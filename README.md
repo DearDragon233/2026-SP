@@ -41,8 +41,10 @@
 │   └── Variety/             # 品种性状模板CSV
 ├── Outputs/                 # 输出数据产品
 │   └── pinggu_environmental_data.csv
-├── *.py                     # 数据处理脚本
-├── *.docx/.md               # 文档
+├── Scripts/                 # 数据处理脚本
+│   └── *.py
+├── Personal/                # 私人文档（不上传）
+├── *.docx/.md               # 项目文档
 └── README.md
 ```
 
