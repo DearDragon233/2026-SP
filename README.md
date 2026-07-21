@@ -41,11 +41,12 @@
 │   └── Variety/             # 品种性状模板CSV
 ├── Outputs/                 # 输出数据产品
 │   └── pinggu_environmental_data.csv
-├── Scripts/                 # 数据处理脚本
-│   └── *.py
-├── Personal/                # 私人文档（不上传）
 ├── *.docx/.md               # 项目文档
 └── README.md
+
+脚本和私人文件已移至仓库外:
+  D:\2026-SP-Scripts\        # 数据处理脚本
+  D:\2026-SP-Personal\       # 私人文档
 ```
 
 ## 复现步骤

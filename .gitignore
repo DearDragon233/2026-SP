@@ -30,8 +30,5 @@ desktop.ini
 .vscode/
 .idea/
 
-# ===== 私人文件 =====
-Personal/
-
 # ===== 临时文件 =====
 *.tmp
