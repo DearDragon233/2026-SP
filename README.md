@@ -75,11 +75,6 @@
 conda env create -f config/environment.yml   # 待创建
 ```
 
-## 论文目标期刊
-
-Primary: Journal of Integrative Agriculture (JIA, IF 4.0)
-Fallback: Agronomy-Basel (IF 3.5) / PeerJ (IF 2.5)
-
 ## Coworker
 
 见 `ManageFiles/README.md` 中的角色分配和阅读顺序
