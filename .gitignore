@@ -1,34 +1,45 @@
-# ===== 大型原始数据 (不上传GitHub) =====
-Data/WorldClim/
-Data/SRTM/
-Data/SoilGrids/
-Data/SoilGrids_wgs84/
-Data/ERA5/
-Data/ChinaSoil/
-Data/CHELSA/
-Data_Download/
-Data/*.zip
-Data/Management/*.tif
+# Data (.tif, .rds, .zip) — tracked via Git LFS or external storage
+Data/WorldClim/*.tif
+Data/SoilGrids_wgs84/*.tif
+Data/SRTM/*.tif
+Data/Management/Xiao2024/*.tif
+Data/Management/Xiao2024/*.rds
 
-# 临时中转文件
-Data/Management/README.txt
-
-# TIF/地理数据
-*.tif
-*.tif.aux.xml
-
-# ===== Python =====
+# Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*.so
+*.egg-info/
+*.egg
 
-# ===== Windows =====
-Thumbs.db
-desktop.ini
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
 
-# ===== IDE =====
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
 .vscode/
 .idea/
 
-# ===== 临时文件 =====
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temp
+tmp/
+temp/
 *.tmp
+*.bak
+
+# Outputs — intermediate files
+Outputs/models/*.pkl
+Outputs/intermediate/
+
+# Config — environment lock
+config/environment.yml

@@ -1,64 +1,85 @@
-# 2026-SP: 育种模型
+# 2026-SP — Winter Wheat × Summer Maize Breeding Model
 
-平谷区冬小麦环境指纹矩阵构建——基于WorldClim/SRTM/SoilGrids/CMIP6多源数据。
+基于环境指纹与机器学习的平谷区冬小麦-夏玉米轮作体系产量预测与管理优化
 
-## 数据产品
+## 项目状态
 
-| 文件 | 说明 |
-|------|------|
-| `Outputs/pinggu_environmental_data.csv` | **主数据**：234网格×73变量环境指纹矩阵 |
-| `Data_checklist v2.0.xlsx` | 65维数据获取状态清单 |
+- **区域:** 北京市平谷区（234个1km网格）
+- **作物:** 冬小麦-夏玉米一年两熟轮作
+- **品种:** 8小麦 + 8玉米 = 16品种
+- **架构:** 3R+5S 双轨交叉验证（v4定稿）
+- **环境指纹:** 234×73 CSV 就绪
+- **阶段:** 特征工程待启动
 
-## 变量维度 (73列)
-
-- **坐标** (2): lon, lat
-- **极端气候代理** (3): bio5/bio6/bio13 → Tmax_95p/Tmin_5p/Prec_95p
-- **Bioclimatic** (19): bio1-bio19
-- **月度降水** (12): prec_01~12
-- **月均温** (12): tavg_01~12
-- **GDD** (14): 月度GDD + 生长季GDD + 全年GDD
-- **地形** (3): elevation, slope, aspect
-- **土壤** (8): clay, sand, silt, SOC, BD, CEC, pH, nitrogen
-
-## 数据来源
-
-| 数据源 | 分辨率 | 引用 |
-|--------|--------|------|
-| WorldClim 2.1 | 2.5 arc-min (~4.6km) | Fick & Hijmans 2017 |
-| SRTM (CGIAR v4) | 90m → 4.6km | Jarvis et al. 2008 |
-| SoilGrids 2.0 | 5km → 4.6km | Poggio et al. 2021 |
-| CMIP6 (SSP2-4.5/SSP5-8.5) | 年值 | O'Neill et al. 2016 |
-
-## 目录结构
+## 仓库结构
 
 ```
 2026-SP/
-├── Data/                    # 原始数据（不上传GitHub）
-│   ├── WorldClim/           # 43 tif (~2.3 GB)
-│   ├── SRTM/                # 1 tif (~70 MB)
-│   ├── SoilGrids_wgs84/     # 8 tif (~58 MB)
-│   ├── CMIP6/               # CO2浓度CSV
-│   └── Variety/             # 品种性状模板CSV
-├── Outputs/                 # 输出数据产品
-│   └── pinggu_environmental_data.csv
-├── *.docx/.md               # 项目文档
-└── README.md
-
-脚本和私人文件已移至仓库外:
-  D:\2026-SP-Scripts\        # 数据处理脚本
-  D:\2026-SP-Personal\       # 私人文档
+├── src/                              ← 源代码（按角色模块）
+│   ├── r1_feature_engineering/         R1 特征工程架构师
+│   ├── r2_modeling/                    R2 建模与优化工程师
+│   ├── r3_shap_interpretation/         R3 模型解释与交付工程师
+│   ├── s1_feature_audit/              S1 特征审计员
+│   ├── s2_model_validation/           S2 模型验证员
+│   ├── s5_figures_main/               S5 主体图设计师
+│   ├── s6_figures_supp/               S6 附录图+规范设计师
+│   └── utils/                         共享工具函数
+│
+├── Data/                              ← 所有源数据
+│   ├── WorldClim/                     WorldClim 2.1 (43 tif, 2.5min)
+│   ├── SoilGrids_wgs84/               SoilGrids 250m (8 tif, 5km)
+│   ├── SRTM/                          SRTM 90m (srtm_60_04.tif)
+│   ├── Management/                    管理情景CSV + Xiao2024公开数据
+│   │   └── Xiao2024/                   Xiao et al.(2024) Nature Food (CC-BY-4.0)
+│   ├── Variety/                       品种性状CSV (8小麦+8玉米)
+│   ├── processed/                     ← 清洗/特征工程后的中间数据
+│   └── external/                      其他第三方数据
+│
+├── Outputs/                           ← 所有产出
+│   ├── pinggu_environmental_data.csv   环境指纹矩阵 (234×73)
+│   ├── figures/
+│   │   ├── main/                      Fig 1-7 (600 DPI TIFF)
+│   │   └── supp/                      Fig S1-S12 (300 DPI PNG)
+│   ├── models/                        训练好的模型 (.pkl)
+│   ├── intermediate/                  中间CSV (清洗/预测/特征矩阵)
+│   └── reports/                       自动生成的文字报告
+│
+├── ManageFiles/                       ← 项目管理文档（纯PDF+MD）
+│   ├── README.md                      使用指南（从这里开始）
+│   ├── 26SP_项目分工与日历_v4_3R5S.pdf
+│   ├── 26SP_分工内容实现技术教程.pdf
+│   ├── 26SP_参考文献精读与使用指南.pdf
+│   ├── 26SP_育种模型项目技术培训手册.pdf
+│   └── ...
+│
+├── Paper/                             ← 参考文献PDF（10篇已下载）
+├── notebooks/                         ← Jupyter探索笔记本
+├── config/                            ← 配置文件
+│   └── style_2026sp.mplstyle          matplotlib全局风格表（S6维护）
+│
+├── .gitignore
+├── 26SP_data_registry.json            数据注册表
+└── README.md                          本文件
 ```
 
-## 复现步骤
+## 快速开始
 
-1. 下载原始数据：参考 `数据下载操作手册.md`
-2. 提取平谷网格：`python extract_env_data_v2.py`
-3. 合并土壤数据：`python merge_soilgrids.py`
-4. 修正土壤单位：`python fix_soil_units.py`
-5. 验证覆盖范围：`python check_coverage.py`
+1. 打开 `ManageFiles/README.md` → 按三阶段阅读
+2. 确认你的角色 → 查看 `ManageFiles/26SP_项目分工与日历_v4_3R5S.pdf`
+3. 打开对应 `src/<你的角色>/` 文件夹开始写代码
+4. 数据在 `Data/` 下，产出放 `Outputs/`
 
-## 环境要求
+## 环境
 
 ```bash
-pip install pandas numpy rasterio matplotlib openpyxl
+conda env create -f config/environment.yml   # 待创建
 ```
+
+## 论文目标期刊
+
+Primary: Journal of Integrative Agriculture (JIA, IF 4.0)
+Fallback: Agronomy-Basel (IF 3.5) / PeerJ (IF 2.5)
+
+## Coworker
+
+见 `ManageFiles/README.md` 中的角色分配和阅读顺序

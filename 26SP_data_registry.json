@@ -1,0 +1,88 @@
+{
+  "project": "2026-SP",
+  "last_updated": "2026-07-28-final",
+  "data_sources": {
+    "environmental": {
+      "file": "Outputs/pinggu_environmental_data.csv",
+      "grids": 234,
+      "variables": 73,
+      "resolution": "0.0417 deg (~4.6 km)",
+      "missing_rate": "0.3%",
+      "status": "ready"
+    },
+    "variety_traits": {
+      "file": "Data/Variety/Variety_Wheat_Traits.csv",
+      "varieties": 8,
+      "traits": [
+        "TKW_g",
+        "WGP_pct",
+        "panicles_m2",
+        "height_cm",
+        "maturity_d",
+        "grain_fill_d",
+        "cold_tol_1to9",
+        "drought_tol_1to9"
+      ],
+      "source": "文献提取: 品种审定公告 + 已发表论文",
+      "note": "京冬系列×4, 中麦系列×2, 轮选系列×2",
+      "status": "ready_literature"
+    },
+    "management": {
+      "file": "Data/Management/management_scenarios.csv",
+      "scenarios": 14,
+      "variables": [
+        "N_rate_kgha",
+        "irrigation_mm",
+        "sowing_DOY",
+        "plant_density_m2"
+      ],
+      "source": "文献设计: Chen et al.(2014) Nature; Bai et al.(2024) Nature Food",
+      "grid_template": "Data/Management/management_grid_default.csv (234 grids)",
+      "status": "ready_scenarios"
+    },
+    "variety_maize": {
+      "path": "Data/Variety/Variety_Maize_Traits.csv",
+      "description": "North China Plain summer maize 8-variety traits (literature extraction)",
+      "source": "Dai(2011)/Meng(2013)/Liu(2020)/Chen(2002)/variety approval bulletins",
+      "rows": 8,
+      "columns": 13
+    }
+  },
+  "documents": {
+    "project_plan_v2": "2026-SP_项目分工与工作日程_v2.docx",
+    "innovation_analysis": "2026-SP_创新点与文献缺口分析.docx",
+    "training_manual": "育种模型项目技术培训手册.docx",
+    "data_checklist": "Data_checklist v2.0.xlsx"
+  },
+  "innovations": {
+    "P0_must": [
+      "动态环境指纹(年际CV+物候极端)",
+      "空间分块CV"
+    ],
+    "P1_recommended": [
+      "QRF不确定性分解+空间化",
+      "EESI极端事件敏感指数"
+    ],
+    "P2_optional": [
+      "PCMCI因果特征选择",
+      "鲁棒NSGA-II优化"
+    ],
+    "P3_nice": [
+      "跨尺度验证(网格+乡镇)"
+    ]
+  },
+  "next_milestone": "M1: 特征就绪(D5)",
+  "cropping_system": "winter wheat - summer maize double cropping (Jun-Oct maize)",
+  "repository_structure": {
+    "src": "Source code by role module (r1-r3, s1-s6, utils)",
+    "Data/processed": "Post-feature-engineering intermediate data",
+    "Data/external": "Third-party data (non-standard sources)",
+    "Outputs/figures/main": "Fig 1-7, 600 DPI TIFF",
+    "Outputs/figures/supp": "Fig S1-S12, 300 DPI PNG",
+    "Outputs/models": "Trained model .pkl files",
+    "Outputs/intermediate": "Intermediate CSVs (cleaned, engineered, predictions)",
+    "Outputs/reports": "Auto-generated text reports",
+    "notebooks": "Jupyter exploratory notebooks",
+    "config": "Configuration files (mplstyle, env specs)"
+  }
+}

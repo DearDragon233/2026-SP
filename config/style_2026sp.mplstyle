@@ -1,0 +1,14 @@
+# 2026-SP matplotlib style ¡ª S6 maintains this file
+# Applied by both S5 and S6 for visual consistency across all 19 figures
+font.family: Arial
+font.size: 10
+axes.labelsize: 11
+axes.titlesize: 12
+xtick.labelsize: 9
+ytick.labelsize: 9
+legend.fontsize: 9
+figure.dpi: 300
+savefig.dpi: 600
+savefig.bbox: tight
+axes.spines.top: False
+axes.spines.right: False
