@@ -1,6 +1,6 @@
 # 2026-SP 论文大纲 v3.0（诊断型重构版）
-## 环境指纹能否解释区域冬小麦产量变异？——基于平谷区 234 网格的多源数据系统性检验
-## Can environmental fingerprints explain regional winter wheat yield variability? A systematic assessment with multi-source data in Pinggu District, Beijing
+## 环境指纹能否解释中国小农区冬小麦产量变异？——基于北京平谷区多源农业数据的空间建模诊断
+## Can Environmental Fingerprints Explain Winter Wheat Yield Variability in Smallholder Landscapes? A Spatial Modeling Diagnostic Based on Multi-Source Agricultural Data in Pinggu, Beijing
 
 **目标期刊**: Agronomy (MDPI, JCR Q1-Q2) 或 Field Crops Research (Elsevier, Q1)
 **定位**: 诊断型方法学论文（非预测型）
