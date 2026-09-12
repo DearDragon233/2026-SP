@@ -1,80 +1,69 @@
-# 2026-SP — Winter Wheat × Summer Maize Breeding Model
+# 2026-SP 重构版 README
 
-基于环境指纹与机器学习的平谷区冬小麦-夏玉米轮作体系产量预测与管理优化
+# 环境指纹能否解释区域产量变异？| Can Environmental Fingerprints Explain Regional Yield Variability?
 
-## 项目状态
+> 系统性诊断空间产量建模中的循环验证与乐观偏差 —— 以北京平谷区 234 网格冬小麦为例
+>
+> **在线工具**: [桃园农事气象助手](https://taoyuan-weather.pages.dev/) (实践延伸)
+> **License**: MIT
 
-- **区域:** 北京市平谷区（234个1km网格）
-- **作物:** 冬小麦-夏玉米一年两熟轮作
-- **品种:** 8小麦 + 8玉米 = 16品种
-- **架构:** 4R（待改）
-- **环境指纹:** 234×73 CSV 就绪
-- **阶段:** 特征工程待启动
+[![Status](https://img.shields.io/badge/Status-Manuscript_in_prep-yellow)]()
+[![Target](https://img.shields.io/badge/Target-Agronomy%20%2F%20Field_Crops_Res-green)]()
+[![Data](https://img.shields.io/badge/Data-Open--Meteo%20%2B%20WorldClim%20%2B%20SoilGrids-blue)]()
 
-## 仓库结构
+## 核心发现（三句话版本）
+
+1. **随机 CV 比空间分块 CV 虚高 R² 0.036-0.088**——空间自相关导致的乐观偏差被量化证实
+2. **以空间插值产量为目标的模型 R²=0.98，但以实测产量为目标的 R²≈0**——循环验证被直接暴露
+3. **独立数据源（ChinaWheatYield30m 2021）确认环境变量在 3.5km 尺度不解释真实产量变异**
+
+## 项目结构
 
 ```
 2026-SP/
-├── src/                              ← 源代码（按角色模块）
-│   ├── r1_feature_engineering/         R1 特征工程架构师
-│   ├── r2_modeling/                    R2 建模与优化工程师
-│   ├── r3_shap_interpretation/         R3 模型解释与交付工程师
-│   ├── s1_feature_audit/              S1 特征审计员
-│   ├── s2_model_validation/           S2 模型验证员
-│   ├── s5_figures_main/               S5 主体图设计师
-│   ├── s6_figures_supp/               S6 附录图+规范设计师
-│   └── utils/                         共享工具函数
-│
-├── Data/                              ← 所有源数据
-│   ├── WorldClim/                     WorldClim 2.1 (43 tif, 2.5min)
-│   ├── SoilGrids_wgs84/               SoilGrids 250m (8 tif, 5km)
-│   ├── SRTM/                          SRTM 90m (srtm_60_04.tif)
-│   ├── Management/                    管理情景CSV + Xiao2024公开数据
-│   │   └── Xiao2024/                   Xiao et al.(2024) Nature Food (CC-BY-4.0)
-│   ├── Variety/                       品种性状CSV (8小麦+8玉米)
-│   ├── processed/                     ← 清洗/特征工程后的中间数据
-│   └── external/                      其他第三方数据
-│
-├── Outputs/                           ← 所有产出
-│   ├── pinggu_environmental_data.csv   环境指纹矩阵 (234×73)
-│   ├── figures/
-│   │   ├── main/                      Fig 1-7 (600 DPI TIFF)
-│   │   └── supp/                      Fig S1-S12 (300 DPI PNG)
-│   ├── models/                        训练好的模型 (.pkl)
-│   ├── intermediate/                  中间CSV (清洗/预测/特征矩阵)
-│   └── reports/                       自动生成的文字报告
-│
-├── ManageFiles/                       ← 项目管理文档（纯PDF+MD）
-│   ├── README.md                      使用指南（从这里开始）
-│   ├── 26SP_项目分工与日历_v4_3R5S.pdf
-│   ├── 26SP_分工内容实现技术教程.pdf
-│   ├── 26SP_参考文献精读与使用指南.pdf
-│   ├── 26SP_育种模型项目技术培训手册.pdf
-│   └── ...
-│
-├── Paper/                             ← 参考文献PDF（10篇已下载）
-├── notebooks/                         ← Jupyter探索笔记本
-├── config/                            ← 配置文件
-│   └── style_2026sp.mplstyle          matplotlib全局风格表（S6维护）
-│
-├── .gitignore
-├── 26SP_data_registry.json            数据注册表
-└── README.md                          本文件
+├── Paper/                    # 论文大纲、核心文献 PDF
+│   └── Outline_v3.0_diagnostic.md  # 当前大纲（诊断型重构版）
+├── Data/                     # 原始数据（Xiao2024 等）
+├── Outputs/
+│   ├── pinggu_environmental_data.csv  # 原始环境矩阵
+│   ├── figures/main/         # 出版级图表（fig01-07, 600dpi png+tiff）
+│   ├── figures/qa/           # 质量审计图（qa01-06）
+│   ├── figures/supp/         # 补充图
+│   ├── intermediate/         # 中间表（筛选结果/CV对比/QRF/敏感性）
+│   └── reports/              # 补强报告 (docx+html)
+├── src/
+│   ├── s1_feature_audit/     # 特征审计管线
+│   ├── s2_county_yield/      # 区级产量整合（贝叶斯融合）
+│   ├── s2_model_validation/  # ★ 本轮补强：advance_validation.py + zenodo_cv.py
+│   ├── s1_feature_audit/     # 质量评估与图表重生成
+│   └── r2_modeling/          # 原始建模管线（W1-3）
+└── config/                   # 配置
 ```
 
-## 快速开始
-
-1. 打开 `ManageFiles/README.md` → 按三阶段阅读
-2. 确认你的角色 → 查看 `ManageFiles/26SP_项目分工与日历_v4_3R5S.pdf`
-3. 打开对应 `src/<你的角色>/` 文件夹开始写代码
-4. 数据在 `Data/` 下，产出放 `Outputs/`
-
-## 环境
+## 一键复现
 
 ```bash
-conda env create -f config/environment.yml   # 待创建
+# 环境: Python 3.13 + pandas/numpy/sklearn/xgboost/lightgbm/quantile-forest/shap/rasterio
+cd src/s2_model_validation
+python advance_validation.py   # G1+G2+G3 全部实验 (~10min)
+python zenodo_cv.py            # 独立数据源验证 (~2min)
 ```
 
-## Coworker
+## 关键数据
 
-见 `ManageFiles/README.md` 中的角色分配和阅读顺序
+| 文件 | 内容 |
+|---|---|
+| `cv_scheme_comparison.csv` | 3 CV 方案 × 3 模型的 R²/RMSE |
+| `cv_optimism_gap.csv` | 随机 CV 相对空间 CV 的乐观偏差 |
+| `qrf_uncertainty.csv` | 234 网格 Q10/Q50/Q90 逐格区间 |
+| `yield_source_sensitivity.csv` | 四产量目标 × 三模型性能矩阵 |
+| `zenodo_cv_results.csv` | 独立数据源（ChinaWheatYield30m）CV 结果 |
+
+## 团队
+
+- **彭宇程**（未来技术学院强基计划）— 项目设计、数据管线、论文
+- 其余 3 人分工待定
+
+## 致谢
+
+Open-Meteo（气象数据）、WorldClim/SoilGrids/SRTM（环境变量）、Zhao et al. 2023 ESSD（ChinaWheatYield30m）、北京市统计局。
