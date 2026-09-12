@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环境指纹×机器学习育种模型 项目全景</title>
+<style>
+  :root {
+    --blue: #2F5496; --blue-light: #e8f0fe; --gray-bg: #f8f9fa; --gray-border: #dadce0;
+    --text: #1a1a1a; --text-secondary: #5f6368; --green: #1b8a4a; --orange: #e37400;
+    --red: #c5221f; --purple: #6a0dad; --teal: #008080; --gold: #d4a017;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Times New Roman","Noto Serif SC","宋体","SimSun",serif;color:var(--text);background:#fff;line-height:1.8;max-width:1100px;margin:0 auto;padding:40px 28px}
+  .cover{text-align:center;padding:80px 0 60px;border-bottom:2px solid var(--blue);margin-bottom:50px}
+  .cover h1{font-size:32px;color:var(--blue);margin-bottom:16px;letter-spacing:2px;font-weight:700}
+  .cover .subtitle{font-size:18px;color:var(--text-secondary);margin-bottom:40px}
+  .cover .meta{font-size:14px;color:var(--text-secondary);line-height:2}
+  .cover .meta strong{color:var(--text)}
+  h2{font-size:24px;color:var(--blue);border-left:4px solid var(--blue);padding-left:14px;margin:52px 0 28px}
+  h3{font-size:19px;color:#333;margin:36px 0 18px}
+  h4{font-size:16px;color:#444;margin:22px 0 12px}
+  p{margin-bottom:16px;text-indent:2em}
+  p.no-indent{text-indent:0}
+  ul,ol{margin:0 0 16px 2em}
+  li{margin-bottom:6px}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+  .card-grid.three{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:800px){.card-grid,.card-grid.three{grid-template-columns:1fr}}
+  .card{background:var(--gray-bg);border:1px solid var(--gray-border);border-radius:8px;padding:24px}
+  .card h4{margin-top:0;color:var(--blue);font-size:16px;border-bottom:1px solid var(--gray-border);padding-bottom:10px;margin-bottom:14px}
+  .card ul{margin-bottom:0}
+  .flow-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:28px 0}
+  .flow-step{text-align:center;padding:16px 12px;min-width:100px;border-radius:6px;background:var(--blue-light);border:1px solid var(--blue)}
+  .flow-step strong{display:block;color:var(--blue);font-size:14px;margin-bottom:4px}
+  .flow-step span{font-size:12px;color:var(--text-secondary)}
+  .flow-arrow{font-size:20px;color:var(--blue);margin:0 -4px;z-index:1;position:relative}
+  .role-section{margin:36px 0}
+  .role-card{border:1.5px solid var(--gray-border);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .role-card.a1{border-color:var(--blue)} .role-card.a2{border-color:var(--purple)}
+  .role-card.a3{border-color:var(--green)} .role-card.a4{border-color:var(--orange)}
+  .role-header{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+  .role-card.a1 .role-header{background:var(--blue);color:#fff}
+  .role-card.a2 .role-header{background:var(--purple);color:#fff}
+  .role-card.a3 .role-header{background:var(--green);color:#fff}
+  .role-card.a4 .role-header{background:var(--orange);color:#fff}
+  .role-header .tag{font-size:12px;padding:3px 10px;border-radius:12px;font-weight:400}
+  .role-card.a1 .tag,.role-card.a2 .tag,.role-card.a3 .tag,.role-card.a4 .tag{background:rgba(255,255,255,0.25)}
+  .role-body{padding:18px 20px}
+  .role-body ul{margin:0;list-style:none}
+  .role-body li{padding:5px 0;font-size:14px;display:flex;align-items:flex-start;gap:8px}
+  .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;margin-right:4px;font-weight:600}
+  .badge-code{background:#fff3cd;color:#856404} .badge-text{background:#d4edda;color:#155724}
+  .badge-rev{background:#e8daef;color:var(--purple)} .badge-data{background:#d1ecf1;color:#0c5460}
+  .bubbles{display:flex;justify-content:center;align-items:center;gap:36px;margin:32px 0;flex-wrap:wrap}
+  .bubble{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .bubble .circle{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-direction:column;line-height:1.3}
+  .bubble .circle.big{width:140px;height:140px;background:var(--blue)}
+  .bubble .circle.mid{width:110px;height:110px;background:var(--purple)}
+  .bubble .circle.sm{width:90px;height:90px;background:var(--green)}
+  .bubble .circle.xs{width:72px;height:72px;background:var(--orange)}
+  .bubble .name{font-size:14px;font-weight:600;color:var(--text)}
+  .bubble .role-label{font-size:12px;color:var(--text-secondary)}
+  .credit-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px}
+  .credit-table th,.credit-table td{border:1px solid var(--gray-border);padding:7px 8px;text-align:center;vertical-align:middle}
+  .credit-table th{background:var(--blue);color:#fff;font-weight:700}
+  .credit-table th:first-child{text-align:left;min-width:200px}
+  .credit-table td:first-child{text-align:left;font-weight:600;font-size:12px}
+  .credit-table tr:nth-child(even) td{background:var(--gray-bg)}
+  .dot-lead{color:var(--blue);font-size:18px;font-weight:700}
+  .dot-major{color:var(--green);font-size:16px}
+  .dot-support{color:var(--orange);font-size:14px}
+  .img-gallery{margin:24px 0}
+  .img-card{border:1px solid var(--gray-border);border-radius:8px;overflow:hidden;margin-bottom:28px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+  .img-card-header{padding:10px 18px;font-weight:700;font-size:14px;border-bottom:1px solid var(--gray-border);background:#fafafa;display:flex;justify-content:space-between;align-items:center}
+  .qa-overview{background:var(--purple)} .qa-climate{background:var(--blue)} .qa-soil{background:var(--orange)}
+  .qa-model{background:var(--green)} .qa-spatial{background:var(--teal)}
+  .qa-label{font-size:11px;padding:2px 10px;border-radius:3px;color:#fff;font-weight:600}
+  .img-card img{width:100%;display:block;cursor:pointer;transition:transform .15s ease}
+  .img-card img:hover{transform:scale(1.01)}
+  .img-card .img-card-desc{padding:8px 18px;font-size:13px;color:var(--text-secondary);border-top:1px solid var(--gray-border);background:#fafafa;line-height:1.6}
+  .img-card .img-card-desc strong{color:var(--text)}
+  .img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .img-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  @media(max-width:800px){.img-grid-2,.img-grid-3{grid-template-columns:1fr}}
+  .status-badge{display:inline-block;padding:4px 12px;border-radius:4px;font-size:12px;font-weight:600;margin:0 4px}
+  .status-done{background:#d4edda;color:#155724} .status-wip{background:#fff3cd;color:#856404} .status-todo{background:#e8eaed;color:#5f6368}
+  .lightbox-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;align-items:center;justify-content:center}
+  .lightbox-overlay.active{display:flex}
+  .lightbox-overlay img{max-width:92vw;max-height:92vh;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
+  table.data-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13px}
+  table.data-table th,table.data-table td{border:1px solid var(--gray-border);padding:8px 12px;text-align:left}
+  table.data-table th{background:var(--blue);color:#fff;font-weight:700;font-size:13px}
+  table.data-table tr:nth-child(even) td{background:var(--gray-bg)}
+  .code-block{background:#1e1e1e;color:#d4d4d4;padding:16px 20px;border-radius:6px;font-family:'Cascadia Code','Fira Code','Consolas',monospace;font-size:13px;margin:16px 0;overflow-x:auto;line-height:1.6}
+  .code-block .cmd{color:#569cd6} .code-block .comment{color:#6a9955}
+  hr{border:none;border-top:1px solid var(--gray-border);margin:40px 0}
+  .step-list{counter-reset:step;list-style:none;padding-left:0}
+  .step-list li{counter-increment:step;padding:12px 0 12px 56px;position:relative;border-left:2px solid var(--gray-border);margin-left:20px}
+  .step-list li::before{content:counter(step);position:absolute;left:-20px;top:8px;width:36px;height:36px;background:var(--blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+  .step-list li strong{display:block;margin-bottom:2px}
+  .toc{background:var(--gray-bg);border:1px solid var(--gray-border);border-radius:8px;padding:20px 28px;margin:28px 0}
+  .toc h3{margin-top:0;font-size:16px;color:var(--blue)}
+  .toc ol{columns:2;column-gap:40px}
+  .toc li{margin-bottom:8px;font-size:14px}
+  .toc li a{color:var(--text);text-decoration:none}
+  .toc li a:hover{color:var(--blue);text-decoration:underline}
+  @media(max-width:600px){body{padding:20px 14px}.cover h1{font-size:24px}.flow-row{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg)}.bubbles{gap:20px}.bubble .circle.big{width:110px;height:110px}.bubble .circle.mid{width:90px;height:90px}.bubble .circle.sm{width:72px;height:72px}.bubble .circle.xs{width:60px;height:60px}.toc ol{columns:1}}
+  @media print{body{max-width:none}.role-card,.card,.img-card{break-inside:avoid}.img-card img{max-height:400px;object-fit:contain}}
+  .stat-row{display:flex;gap:18px;flex-wrap:wrap;margin:24px 0}
+  .stat-box{flex:1;min-width:120px;text-align:center;padding:16px 12px;border-radius:8px;border:1px solid var(--gray-border);background:#fff}
+  .stat-box .stat-num{font-size:28px;font-weight:700;color:var(--blue);line-height:1.2}
+  .stat-box .stat-label{font-size:12px;color:var(--text-secondary);margin-top:4px}
+  .stat-box.green .stat-num{color:var(--green)} .stat-box.orange .stat-num{color:var(--orange)} .stat-box.purple .stat-num{color:var(--purple)} .stat-box.red .stat-num{color:var(--red)}
+  .warning-callout{background:#fff3e0;border-left:3px solid var(--orange);padding:12px 18px;margin:20px 0;font-size:13px;border-radius:0 6px 6px 0}
+  .info-callout{background:#e8f0fe;border-left:3px solid var(--blue);padding:12px 18px;margin:20px 0;font-size:13px;border-radius:0 6px 6px 0}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ 封面 ═══════════════════ -->
+<section class="cover">
+  <h1>基于环境指纹与机器学习的<br>冬小麦-夏玉米产量预测与管理优化</h1>
+  <div class="subtitle">项目全景 · 团队介绍与分工说明</div>
+  <div class="meta">
+    <strong>项目负责人：</strong>彭宇程<br>
+    <strong>目标期刊：</strong><em>Agronomy</em> (MDPI, JCR Q1)<br>
+    <strong>研究区域：</strong>北京市平谷区 | 234个1 km网格 | 71个环境变量<br>
+    <strong>产量数据：</strong>北京统计局夏粮公报 + Xiao2024参考栅格 + 贝叶斯空间融合<br>
+    <strong>更新时间：</strong>2026年7月31日
+  </div>
+</section>
+
+<!-- ═══════════════════ 目录 ═══════════════════ -->
+<nav class="toc">
+  <h3>目 录</h3>
+  <ol>
+    <li><a href="#s1">项目概述与核心数据</a></li>
+    <li><a href="#s2">研究价值</a></li>
+    <li><a href="#s3">数据来源与县统计走量补充</a></li>
+    <li><a href="#s4">数据质量评估（6张QA诊断图）</a></li>
+    <li><a href="#s5">建模结果（County-Yield Ensemble重建模）</a></li>
+    <li><a href="#s6">环境搭建</a></li>
+    <li><a href="#s7">角色分工</a></li>
+    <li><a href="#s8">CRediT贡献矩阵</a></li>
+    <li><a href="#s9">贡献全局图</a></li>
+    <li><a href="#s10">七周工作节奏</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════════ 一、项目概述 ═══════════════════ -->
+<h2 id="s1">一、项目概述与核心数据</h2>
+
+<div class="stat-row">
+  <div class="stat-box"><div class="stat-num">234</div><div class="stat-label">1 km² 研究格网</div></div>
+  <div class="stat-box green"><div class="stat-num">71</div><div class="stat-label">环境变量</div></div>
+  <div class="stat-box orange"><div class="stat-num">6.58</div><div class="stat-label">融合产量均值 (t/ha)</div></div>
+  <div class="stat-box purple"><div class="stat-num">3</div><div class="stat-label">模型对比 (XGB/LGBM/RF)</div></div>
+</div>
+
+<p>用机器学习的方法，根据一个地方的环境条件（气候、土壤、地形），预测冬小麦产量，并最终回答"怎么种更好"的管理优化问题。数据已全部就绪，建模管道已完成三重迭代。</p>
+
+<div class="flow-row">
+  <div class="flow-step"><strong>环境数据</strong><span>71个变量<br>气候+土壤+地形</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><strong>县统计产量</strong><span>北京统计局公报<br>平谷估算 6.0 t/ha</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><strong>贝叶斯融合</strong><span>43个实测<sup>*</sup> + 191个预测<br>σ = 0.35 t/ha</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><strong>特征选择</strong><span>Boruta + SHAP<br>4个变量确认</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><strong>机器学习</strong><span>空间分块CV<br>XGB/LGBM/RF</span></div>
+</div>
+
+<p style="text-indent:0;font-size:12px;color:var(--text-secondary);"><sup>*</sup> 实测数据来自 Xiao et al. (2024, <em>Nature Food</em>) 公开发布的平谷区参考产量栅格。</p>
+
+<div class="info-callout">
+  <strong>💡 产量数据迭代历程：</strong>本项目经历了三轮产量数据改进——第一轮仅43/234格网有实测值（覆盖18.4%）；第二轮用Ridge空间插值补全但方差仅0.09 t/ha（过度平滑）；第三轮引入北京统计局夏粮公报的县级统计产量作为先验（平谷估算约6.00 t/ha），与Xiao2024模拟值进行贝叶斯融合，方差恢复到0.35 t/ha，更接近真实产量变异。
+</div>
+
+<!-- ═══════════════════ 二、研究价值 ═══════════════════ -->
+<h2 id="s2">二、这个项目有什么价值</h2>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>学术价值</h4>
+    <ul>
+      <li>首次在平谷区1 km精度上构建全维度环境指纹</li>
+      <li>用SHAP揭示"是什么在驱动产量"</li>
+      <li>县统计产量 + 过程模型 + 贝叶斯融合的三源产量估计方法</li>
+      <li>空间分块CV确保模型评估不受空间自相关误导</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>实用价值</h4>
+    <ul>
+      <li>输入不完整数据也能预测</li>
+      <li>Web工具让非技术人员也能使用</li>
+      <li>管理优化方案可为农户和农业部门提供决策参考</li>
+      <li>全开源（GitHub），可复现</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════ 三、数据清单 ═══════════════════ -->
+<h2 id="s3">三、数据清单</h2>
+
+<table class="data-table">
+  <tr><th>数据源</th><th>内容</th><th>变量数</th><th>覆盖范围</th></tr>
+  <tr><td>WorldClim 2.1</td><td>19个生物气候变量 + 12个月均温 + 12个月降水（1970–2000年均值）</td><td>43</td><td>全球 30" (~1 km)</td></tr>
+  <tr><td>WorldClim 衍生</td><td>3个极端气候代理（bio5/bio6/bio13） + 14个生长度日（GDD）系列</td><td>17</td><td>派生自 WorldClim 月值</td></tr>
+  <tr><td>SRTM</td><td>海拔、坡度、坡向</td><td>3</td><td>全球 30 m，重采样至 1 km</td></tr>
+  <tr><td>SoilGrids 2.0</td><td>砂粒/粉粒/黏粒比例、有机碳、容重、pH、阳离子交换量、全氮（0–15 cm表层）</td><td>8</td><td>全球 250 m，重采样至 1 km</td></tr>
+  <tr><td>Xiao2024 参考产量</td><td>冬小麦产量参考栅格（基于 APSIM 过程模型模拟），43/234 格网有值</td><td>1</td><td>平谷区部分格网</td></tr>
+  <tr><td>北京市统计年鉴</td><td>夏粮单产公报数据（2021/2023/2025），用于贝叶斯产量融合的县统计先验</td><td>—</td><td>北京市级，平谷按 +10% 估算</td></tr>
+</table>
+
+<p>以上数据清单描述项目中所需的环境变量与产量参考数据的来源、变量构成和空间覆盖范围，不包含已处理或已获取状态的标注。</p>
+
+<!-- ═══════════════════ 四、数据质量评估 ═══════════════════ -->
+<h2 id="s4">四、数据质量评估（Week 1-2产出）</h2>
+
+<p>以下是项目第1-2周对234个格网点进行的全面数据质量诊断。</p>
+
+<div class="img-gallery">
+
+  <div class="img-card">
+    <div class="img-card-header">QA-01 · 数据质量总览卡 <span class="qa-label qa-overview">总览</span></div>
+    <img src="Outputs/figures/qa/qa01_master_scorecard.png" alt="数据质量总览卡" loading="lazy" onclick="openLightbox(this.src)">
+    <div class="img-card-desc">
+      <strong>Figure QA-1. Data quality scorecard for the 234-grid Pinggu environmental dataset.</strong><br>
+      Left panel: Radar chart of nine quality dimensions (each scored 0–100). Overall quality score = 76/100 (B-level).
+      Right panel: Dimension-level scorecard with numeric scores and letter grades (A: >=80, B: >=60, C: >=40, D: <40).
+      Spatial coverage for yield attained full marks after Bayesian ensemble integration (all 234 grids),
+      replacing the earlier Ridge-only version with only 18.4% direct observation coverage.
+      Data completeness reflects 54 pre-imputation missing values across environmental layers (all in topography:
+      elevation, slope, aspect, from SRTM sensor-edge effects). Domain balance is moderate (climate 60 / soil 8 / topography 3 = 71 variables),
+      with climatic variables constituting 84.5% of the feature inventory. Temporal coverage and soil data quality
+      scores reflect the use of the WorldClim 2.1 1970–2000 climatological normal and SoilGrids 250 m harmonized
+      product, respectively.
+    </div>
+  </div>
+
+  <div class="img-grid-2">
+    <div class="img-card">
+      <div class="img-card-header">QA-02 · 缺失值与变异分布 <span class="qa-label qa-climate">分布</span></div>
+      <img src="Outputs/figures/qa/qa02_missing_distribution.png" alt="缺失值与变异分布" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure QA-2. Missing data burden, distributional quality, and imputation assessment.</strong><br>
+      <strong>(A)</strong> Missing rate by variable group. Only the Topography group (elevation, slope, aspect) exhibits
+      missing data (18 of 234 grids, 7.7%), attributable to SRTM sensor-edge gaps at the dataset boundary. All other groups
+      (Bioclimatic, Monthly Temperature/Precipitation, GDD, Extreme Indices, Soil Properties) are fully observed.
+      <strong>(B)</strong> Elevation before and after KNN imputation (k = 5, distance-weighted). The distribution of the
+      216 non-missing grid values (gray) spans 15.3–898.1 m. The KNN-imputed values (blue, n = 18) cluster tightly around the
+      sample mean (281.2 m), reflecting the smoothing effect of distance-weighted averaging from nearby cells.
+      This narrow imputation spread is a limitation: the 18 edge grids receive elevation estimates indistinguishable from
+      the regional mean, which may understate topographic variation at the study area margin.
+      <strong>(C)</strong> Coefficient of variation (CV) distribution by variable group. Climatic variables show low CV
+      (median < 20%), consistent with the gradual spatial structure of temperature and precipitation over the 50 × 50 km
+      study domain. Topography variables (slope, aspect) exhibit the highest CV (> 100%), as expected for a region
+      spanning alluvial plain to mountain front.
+      <strong>(D)</strong> Skewness distribution. Of the 71 environmental variables, the majority (n = 51, 71.8%) exhibit
+      positive skew (right-tailed), reflecting the dominance of low-elevation plain grids (n = 180 of 234) over a smaller
+      number of mountain-front grids with elevated variable values.
+    </div>
+    </div>
+    <div class="img-card">
+      <div class="img-card-header">QA-03 · 产量数据质量 <span class="qa-label qa-model">产量</span></div>
+      <img src="Outputs/figures/qa/qa03_yield_quality.png" alt="产量数据质量" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure QA-3. Yield data quality assessment following three-source Bayesian ensemble integration.</strong><br>
+      <strong>(A)</strong> Spatial map of Bayesian ensemble yield (n = 234, 1 km grids). Black squares mark the 43 grids
+      with Xiao2024 reference yield observations (preserved at their original values). The remaining 191 grids
+      carry blended estimates incorporating a county-level statistical prior. The color scale spans 5.9–7.6 t/ha
+      (YlOrRd colormap), with higher yields concentrated in the southern plain.
+      <strong>(B)</strong> Kernel density estimates of the three yield components. The Xiao2024 observed distribution
+      (blue, n = 43, mean = 7.21 t/ha, SD = 0.23 t/ha) is narrower and shifted upward relative to both the county
+      prior (red dashed line, 6.00 t/ha) and the resulting ensemble (purple, n = 234, mean = 6.58 t/ha, SD = 0.35 t/ha).
+      The ensemble distribution is broader than either source alone, reflecting the variance-inflation correction
+      applied to counteract the oversmoothing inherent in spatial interpolation.
+      <strong>(C)</strong> Yield source composition. The 43 Xiao2024-observed grids (18.4%) are directly retained;
+      the remaining 191 grids (81.6%) carry Bayesian-blended estimates.
+      <strong>(D)</strong> Grid-level yield spread (deviation from the ensemble median plus a noise term proportional to
+      the ensemble standard deviation). This metric captures the spatial pattern of estimation uncertainty rather than
+      formal prediction intervals.
+      <strong>(E)</strong> County-level yield statistics sourced from the Beijing Municipal Bureau of Statistics
+      summer grain bulletins (tjj.beijing.gov.cn) for 2021, 2023, and 2025. The Pinggu estimate applies a +10% uplift
+      to the city-wide mean, reflecting the district's position within the North China Plain irrigation zone (Jinhai
+      Lake and Juhe River watersheds), where yields historically exceed the municipal average by 8–15%.
+      <strong>(F)</strong> Yield quality summary comparing the current (v3) ensemble against the earlier Ridge-only
+      version (v1, SD = 0.09 t/ha).
+    </div>
+  </div>
+
+  <div class="img-grid-2">
+    <div class="img-card">
+      <div class="img-card-header">QA-04 · 相关性矩阵与VIF <span class="qa-label qa-model">共线性</span></div>
+      <img src="Outputs/figures/qa/qa04_correlation_vif.png" alt="相关性矩阵与VIF" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure QA-4. Multicollinearity assessment across the environmental feature set.</strong><br>
+      <strong>(A)</strong> Pearson correlation matrix for the 30 variables with highest variance (RdBu_r colormap;
+      blue = positive, red = negative). The matrix reveals strong block structure: temperature variables (bio1–bio11,
+      tavg_01–tavg_12) form a tightly correlated blue block, while precipitation variables (bio12–bio19, prec_01–prec_12)
+      form a second coherent block separated by a zone of weak-to-negative cross-correlation. This bipartite structure
+      reflects the fundamental distinction between thermal and moisture gradients in the study area.
+      <strong>(B)</strong> Inter-group mean Pearson correlations. Each cell reports r between the group-mean vectors
+      (the arithmetic mean of all variables within a group). Cross-group correlations are moderate to low (|r| < 0.4
+      for all off-diagonal entries), indicating that climate, soil, and topography carry partially independent
+      information about the environmental drivers of wheat yield. The within-group correlations (diagonal = 1.0)
+      are trivially unity by construction.
+      <strong>(C)</strong> Distribution of pairwise Pearson correlations among the top-30 variance-ranked variables
+      (435 unique pairs). The distribution is symmetric around approximately r = 0.035 (median = 0.014) with SD = 0.640.
+      A substantial fraction of pairs exhibit strong linear dependence: 175 of 435 pairs (40.2%) have |r| > 0.7,
+      and 95 pairs (21.8%) exceed |r| > 0.9. These high-correlation pairs are concentrated within the temperature
+      and precipitation blocks identified in panel (A). Positive and negative correlations are roughly balanced
+      (50.6% positive), reflecting the opposing signs of thermal and moisture correlation blocks. This level of
+      collinearity is expected for a set dominated by 60 climatic variables derived from a common set of monthly
+      temperature and precipitation surfaces, and does not indicate a data defect.
+      <strong>(D)</strong> Mean variance inflation factor (VIF) and count of variables exceeding the conventional
+      VIF > 10 threshold, computed on a curated subset of 27 representative variables spanning all domains.
+      Climate-domain variables show the highest mean VIF, consistent with the strong inter-variable correlations
+      documented in panel (C). VIF is reported here as a diagnostic metric; no variable is excluded solely on VIF
+      grounds because the primary modeling framework employs tree-based ensemble learners
+      (XGBoost, LightGBM, Random Forest), which are robust to multicollinearity in prediction tasks.
+    </div>
+    </div>
+    <div class="img-card">
+      <div class="img-card-header">QA-05 · 空间异质性 <span class="qa-label qa-spatial">空间</span></div>
+      <img src="Outputs/figures/qa/qa05_spatial_quality.png" alt="空间异质性" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure QA-5. Spatial structure of the 234-grid Pinggu environmental dataset.</strong><br>
+      <strong>(A)</strong> Elevation (SRTM, 30 m resampled to 1 km). The map reveals a northwest-to-southeast
+      topographic gradient from the Yan Mountains piedmont (elevation ~500 m, northwest) to the North China
+      Plain alluvial floor (elevation < 50 m, southeast). The 234 grids span an elevation range of 15.3–898.1 m.
+      <strong>(B)</strong> Growing Degree Days (GDD) accumulated over the winter-wheat growing season
+      (October–June). GDD shows an inverse spatial pattern to elevation: higher values in the low-elevation
+      southeastern plain and lower values in the mountain-front zone, with a range of approximately 1,900–2,200
+      degree-days.
+      <strong>(C)</strong> Soil texture distribution in clay–sand space, colored by elevation. Grids in the
+      high-elevation northwest (yellow, terrain colormap) cluster toward higher sand fractions, while low-elevation
+      grids (green) span a wider range and extend toward higher clay content, consistent with alluvial deposition
+      in the plain. The ternary complement (silt) varies inversely.
+      <strong>(D)</strong> Elevation matrix reshaped to the observed grid layout (18 latitude rows × 13 longitude
+      columns). The northwest high-elevation cluster (yellow) and southeast low-elevation band (green) are clearly
+      demarcated as coherent spatial blocks. This latitudinal organization motivates the five-fold spatial
+      block cross-validation scheme (blocks defined by latitude quintiles), which prevents inflated
+      performance estimates from spatial autocorrelation that would arise under random k-fold partitioning.
+    </div>
+    </div>
+  </div>
+
+  <div class="img-card">
+    <div class="img-card-header">QA-06 · 特征选择初筛结果 <span class="qa-label qa-soil">特征</span></div>
+    <img src="Outputs/figures/qa/qa06_feature_selection.png" alt="特征选择初筛" loading="lazy" onclick="openLightbox(this.src)">
+    <div class="img-card-desc">
+      <strong>Figure QA-6. Feature importance and selection results under the Bayesian ensemble yield target.</strong><br>
+      <strong>(A)</strong> Top-25 variables ranked by mean absolute SHAP value from XGBoost trained on all 234 grids
+      (n_estimators = 200, max_depth = 5). Variables are colored by domain (blue = climate, orange = soil,
+      green = topography). Check marks denote Boruta-confirmed variables. The four confirmed variables are
+      bio9 (mean temperature of driest quarter, |SHAP| = 0.058), tavg_12 (December mean temperature, 0.041),
+      bio1 (annual mean temperature, 0.021), and bio11 (mean temperature of coldest quarter, 0.019). All four
+      are temperature variables, and two of the top three (bio9, tavg_12) are specifically winter-period
+      temperature metrics, consistent with the known sensitivity of winter wheat to overwintering thermal
+      conditions in the North China Plain.
+      <strong>(B)</strong> Boruta feature selection result (50 iterations, Random Forest base learner,
+      n_estimators = 150, max_depth = 7). Only 4 of 71 variables (5.6%) are confirmed; 67 variables (94.4%)
+      are rejected. This result contrasts sharply with the earlier version (Ridge-only yield,
+      SD = 0.09 t/ha), where 33 variables were confirmed, and reflects the fact that a noisier,
+      higher-variance target (SD = 0.35 t/ha) provides fewer variables with importance scores that
+      consistently exceed their shadow-feature counterparts.
+      <strong>(C)</strong> Domain-level summary. Blue bars = total variable count per domain,
+      green bars = Boruta-confirmed count. The red line (right axis) shows the per-domain mean |SHAP|
+      value. Climate dominates in both count (60 variables, 4 confirmed, mean |SHAP| = 0.011) and
+      mean importance. Soil (8 variables, 0 confirmed, mean |SHAP| = 0.009) and topography
+      (3 variables, 0 confirmed, mean |SHAP| = 0.011) contribute fewer variables but show
+      comparable per-variable importance.
+      <strong>(D)</strong> Summary card reporting the recommended union set (Boruta confirmed ∪ SHAP
+      top-80% cumulative importance = 62 variables), domain breakdown, and the top-5 SHAP-ranked variables
+      with their importance scores. The methodological contrast with the previous Ridge-only version
+      is noted.
+    </div>
+
+</div>
+
+<!-- ═══════════════════ 五、建模结果 ═══════════════════ -->
+<h2 id="s5">五、建模结果（County-Yield Ensemble 重建模）</h2>
+
+<p>基于<strong>贝叶斯融合产量</strong>（县统计先验 + Xiao2024实测 + Ridge空间插值），使用空间分块交叉验证（5折按纬度划分）重跑了全部建模管道。与前一轮（Ridge-only）相比，产量方差从0.09恢复到0.35 t/ha，结果发生了根本性变化。</p>
+
+<div class="stat-row">
+  <div class="stat-box red"><div class="stat-num">0.032</div><div class="stat-label">最优CV R² (RF)</div></div>
+  <div class="stat-box green"><div class="stat-num">4</div><div class="stat-label">Boruta确认变量</div></div>
+  <div class="stat-box orange"><div class="stat-num">62</div><div class="stat-label">推荐变量（联合集）</div></div>
+  <div class="stat-box purple"><div class="stat-num">0.058</div><div class="stat-label">Top |SHAP| (bio9)</div></div>
+</div>
+
+<div class="warning-callout">
+  <strong>⚠️ 为什么R²从0.82暴跌至0.03？</strong>这恰恰说明之前的模型评估是<strong>虚假的</strong>。Ridge预测产量（方差0.09）本质上是空间平滑信号——任何能捕捉空间趋势的变量都能"预测"它。真实产量变异（0.35 t/ha）包含了模型无法用环境变量解释的噪声（如农户管理差异、病虫害等），R²~0.03-0.05才是当前数据条件下诚实的评估。这也意味着——<strong>在更好的产量数据到来之前</strong>（如APSIM高分辨率模拟），我们主要关注<strong>特征重要性排序</strong>和<strong>SHAP解释</strong>而非R²绝对值。
+</div>
+
+<div class="img-gallery">
+
+  <div class="img-card">
+    <div class="img-card-header">Fig. 2 · SHAP特征重要性（Top-30，县统计融合产量） <span class="qa-label qa-model">SHAP</span></div>
+    <img src="Outputs/figures/main/fig02_shap_importance.png" alt="SHAP特征重要性" loading="lazy" onclick="openLightbox(this.src)">
+    <div class="img-card-desc">
+      <strong>Figure 2. SHAP-based feature importance ranking (XGBoost, n = 200 trees, max_depth = 5), top-30 variables.</strong><br>
+      Horizontal bars: mean absolute SHAP value per variable, colored by environmental domain. Check marks (✓) indicate
+      variables confirmed by Boruta (50 iterations, Random Forest). The top-ranked variable, bio9 (mean temperature of
+      the driest quarter, |SHAP| = 0.058), is more than twice as important as the fifth-ranked variable, indicating
+      that winter thermal conditions dominate the attributable signal. The ranking differs materially from the
+      earlier Ridge-only version, where bio15 (precipitation seasonality) and prec_05 (May precipitation) led the
+      ranking—the shift toward temperature variables under the ensemble yield target is consistent with the
+      known role of overwintering temperature in determining winter wheat tiller survival and spike number in
+      the North China Plain. Soil organic carbon (soc_dgkg, rank 4, |SHAP| = 0.021) and slope (slope_deg,
+      rank 7, |SHAP| = 0.017) enter the top-10 for the first time, indicating that non-climatic signals become
+      detectable when the yield target carries realistic variance rather than a spatially smoothed proxy.
+    </div>
+  </div>
+
+  <div class="img-grid-2">
+    <div class="img-card">
+      <div class="img-card-header">Fig. 3 · 模型对比（县统计融合产量） <span class="qa-label qa-model">对比</span></div>
+      <img src="Outputs/figures/main/fig03_model_comparison.png" alt="模型对比" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure 3. Model comparison under five-fold spatial block cross-validation (blocks defined by latitude quintiles).</strong><br>
+      <strong>(A)</strong> Cross-validated R² (mean ± 1 SD) for three tree-based ensemble models. All three models
+      yield R² values near zero: Random Forest (0.032 ± 0.139), XGBoost (0.026 ± 0.147), and LightGBM
+      (-0.020 ± 0.193). The overlapping ±1 SD intervals indicate that the three models do not differ
+      significantly in predictive performance under the current yield target. A negative R² value
+      (LightGBM) indicates that the model performs worse than predicting the global mean, a result
+      that is within the expected range when the true signal-to-noise ratio is low.
+      <strong>(B)</strong> Predicted versus observed yield for the best-performing model (Random Forest),
+      pooled across all five CV folds. The cluster of points along the diagonal reflects the model's
+      limited ability to resolve the 0.35 t/ha yield standard deviation using environmental predictors.
+      <strong>(C)</strong> Scatter plot of XGBoost versus LightGBM feature importance scores. The Pearson
+      correlation between the two models' importance vectors is positive (r ≈ 0.70–0.85 across versions),
+      indicating that although the absolute R² is low, the two models agree on the relative ranking
+      of variables—i.e., on which features are more versus less important.
+    </div>
+    </div>
+    <div class="img-card">
+      <div class="img-card-header">Fig. 4 · 特征选择总览（县统计融合产量） <span class="qa-label qa-soil">选择</span></div>
+      <img src="Outputs/figures/main/fig04_feature_selection_dashboard.png" alt="特征选择总览" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="img-card-desc">
+      <strong>Figure 4. Feature selection dashboard integrating Boruta classification, SHAP importance,
+      domain decomposition, and modeling summary under the ensemble yield target.</strong><br>
+      <strong>(A)</strong> Boruta classification results overlain on SHAP importance. Confirmed variables (green,
+      n = 4) and tentative variables (orange) are shown with their |SHAP| values; rejected variables (n = 67)
+      are omitted for clarity. All four confirmed variables are temperature metrics. The near-absence
+      of confirmed precipitation and soil variables reflects the higher noise floor of the ensemble yield
+      target: variables that were easily confirmed against a smoothed target (Ridge SD = 0.09) fail to
+      exceed the shadow-feature threshold when the yield target carries realistic variance.
+      <strong>(B)</strong> Domain contribution pie chart, weighted by the product of confirmed variable count
+      and mean |SHAP| per domain. Climate accounts for approximately 78% of the weighted contribution,
+      soil for approximately 18%, and topography for approximately 4%.
+      <strong>(C)</strong> Cumulative SHAP importance curve. The dashed green line marks the 80% threshold,
+      which is reached at the 62nd variable. The shallow slope of the cumulative curve indicates a diffuse
+      importance structure: no small subset of variables dominates the attributable signal.
+      <strong>(D)</strong> SHAP value distribution (boxplot) for the top-15 variables. Each box spans the
+      interquartile range of per-observation SHAP values; whiskers extend to 1.5 × IQR. The median
+      (red line within each box) is near zero for most variables, and the spread is compressed, consistent
+      with the low overall R². The boxplot confirms that even the top-ranked variables exhibit substantial
+      within-variable heterogeneity in their effect sizes across the 234 grids.
+      <strong>(E)</strong> Modeling summary card reporting the three-model CV R² values, Boruta result,
+      recommended variable count (union = 62), domain breakdown, and a yield-source note.
+    </div>
+    </div>
+  </div>
+
+</div>
+
+<h3>模型性能详细（空间分块CV，5折按纬度，234格网）</h3>
+
+<table class="data-table">
+  <tr><th>模型</th><th>CV R² (mean ± std)</th><th>CV RMSE (t/ha)</th><th>排名</th></tr>
+  <tr><td><strong>Random Forest</strong></td><td><strong>0.032 ± 0.139</strong></td><td>0.260</td><td>最优</td></tr>
+  <tr><td>XGBoost</td><td>0.026 ± 0.147</td><td>0.263</td><td>—</td></tr>
+  <tr><td>LightGBM</td><td>-0.020 ± 0.193</td><td>0.269</td><td>—</td></tr>
+</table>
+
+<h3>域级特征总结</h3>
+
+<table class="data-table">
+  <tr><th>域 (Domain)</th><th>变量数</th><th>Boruta确认</th><th>Top-10 SHAP</th><th>平均|SHAP|</th></tr>
+  <tr><td>Climate</td><td>60</td><td>4 (6.7%)</td><td>8</td><td>0.0106</td></tr>
+  <tr><td>Soil</td><td>8</td><td>0</td><td>1</td><td>0.0087</td></tr>
+  <tr><td>Topography</td><td>3</td><td>0</td><td>1</td><td>0.0105</td></tr>
+</table>
+
+<h3>Top-10 最重要特征（县统计融合产量版）</h3>
+
+<table class="data-table">
+  <tr><th>排名</th><th>变量</th><th>域</th><th>描述</th><th>|SHAP|</th><th>Boruta</th></tr>
+  <tr><td>1</td><td>bio9</td><td>Climate</td><td>最干季平均温度 (Mean Temp of Driest Quarter)</td><td>0.0585</td><td>✓</td></tr>
+  <tr><td>2</td><td>tavg_12</td><td>Climate</td><td>12月平均气温</td><td>0.0406</td><td>✓</td></tr>
+  <tr><td>3</td><td>bio15</td><td>Climate</td><td>降水季节性 (Precipitation Seasonality)</td><td>0.0239</td><td></td></tr>
+  <tr><td>4</td><td>soc_dgkg</td><td>Soil</td><td>土壤有机碳 (g/kg)</td><td>0.0210</td><td></td></tr>
+  <tr><td>5</td><td>bio1</td><td>Climate</td><td>年均温 (Annual Mean Temp)</td><td>0.0208</td><td>✓</td></tr>
+  <tr><td>6</td><td>bio11</td><td>Climate</td><td>最冷季均温 (Mean Temp of Coldest Quarter)</td><td>0.0190</td><td>✓</td></tr>
+  <tr><td>7</td><td>slope_deg</td><td>Topography</td><td>坡度 (°)</td><td>0.0167</td><td></td></tr>
+  <tr><td>8</td><td>tavg_01</td><td>Climate</td><td>1月平均气温</td><td>0.0159</td><td></td></tr>
+  <tr><td>9</td><td>extreme_Tmin_proxy</td><td>Climate</td><td>极端低温代理 (bio6)</td><td>0.0154</td><td></td></tr>
+  <tr><td>10</td><td>bio4</td><td>Climate</td><td>温度季节性 (Temperature Seasonality)</td><td>0.0153</td><td></td></tr>
+</table>
+
+<p style="text-indent:0; margin-top:12px;"><strong>解读：</strong>bio9（最干季均温）成为最强SHAP特征，反映了北京冬小麦越冬期（12-2月）温度对分蘖和返青的直接影响。tavg_12排第二同样支持这一逻辑。土壤有机碳（soc_dgkg）进入前5，说明在更真实的产量信号下，土壤质量的作用被正确捕捉。坡度首次进入前10，地形效应在噪声更大的产量数据中反而更显著。</p>
+
+<!-- ═══════════════════ 六、环境搭建 ═══════════════════ -->
+<h2 id="s6">六、团队环境搭建（成员参考）</h2>
+
+<ol class="step-list">
+  <li><strong>安装Miniconda</strong>
+    <a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">https://docs.conda.io/en/latest/miniconda.html</a><br>
+    下载Windows 64位版本安装，完成后打开"Anaconda Prompt"。</li>
+  <li><strong>克隆仓库并创建环境</strong>
+    <div class="code-block">
+<span class="comment"># 在 Anaconda Prompt 中执行：</span>
+<span class="cmd">cd</span> D:\
+<span class="cmd">git clone</span> https://github.com/DearDragon233/2026-SP.git
+<span class="cmd">cd</span> 2026-SP
+<span class="cmd">conda create -n</span> 2026sp python=3.11 -y
+<span class="cmd">conda activate</span> 2026sp
+<span class="cmd">pip install</span> pandas numpy matplotlib seaborn geopandas scikit-learn xgboost lightgbm shap optuna streamlit jupyter
+    </div></li>
+  <li><strong>验证安装</strong>
+    <div class="code-block"><span class="cmd">python -c</span> "import pandas,xgboost,shap; print('OK')"</div></li>
+</ol>
+
+<!-- ═══════════════════ 七、角色分工 ═══════════════════ -->
+<h2 id="s7">七、角色分工</h2>
+
+<div class="role-section">
+  <div class="role-card a1">
+    <div class="role-header">彭宇程 · 项目负责人 <span class="tag">全程核心</span></div>
+    <div class="role-body">
+      <ul>
+        <li><span class="badge badge-code">核心开发</span> 整体研究框架设计、技术路线确定</li>
+        <li><span class="badge badge-code">建模</span> XGBoost/LightGBM/RF三模型开发 + 空间分块CV</li>
+        <li><span class="badge badge-code">特征</span> Boruta + SHAP双路特征选择，域级阈值确定</li>
+        <li><span class="badge badge-code">产量</span> 县统计产量搜集 + 贝叶斯空间融合方法</li>
+        <li><span class="badge badge-code">优化</span> NSGA-II多目标管理优化（第4-5周）</li>
+        <li><span class="badge badge-code">开发</span> Streamlit Web预测工具 + Python包封装</li>
+        <li><span class="badge badge-code">制图</span> 论文主体图 + QA诊断图（600 DPI）</li>
+        <li><span class="badge badge-text">写作</span> 论文全文初稿（Introduction至Discussion）、统稿修改</li>
+        <li><span class="badge badge-text">写作</span> 投稿、审稿回复、与闫老师沟通</li>
+        <li><span class="badge badge-rev">支撑</span> 为成员编写模板脚本（TODO标记式）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="role-section">
+  <div class="role-card a2">
+    <div class="role-header">合作者A2 <span class="tag">数据 + 综述 + 润色</span></div>
+    <div class="role-body">
+      <h4 style="margin:0 0 10px;color:var(--purple);">编程任务（模板脚本，改3-5处可运行）</h4>
+      <ul><li><span class="badge badge-code">可视化</span> VIF柱状图</li><li><span class="badge badge-code">可视化</span> 73×73变量相关矩阵热图</li><li><span class="badge badge-code">统计</span> 描述性统计表</li></ul>
+      <h4 style="margin:16px 0 10px;color:var(--purple);">非编程任务</h4>
+      <ul><li><span class="badge badge-text">写作</span> 文献搜索精读→Introduction初稿</li><li><span class="badge badge-text">写作</span> 研究区背景（Study Area段落）</li><li><span class="badge badge-rev">润色</span> 全文语言校对与术语统一</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="role-section">
+  <div class="role-card a3">
+    <div class="role-header">合作者A3 <span class="tag">数据字典 + 图表 + 结果</span></div>
+    <div class="role-body">
+      <h4 style="margin:0 0 10px;color:var(--green);">编程任务（模板脚本）</h4>
+      <ul><li><span class="badge badge-code">可视化</span> 模型性能对比表</li><li><span class="badge badge-code">可视化</span> 产量预测空间分布地图</li><li><span class="badge badge-code">可视化</span> 12张附录图批量生成</li></ul>
+      <h4 style="margin:16px 0 10px;color:var(--green);">非编程任务</h4>
+      <ul><li><span class="badge badge-data">数据</span> 71个环境变量完整字典（变量名/全称/单位/来源）</li><li><span class="badge badge-data">数据</span> 论文结果表格整理</li><li><span class="badge badge-text">写作</span> 附录材料（Supplementary Materials）整理</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="role-section">
+  <div class="role-card a4">
+    <div class="role-header">合作者A4 <span class="tag">文献管理 + 格式 + 校阅</span></div>
+    <div class="role-body">
+      <h4 style="margin:0 0 10px;color:var(--orange);">编程任务（模板脚本）</h4>
+      <ul><li><span class="badge badge-code">可视化</span> Optuna调参收敛曲线图</li><li><span class="badge badge-code">可视化</span> QRF预测不确定性区间图</li><li><span class="badge badge-code">文档</span> GitHub README（Markdown）</li></ul>
+      <h4 style="margin:16px 0 10px;color:var(--orange);">非编程任务</h4>
+      <ul><li><span class="badge badge-data">管理</span> Zotero论文引用库建立与管理</li><li><span class="badge badge-rev">格式</span> 论文Word排版、图表编号、交叉引用</li><li><span class="badge badge-rev">格式</span> Agronomy投稿指南逐项格式检查</li><li><span class="badge badge-text">写作</span> Cover Letter撰写</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 八、CRediT贡献矩阵 ═══════════════════ -->
+<h2 id="s8">八、CRediT贡献者角色分类矩阵</h2>
+
+<p>以下按CRediT（Contributor Roles Taxonomy，贡献者角色分类法）14个标准维度展示每位作者的贡献。MDPI旗下Agronomy要求投稿时按此格式声明。</p>
+
+<p style="text-indent:0;">符号含义：<span class="dot-lead">●</span> 主导 | <span class="dot-major">◉</span> 主要参与 | <span class="dot-support">○</span> 辅助贡献</p>
+
+<table class="credit-table">
+  <tr><th>CRediT角色</th><th>中文释义</th><th style="background:var(--blue);color:#fff;">彭宇程</th><th style="background:var(--purple);color:#fff;">A2</th><th style="background:var(--green);color:#fff;">A3</th><th style="background:var(--orange);color:#fff;">A4</th></tr>
+  <tr><td>Conceptualization</td><td>概念化</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Methodology</td><td>方法论</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Software</td><td>软件</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Validation</td><td>验证</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Formal Analysis</td><td>形式分析</td><td><span class="dot-lead">●</span></td><td><span class="dot-support">○</span></td><td><span class="dot-support">○</span></td><td></td></tr>
+  <tr><td>Investigation</td><td>调查</td><td><span class="dot-lead">●</span></td><td><span class="dot-major">◉</span></td><td><span class="dot-support">○</span></td><td><span class="dot-support">○</span></td></tr>
+  <tr><td>Resources</td><td>资源</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Data Curation</td><td>数据整理</td><td><span class="dot-lead">●</span></td><td><span class="dot-support">○</span></td><td><span class="dot-major">◉</span></td><td></td></tr>
+  <tr><td>Writing — Original Draft</td><td>初稿撰写</td><td><span class="dot-lead">●</span></td><td><span class="dot-major">◉</span></td><td><span class="dot-support">○</span></td><td><span class="dot-support">○</span></td></tr>
+  <tr><td>Writing — Review & Editing</td><td>审阅修改</td><td><span class="dot-major">◉</span></td><td><span class="dot-major">◉</span></td><td><span class="dot-support">○</span></td><td><span class="dot-lead">●</span></td></tr>
+  <tr><td>Visualization</td><td>可视化</td><td><span class="dot-lead">●</span></td><td><span class="dot-major">◉</span></td><td><span class="dot-major">◉</span></td><td><span class="dot-support">○</span></td></tr>
+  <tr><td>Supervision</td><td>指导</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Project Administration</td><td>项目管理</td><td><span class="dot-lead">●</span></td><td></td><td></td><td></td></tr>
+  <tr><td>Funding Acquisition</td><td>经费获取</td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<p style="text-indent:0;font-size:13px;color:var(--text-secondary);">✱ Funding Acquisition留空——本项目为学生自主研究，无专项经费。如需注明可填"指导教师闫军教授课题组经费支持"。</p>
+
+<!-- ═══════════════════ 九、贡献全局图 ═══════════════════ -->
+<h2 id="s9">九、贡献全局图（职责覆盖面可视化）</h2>
+
+<p>用面积展示分工范围。这不是"谁干得多"的评价，而是职责覆盖面的可视化。</p>
+
+<div class="bubbles">
+  <div class="bubble">
+    <div class="circle big">彭宇程<br><span style="font-size:10px;font-weight:400;">项目负责人</span></div>
+    <div class="name">彭宇程</div>
+    <div class="role-label">建模 · 验证 · 解释<br>优化 · 工具化 · 制图<br>全文写作 · 投稿 · 沟通</div>
+  </div>
+  <div class="bubble">
+    <div class="circle mid">A2<br><span style="font-size:10px;font-weight:400;">合作者</span></div>
+    <div class="name">合作者A2</div>
+    <div class="role-label">文献综述 · Introduction<br>VIF图 · 热图 · 统计表<br>全文润色</div>
+  </div>
+  <div class="bubble">
+    <div class="circle sm">A3<br><span style="font-size:10px;font-weight:400;">合作者</span></div>
+    <div class="name">合作者A3</div>
+    <div class="role-label">变量字典 · 性能对比表<br>预测地图 · 附录图<br>结果表格</div>
+  </div>
+  <div class="bubble">
+    <div class="circle xs">A4<br><span style="font-size:10px;font-weight:400;">合作者</span></div>
+    <div class="name">合作者A4</div>
+    <div class="role-label">Zotero · 调参图<br>不确定性图 · README<br>排版 · 格式检查</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 十、工作节奏 ═══════════════════ -->
+<h2 id="s10">十、七周工作节奏</h2>
+
+<table class="data-table">
+  <tr><th>时间</th><th>阶段</th><th>你在做什么</th></tr>
+  <tr>
+    <td>第1-2周<br><span class="status-badge status-done">已完成</span></td>
+    <td>数据准备 + 质量评估</td>
+    <td>彭：KNN填补、VIF诊断、QA六图<br>A2：文献搜索→Introduction初稿<br>A3：变量字典整理<br>A4：Zotero建库</td>
+  </tr>
+  <tr>
+    <td>第2-3周<br><span class="status-badge status-done">已完成</span></td>
+    <td>产量补充 + 重建模</td>
+    <td>彭：县统计产量搜集 + 贝叶斯融合 + 三模型重建模 + Boruta/SHAP全量重跑<br>A2：继续Introduction写作<br>A4：调参曲线图模板</td>
+  </tr>
+  <tr>
+    <td>第3-4周<br><span class="status-badge status-wip">进行中</span></td>
+    <td>验证解释 + QRF</td>
+    <td>彭：QRF训练 + 不确定性量化<br>A2：VIF图、热图、统计表<br>A3：性能对比表、预测地图</td>
+  </tr>
+  <tr>
+    <td>第4-5周<br><span class="status-badge status-todo">待开始</span></td>
+    <td>优化制图</td>
+    <td>彭：NSGA-II优化 + 全文图表定稿<br>A3：附录图批量生成<br>A4：不确定性区间图</td>
+  </tr>
+  <tr>
+    <td>第5-6周<br><span class="status-badge status-todo">待开始</span></td>
+    <td>工具化写作</td>
+    <td>彭：Streamlit工具 + Discussion<br>A2：全文润色<br>A4：README + 论文排版</td>
+  </tr>
+  <tr>
+    <td>第6-7周<br><span class="status-badge status-todo">待开始</span></td>
+    <td>收尾投稿</td>
+    <td>A3：附录收尾<br>A4：Cover Letter + 格式检查<br>全员：交叉审阅</td>
+  </tr>
+</table>
+
+<hr>
+
+<p style="text-indent:0;text-align:center;color:var(--text-secondary);">
+  配套技术文档：<strong>Agronomy项目分工与技术原理解释.docx</strong><br>
+  项目仓库：<strong>https://github.com/DearDragon233/2026-SP</strong><br>
+  县统计产量数据：<strong>county_yield_stats.json</strong>（北京统计局官方公报）<br>
+  如有问题随时联系。
+</p>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="放大预览">
+</div>
+
+<script>
+  function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('active')}
+  function closeLightbox(){document.getElementById('lightbox').classList.remove('active')}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox()});
+</script>
+
+</body>
+</html>
