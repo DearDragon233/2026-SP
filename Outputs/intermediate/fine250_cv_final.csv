@@ -1,0 +1,5 @@
+﻿Scheme,Model,R2_mean,R2_std,RMSE_mean,R2_pooled,n
+random_5fold,XGBoost,0.1547,0.1357,0.2393,0.1649,301
+random_5fold,RF,0.1986,0.1358,0.2328,0.2096,301
+spatial_4quadrant,XGBoost,-1.486,1.6617,0.2626,-0.4166,301
+spatial_4quadrant,RF,-1.9436,2.4859,0.2615,-0.3734,301

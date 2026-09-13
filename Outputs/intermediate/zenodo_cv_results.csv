@@ -1,0 +1,7 @@
+﻿Target,Scheme,Model,R2_mean,R2_std,RMSE_mean,R2_pooled,n
+D_zenodo_2021,checker_4,XGBoost,-1.0263,0.9044,0.2395,-0.0927,22
+D_zenodo_2021,checker_4,LightGBM,-0.9542,0.8473,0.2432,-0.2089,22
+D_zenodo_2021,checker_4,RF,-1.3103,1.3718,0.2455,-0.1245,22
+D_zenodo_2021,random,XGBoost,0.1617,0.1944,0.2044,0.9868,22
+D_zenodo_2021,random,LightGBM,-0.3044,0.1358,0.257,0.9786,22
+D_zenodo_2021,random,RF,0.2416,0.0873,0.1959,0.9877,22

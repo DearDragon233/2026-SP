@@ -1,0 +1,15 @@
+feature,shap_mean_abs
+bio_4,0.1037
+bio_15,0.0446
+elevation_m,0.0343
+bdod,0.0172
+cec,0.0172
+bio_1,0.0116
+soc,0.0068
+silt,0.0062
+bio_12,0.0047
+clay,0.0039
+bio_5,0.0038
+bio_10,0.0023
+sand,0.0011
+phh2o,0.0009
