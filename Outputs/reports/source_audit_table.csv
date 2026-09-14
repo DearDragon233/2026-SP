@@ -1,0 +1,9 @@
+﻿数据源,来源机构/载体,渠道,获取方式,许可,更新频率,可信依据,可信度评级,链接实测
+Xiao et al. 2024（产量+管理主数据）,Nature Food 5:59-71（IF≈27，同行评审）,Figshare DOI 10.6084/m9.figshare.24471919.v5,公开直下,CC BY 4.0,静态（论文附录）,中国农科院/ Nature Food 级审校,A 高可信,202 302 链接可达（2026-09-14 实测）
+ChinaWheatYield30m,ESSD 15:4047-4063（IF≈11.4，同行评审）,Zenodo DOI 10.5281/zenodo.7360753,公开直下,CC BY 4.0,静态（2016-2021 六期）,中科院团队 / ESSD 数据论文审校,A 高可信,本机网络 403 限流；同网络浏览器 200 并已下载 1088MB（2021）
+WorldClim 2.1,全球气候背景标准数据集,worldclim.org,公开直下,CC BY-SA 4.0,低频（版本级）,学术机构维护，万级引用,A 高可信,200 实测
+SoilGrids 2.0,ISRIC 国际土壤参考信息中心,soilgrids.org,公开直下,CC BY 4.0,版本级更新,ISRIC 官方维护,A 高可信,200 实测
+SRTM 90m,NASA/CGIAR-CSI,srtm.csi.cgiar.org,公开直下,公有领域/自由使用,静态,NASA 官方任务,A 高可信,200 实测
+NASA POWER,NASA Langley,power.larc.nasa.gov API,API 免 key,公有领域（NASA 开放数据）,持续更新,NASA 官方,A 高可信,API 200 实测，286 月值已下载
+Zenodo 2016-2020 年份,同 ChinaWheatYield30m,同上,公开直下,CC BY 4.0,静态,同上,A 高可信,待爸爸网盘下载（不在本机）
+国家统计局县域数据,国家数据 data.stats.gov.cn,官网查询,公开查询,政府公开数据（注明出处）,年度,官方统计,B+（县域尺度需口径核对）,API 反爬超时；浏览器可查；暂未入库

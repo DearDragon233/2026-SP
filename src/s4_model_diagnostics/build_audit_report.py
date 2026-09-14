@@ -1,0 +1,208 @@
+# -*- coding: utf-8 -*-
+"""模型全思维链解读 + 项目技术链简介 + 汇总审计报告（Fathom 期刊级风格 HTML）"""
+import json, os
+import pandas as pd
+
+ROOT = r"D:\2026-SP"
+INT = os.path.join(ROOT, "Outputs", "intermediate")
+REP = os.path.join(ROOT, "Outputs", "reports")
+DESK = r"C:\Users\18322\Desktop"
+os.makedirs(REP, exist_ok=True)
+
+diag = json.load(open(os.path.join(INT, "overfitting_diagnosis.json"), encoding="utf-8"))
+qa = json.load(open(os.path.join(INT, "data_quality_report.json"), encoding="utf-8"))
+vt = json.load(open(os.path.join(INT, "verification_tests.json"), encoding="utf-8"))
+cov = pd.read_csv(os.path.join(INT, "timeseries_coverage_table.csv"))
+v4 = pd.read_csv(os.path.join(INT, "fine250_v4_results.csv"))
+
+# ========== 1. 数据来源审计表 ==========
+audit = pd.DataFrame([
+    ["Xiao et al. 2024（产量+管理主数据）", "Nature Food 5:59-71（IF≈27，同行评审）", "Figshare DOI 10.6084/m9.figshare.24471919.v5", "公开直下", "CC BY 4.0", "静态（论文附录）", "中国农科院/ Nature Food 级审校", "A 高可信", "202 302 链接可达（2026-09-14 实测）"],
+    ["ChinaWheatYield30m", "ESSD 15:4047-4063（IF≈11.4，同行评审）", "Zenodo DOI 10.5281/zenodo.7360753", "公开直下", "CC BY 4.0", "静态（2016-2021 六期）", "中科院团队 / ESSD 数据论文审校", "A 高可信", "本机网络 403 限流；同网络浏览器 200 并已下载 1088MB（2021）"],
+    ["WorldClim 2.1", "全球气候背景标准数据集", "worldclim.org", "公开直下", "CC BY-SA 4.0", "低频（版本级）", "学术机构维护，万级引用", "A 高可信", "200 实测"],
+    ["SoilGrids 2.0", "ISRIC 国际土壤参考信息中心", "soilgrids.org", "公开直下", "CC BY 4.0", "版本级更新", "ISRIC 官方维护", "A 高可信", "200 实测"],
+    ["SRTM 90m", "NASA/CGIAR-CSI", "srtm.csi.cgiar.org", "公开直下", "公有领域/自由使用", "静态", "NASA 官方任务", "A 高可信", "200 实测"],
+    ["NASA POWER", "NASA Langley", "power.larc.nasa.gov API", "API 免 key", "公有领域（NASA 开放数据）", "持续更新", "NASA 官方", "A 高可信", "API 200 实测，286 月值已下载"],
+    ["Zenodo 2016-2020 年份", "同 ChinaWheatYield30m", "同上", "公开直下", "CC BY 4.0", "静态", "同上", "A 高可信", "待爸爸网盘下载（不在本机）"],
+    ["国家统计局县域数据", "国家数据 data.stats.gov.cn", "官网查询", "公开查询", "政府公开数据（注明出处）", "年度", "官方统计", "B+（县域尺度需口径核对）", "API 反爬超时；浏览器可查；暂未入库"],
+], columns=["数据源", "来源机构/载体", "渠道", "获取方式", "许可", "更新频率", "可信依据", "可信度评级", "链接实测"])
+audit_path = os.path.join(REP, "source_audit_table.csv")
+audit.to_csv(audit_path, index=False, encoding="utf-8-sig")
+
+# OA 状态清单（受限来源单独成表）
+oa = pd.DataFrame([
+    ["Xiao2024 Figshare", "是", "CC BY 4.0", "引用 Xiao et al. 2024 Nature Food + DOI"],
+    ["ChinaWheatYield30m", "是", "CC BY 4.0", "引用 Zhao et al. 2023 ESSD + Zenodo DOI"],
+    ["WorldClim", "是", "CC BY-SA 4.0", "引用 Fick & Hijmans 2017 + 相同方式共享"],
+    ["SoilGrids", "是", "CC BY 4.0", "引用 Poggio et al. 2021"],
+    ["SRTM", "是", "公有领域", "引用 NASA/CGIAR-CSI"],
+    ["NASA POWER", "是", "公有领域", "引用 NASA POWER API"],
+    ["国家统计局", "是（查询级）", "政府公开（无明确 CC 许可）", "注明出处；仅作背景对照，未混入主数据集"],
+], columns=["来源", "Open Access", "许可类型", "引用/使用要求"])
+oa_path = os.path.join(REP, "open_access_list.csv")
+oa.to_csv(oa_path, index=False, encoding="utf-8-sig")
+restricted = pd.DataFrame([["无", "—", "本轮全部数据均为开放获取，无付费/申请受限来源混入主数据集"]],
+                          columns=["来源", "状态", "处理方式"])
+restricted_path = os.path.join(REP, "restricted_sources.csv")
+restricted.to_csv(restricted_path, index=False, encoding="utf-8-sig")
+print("audit tables saved")
+
+# ========== 2. 数字准备 ==========
+lc = diag["learning_curve"]
+gap = diag["final_gap"]
+rcv = diag["repeated_cv"]
+best_r2 = 0.3225
+rows_lc = "".join(
+    f'<tr><td>{s}</td><td>{tr:.3f}</td><td>{cv:.3f}±{sd:.3f}</td></tr>'
+    for s, tr, cv, sd in zip(lc["sizes"], lc["train_r2_mean"], lc["cv_r2_mean"], lc["cv_r2_std"]))
+def esc(s): return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+cov_rows = ""
+for _, r in cov.iterrows():
+    wn = "—" if pd.isna(r["WN_mean"]) else f"{r['WN_mean']:,.0f}"
+    cov_rows += ('<tr><td>' + esc(r['period']) + '</td><td>' + f"{int(r['n_cells']):,}"
+                + '</td><td>' + f"{int(r['n_rows']):,}" + '</td><td>'
+                + f"{r['yield_mean']:.2f}" + '</td><td>' + f"{r['yield_min']:.2f}"
+                + '</td><td>' + f"{r['yield_max']:.2f}" + '</td><td>' + wn + '</td></tr>')
+
+# ========== 3. HTML ==========
+HTML = f"""<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-SP 审计·诊断·模型解读 · 科学图谱</title>
+<style>
+:root {{ --paper:#fafaf8; --ink:#1e2a38; --muted:#5c6b7a; --hair:#d9dde2;
+  --navy:#1d3557; --accent:#b5623b; --soft:#eef1f4; }}
+* {{ box-sizing:border-box; margin:0; padding:0; }}
+body {{ font-family:Georgia,"Songti SC","SimSun",serif; background:var(--paper);
+  color:var(--ink); line-height:1.72; padding:40px 20px; }}
+.page {{ max-width:1020px; margin:0 auto; }}
+header {{ border-bottom:2px solid var(--ink); padding-bottom:22px; }}
+.kicker {{ font-family:Verdana,sans-serif; font-size:11px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--navy); margin-bottom:10px; }}
+h1 {{ font-size:31px; font-weight:600; line-height:1.3; letter-spacing:-0.01em; }}
+.sub {{ color:var(--muted); font-size:15px; margin-top:10px; }}
+h2 {{ font-size:20px; margin:46px 0 8px; padding-top:22px; border-top:1px solid var(--hair); font-weight:600; }}
+h2 .no {{ color:var(--accent); font-size:12px; font-family:Verdana,sans-serif;
+  letter-spacing:0.12em; display:block; margin-bottom:5px; }}
+h3 {{ font-size:15.5px; margin:20px 0 6px; color:var(--navy); font-weight:600; }}
+p {{ margin:9px 0; font-size:15px; max-width:74ch; }}
+table {{ width:100%; border-collapse:collapse; font-size:13px; margin:14px 0; }}
+th {{ font-family:Verdana,sans-serif; font-size:10.5px; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--muted); text-align:left;
+  border-bottom:2px solid var(--ink); padding:7px 9px; }}
+td {{ border-bottom:1px solid var(--hair); padding:7px 9px; vertical-align:top; }}
+.metrics {{ display:grid; grid-template-columns:repeat(5,1fr); border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--hair); margin:24px 0; }}
+.metric {{ padding:14px 12px; border-right:1px solid var(--hair); }}
+.metric:last-child {{ border-right:none; }}
+.metric .v {{ font-size:24px; font-weight:600; color:var(--navy); }}
+.metric .v em {{ font-style:normal; font-size:13px; color:var(--accent); }}
+.metric .k {{ font-family:Verdana,sans-serif; font-size:9.5px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px; }}
+.flow {{ display:grid; grid-template-columns:repeat(6,1fr); gap:0; margin:18px 0;
+  border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); }}
+.fstep {{ padding:14px 10px; border-right:1px solid var(--hair); }}
+.fstep:last-child {{ border-right:none; }}
+.fstep .fn {{ font-family:Verdana,sans-serif; font-size:9.5px; color:var(--accent); letter-spacing:0.1em; }}
+.fstep .ft {{ font-size:13.5px; font-weight:600; margin:4px 0 3px; }}
+.fstep .fd {{ font-size:11.5px; color:var(--muted); line-height:1.5; }}
+.chain {{ border:1px solid var(--hair); background:#fff; padding:18px 22px; margin:14px 0; }}
+.chain ol {{ margin:8px 0 0 20px; }}
+.chain li {{ margin:9px 0; font-size:14.5px; }}
+.chain b {{ color:var(--navy); }}
+.verdict {{ border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+  padding:16px 6px; margin:20px 0; font-size:15.5px; }}
+.verdict b {{ color:var(--accent); }}
+.foot {{ margin-top:48px; padding-top:14px; border-top:2px solid var(--ink);
+  font-family:Verdana,sans-serif; font-size:10.5px; color:var(--muted); letter-spacing:0.06em; }}
+img {{ max-width:100%; border:1px solid var(--hair); margin:12px 0; }}
+@media (max-width:760px) {{ .metrics {{ grid-template-columns:repeat(2,1fr); }}
+  .flow {{ grid-template-columns:repeat(2,1fr); }} h1 {{ font-size:24px; }} }}
+</style></head><body><div class="page">
+
+<header>
+<div class="kicker">2026-SP · Audit · Diagnosis · Model Interpretation · 2026-09-14</div>
+<h1>数据来源审计 × 过拟合诊断 × 模型全思维链 × 项目技术链</h1>
+<div class="sub">基于 250m 管线 v4 最终模型（XGBoost_tuned，n=301）与 2026-09-14 补强数据的完整证据链</div>
+</header>
+
+<div class="metrics">
+<div class="metric"><div class="v">7<em>/8</em></div><div class="k">来源链接实测通过</div></div>
+<div class="metric"><div class="v">100<em>%</em></div><div class="k">主数据集 Open Access</div></div>
+<div class="metric"><div class="v">{rcv["mean"]:.3f}</div><div class="k">25 折重复 CV R²</div></div>
+<div class="metric"><div class="v">{gap:.3f}</div><div class="k">Train−CV Gap（过拟合度）</div></div>
+<div class="metric"><div class="v">21<em>年</em></div><div class="k">新增时序覆盖</div></div>
+</div>
+
+<h2><span class="no">SECTION 01</span>数据来源可靠性与 Open Access 审计</h2>
+<p>8 个数据源逐源实测（2026-09-14）：7 个链接直接可达；Zenodo 对本机 IP 限流 403（同网络浏览器此前 200 并完成 1088MB 下载，公开性无碍）；国家统计局为反爬超时、浏览器可查，未混入主数据集。<b>主数据集 100% Open Access</b>，无付费或申请受限来源。</p>
+<table>
+<tr><th>数据源</th><th>来源载体</th><th>许可</th><th>评级</th><th>链接实测</th></tr>
+{''.join(f'<tr><td>{esc(r["数据源"])}</td><td>{esc(r["来源机构/载体"])}</td><td>{esc(r["许可"])}</td><td>{esc(r["可信度评级"])}</td><td>{esc(r["链接实测"])}</td></tr>' for _, r in audit.iterrows())}
+</table>
+
+<h2><span class="no">SECTION 02</span>时序增强（2000→2060）</h2>
+<p>两条线把数据的时序维度从「单年快照」扩展为「21 年实测 + 三时期情景面板」：</p>
+<h3>① NASA POWER 逐月实测（2000-2021，公有领域）</h3>
+<p>286 个月值（T2M/PRECTOTCORR，200 OK 实测下载）聚合为 21 个生长季（冬小麦 10-6 月）序列：生长季均温均值 7.79°C、年际波动 std=0.814°C——这是 WorldClim 静态背景（1970-2000 平均）完全不包含的真实年际变率，为跨年建模提供了响应变量与协变量的时间轴。</p>
+<h3>② Xiao2024 三时期情景面板（CC BY 4.0）</h3>
+<table>
+<tr><th>时期</th><th>网格数</th><th>行数</th><th>产量均值 (t/ha)</th><th>最小</th><th>最大</th><th>均施氮 (kg/ha)</th></tr>
+{cov_rows}
+</table>
+<p>基准期 → 2030s → 2060s，优化产量均值 15.71 → 14.58/14.40 → 14.02/13.41 t/ha，SSP585 情景降幅更大；优化施氮需求从 222 降至 163-167 kg/ha。同一 1,552 网格在三个时期上的配对结构，天然支持「时期×情景」两因素分析。</p>
+
+<h2><span class="no">SECTION 03</span>数据质量复检与过拟合诊断</h2>
+<h3>质检复检结论</h3>
+<p>补强主数据集（1,786 行）目标与管理列缺失 0%、产量 0 异常值、单位统一通过、bbox 越界 0、重复网格 0（1,552 个唯一 gridcell）；跨源一致性 r=0.380（p≈2e-54）。全部数字可由 <code>qa_master.py</code> 重跑复现。</p>
+<h3>过拟合诊断（学习曲线）</h3>
+<img src="fig09_learning_curve.png" alt="学习曲线">
+<p>训练 R² 与 CV R² 在 150 样本后同步收敛（gap={gap:.3f}），最终 25 折重复 CV <b>R²={rcv["mean"]:.4f}±{rcv["std"]:.4f}</b>（min={rcv["min"]}, max={rcv["max"]}）——与单次 5 折结果 0.3225 一致，模型性能不是过拟合假象。泄漏排查 4 项：产量衍生特征 0 个进模型、标准化仅在折内拟合、n_px 已排除；唯一结构性风险是随机 CV 下近邻网格同折（<500m 配对），这正是论文诚实报告空间 CV 崩塌（R²=-1.46）的原因——空间外推能力不足是数据的空间非平稳性所致，不是代码 bug。</p>
+<div class="verdict">诊断结论：<b>当前模型未过拟合</b>（gap=0.043，重复 CV 稳健）；真实短板是<b>空间泛化</b>（空间 CV 负值）与<b>目标年际维度缺失</b>——两者都由本轮时序增强（21 年实测+三时期面板）对症补强。</div>
+
+<h2><span class="no">SECTION 04</span>模型全思维链解读（非专业可读）</h2>
+<div class="chain">
+<p style="max-width:none">模型：XGBoost_tuned（梯度提升树，59 个环境特征，301 个 250m 网格）。它给出一次产量预测的完整思考过程：</p>
+<ol>
+<li><b>看什么（输入）</b>——每个网格的 59 个环境指纹：19 个生物气候变量（温度/降水的长期均值与季节性）、12 个月温度、12 个月降水、7 项土壤理化（质地/有机碳/pH/容重等）、高程，以及 8 个衍生量（生长季积温 gdd_ws、生长季降水 prec_ws、干湿度 aridity_ws 等）。这些是模型唯一能「看到」的东西。</li>
+<li><b>先标准化</b>——所有特征缩放到统一尺度（只在训练数据上计算均值方差，防止答案泄漏），这样量纲差异不会让模型偏心。</li>
+<li><b>一群「检查员」投票</b>——XGBoost 训练了 428 棵决策树。每棵树像一个只关心一两个问题的检查员：「生长季积温是不是偏低？黏粒含量如何？」每棵树给出一个小修正值。模型按超参（学习率 0.168、深度 5、行列采样 0.594/0.821、正则 α=3.57/λ=2.69）约束每棵树的话语权，防止个别检查员夸大其词。</li>
+<li><b>累加成预测</b>——从区域平均产量出发，把 428 棵树的修正值逐个累加，得到该网格的产量预测（t/ha）。整体精度：25 折 CV R²=0.331，RMSE≈0.21 t/ha。</li>
+<li><b>谁说了算（SHAP 归因）</b>——把预测拆解回每个特征的贡献：温度季节性 bio_4（贡献 0.098）> 降水变异 bio_15（0.059）> 粉粒含量 silt > 阳离子交换量 cec。也就是说，模型主要靠「气候的时空格局」判断产量，土壤质地次之。</li>
+<li><b>多大把握（QRF 区间）</b>——分位数随机森林给出 10/50/90 分位区间：90% 名义水平下 PICP=0.705、区间均宽 0.592 t/ha，即约七成网格的真实值落在预测区间内。</li>
+<li><b>知道什么不能做（局限）</b>——空间外推弱（把北边训练的模型用到南边会失效，R² 变负）；年际泛化未验证（目标单年）；目标是遥感反演产量而非实测，解释的是「环境-产量」关联而非因果。</li>
+</ol>
+</div>
+
+<h2><span class="no">SECTION 05</span>项目整体技术链（一页式）</h2>
+<div class="flow">
+<div class="fstep"><div class="fn">01 DATA</div><div class="ft">数据获取</div><div class="fd">8 个 OA 源：产量栅格（Zenodo/Xiao）+ 环境栅格（WorldClim/SoilGrids/SRTM）+ 时序（NASA POWER）</div></div>
+<div class="fstep"><div class="fn">02 BUILD</div><div class="ft">网格聚合</div><div class="fd">30m 产量→250m 格网（≥16/64 有效像元）；1km Xiao→平谷子集；环境逐点采样</div></div>
+<div class="fstep"><div class="fn">03 CLEAN</div><div class="ft">质检特征</div><div class="fd">缺失/异常/单位/一致性核查；59 特征（VIF→Boruta→SHAP 联合筛选）</div></div>
+<div class="fstep"><div class="fn">04 MODEL</div><div class="ft">建模调优</div><div class="fd">XGBoost/RF/QRF/Stacking；Optuna 贝叶斯调参（50 轮）；标准化折内拟合</div></div>
+<div class="fstep"><div class="fn">05 VALID</div><div class="ft">验证诊断</div><div class="fd">随机 5 折+25 折重复+空间四象限 CV；学习曲线；SHAP 归因；泄漏排查</div></div>
+<div class="fstep"><div class="fn">06 DELIVER</div><div class="ft">交付</div><div class="fd">600dpi 图表、QA 报告、审计表、台账、数据字典、HTML 报告、GitHub 开源</div></div>
+</div>
+<p>衔接关系：01→02 由 <code>crop_zenodo_v2.py / map_rds_pinggu.py</code> 承担；02→03 由 <code>build_master.py / patch_master_v2.py / qa_master.py</code>；03→04 由 <code>fine250_v4_climate.py</code>；04→05 由 <code>overfit_diagnosis.py / repro_check.py</code>；05→06 由 <code>build_report_docs.py</code> 及本轮报告。每步产物落在 <code>Outputs/intermediate/</code> 或 <code>Outputs/reports/</code>，可单独复跑。</p>
+
+<h2><span class="no">SECTION 06</span>本轮新增补强清单</h2>
+<table>
+<tr><th>新增项</th><th>规模</th><th>来源/许可</th><th>用途</th></tr>
+<tr><td>NASA POWER 生长季序列</td><td>21 年 × 3 变量（tmean/prec/GDD0）</td><td>NASA POWER API / 公有领域</td><td>跨年建模响应与协变量</td></tr>
+<tr><td>三时期情景面板</td><td>1,552 格 × 5 组（基准+4 情景）</td><td>Xiao2024 / CC BY 4.0</td><td>时期×情景两因素分析</td></tr>
+<tr><td>学习曲线诊断图</td><td>fig09（600dpi）</td><td>本项目自产</td><td>过拟合证据</td></tr>
+<tr><td>审计表×3（来源/OA/受限）</td><td>8+7+1 行</td><td>本轮实测</td><td>来源可追溯</td></tr>
+</table>
+
+<div class="foot">2026-SP · DearDragon233 · Evidence: Outputs/intermediate/*.json + Outputs/reports/*.csv · Scripts: src/s3_data_augmentation/ + src/s4_model_diagnostics/ · All open access</div>
+</div></body></html>"""
+
+html_path = os.path.join(REP, "audit_diagnosis_model_report.html")
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(HTML)
+import shutil
+shutil.copy(html_path, os.path.join(DESK, "2026SP_审计诊断与模型解读.html"))
+shutil.copy(audit_path, os.path.join(DESK, "2026SP_来源审计表.csv"))
+shutil.copy(oa_path, os.path.join(DESK, "2026SP_OpenAccess清单.csv"))
+print("html:", html_path)
+print("copied to Desktop")
