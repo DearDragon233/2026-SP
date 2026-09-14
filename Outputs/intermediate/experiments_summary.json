@@ -1,0 +1,167 @@
+{
+ "best": "E8_resid_idw",
+ "ledger": [
+  {
+   "exp": "E0_baseline_v4",
+   "desc": "v4 复刻 58 特征（剔除死列 nitrogen）",
+   "n_feat": 72,
+   "r2_fold_mean": 0.3195,
+   "r2_fold_std": 0.1247,
+   "r2_pooled": 0.3237,
+   "adj_r2": 0.1101,
+   "rmse": 0.2166,
+   "mae": 0.137
+  },
+  {
+   "exp": "E1_year_climate",
+   "desc": "+2021 年份特异气候 7 列（创新点1）",
+   "n_feat": 79,
+   "r2_fold_mean": 0.3176,
+   "r2_fold_std": 0.1235,
+   "r2_pooled": 0.3219,
+   "adj_r2": 0.0795,
+   "rmse": 0.2169,
+   "mae": 0.137
+  },
+  {
+   "exp": "E2_full_v5",
+   "desc": "+距平 4 + 交互 3（72 特征）",
+   "n_feat": 86,
+   "r2_fold_mean": 0.3222,
+   "r2_fold_std": 0.1209,
+   "r2_pooled": 0.3264,
+   "adj_r2": 0.0557,
+   "rmse": 0.2162,
+   "mae": 0.1365
+  },
+  {
+   "exp": "E4b_logz",
+   "desc": "E2 + 折内 z-score log 目标",
+   "n_feat": 86,
+   "r2_fold_mean": 0.2484,
+   "r2_fold_std": 0.127,
+   "r2_pooled": 0.2576,
+   "adj_r2": -0.0407,
+   "rmse": 0.2269,
+   "mae": 0.1424
+  },
+  {
+   "exp": "E5_topk25",
+   "desc": "E2 + 折内增益 top-25 选择",
+   "n_feat": 25,
+   "r2_fold_mean": 0.3205,
+   "r2_fold_std": 0.1249,
+   "r2_pooled": 0.3246,
+   "adj_r2": 0.2632,
+   "rmse": 0.2165,
+   "mae": 0.1368,
+   "sel_note": "fold-internal gain ranking"
+  },
+  {
+   "exp": "E7_ridge_blend",
+   "desc": "E2 + Ridge 0.5/0.5 混合",
+   "n_feat": 86,
+   "r2_fold_mean": 0.3273,
+   "r2_fold_std": 0.1327,
+   "r2_pooled": 0.3357,
+   "adj_r2": 0.0688,
+   "rmse": 0.2147,
+   "mae": 0.1349
+  },
+  {
+   "exp": "E8_resid_idw",
+   "desc": "E2 + 折内残差 8 近邻 IDW 修正",
+   "n_feat": 86,
+   "r2_fold_mean": 0.7709,
+   "r2_fold_std": 0.0616,
+   "r2_pooled": 0.7711,
+   "adj_r2": 0.6791,
+   "rmse": 0.126,
+   "mae": 0.0798,
+   "caution": "随机 CV 受空间自相关加持，需空间 CV 复核"
+  },
+  {
+   "exp": "E6_nested_optuna",
+   "desc": "E5 + 嵌套 Optuna（内 3 折 × 20 试/折）",
+   "n_feat": 25,
+   "r2_fold_mean": 0.3065,
+   "r2_fold_std": 0.1238,
+   "r2_pooled": 0.3113,
+   "adj_r2": 0.2487,
+   "rmse": 0.2186,
+   "mae": 0.1381,
+   "tuned_folds": [
+    {
+     "fold": 0,
+     "best_params": {
+      "n_estimators": 161,
+      "max_depth": 3,
+      "learning_rate": 0.0595979532401693,
+      "subsample": 0.7572512002511721,
+      "colsample_bytree": 0.5960530294625389,
+      "min_child_weight": 9,
+      "reg_alpha": 2.3438991151540147,
+      "reg_lambda": 0.0471684042806291
+     },
+     "inner_r2": 0.2651
+    },
+    {
+     "fold": 1,
+     "best_params": {
+      "n_estimators": 332,
+      "max_depth": 5,
+      "learning_rate": 0.02929339750012133,
+      "subsample": 0.9010984903770198,
+      "colsample_bytree": 0.5372753218398854,
+      "min_child_weight": 15,
+      "reg_alpha": 1.2273800987852967,
+      "reg_lambda": 0.0062353771356731605
+     },
+     "inner_r2": 0.2985
+    },
+    {
+     "fold": 2,
+     "best_params": {
+      "n_estimators": 332,
+      "max_depth": 5,
+      "learning_rate": 0.02929339750012133,
+      "subsample": 0.9010984903770198,
+      "colsample_bytree": 0.5372753218398854,
+      "min_child_weight": 15,
+      "reg_alpha": 1.2273800987852967,
+      "reg_lambda": 0.0062353771356731605
+     },
+     "inner_r2": 0.3788
+    },
+    {
+     "fold": 3,
+     "best_params": {
+      "n_estimators": 161,
+      "max_depth": 3,
+      "learning_rate": 0.0595979532401693,
+      "subsample": 0.7572512002511721,
+      "colsample_bytree": 0.5960530294625389,
+      "min_child_weight": 9,
+      "reg_alpha": 2.3438991151540147,
+      "reg_lambda": 0.0471684042806291
+     },
+     "inner_r2": 0.287
+    },
+    {
+     "fold": 4,
+     "best_params": {
+      "n_estimators": 332,
+      "max_depth": 5,
+      "learning_rate": 0.02929339750012133,
+      "subsample": 0.9010984903770198,
+      "colsample_bytree": 0.5372753218398854,
+      "min_child_weight": 15,
+      "reg_alpha": 1.2273800987852967,
+      "reg_lambda": 0.0062353771356731605
+     },
+     "inner_r2": 0.3676
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,98 @@
+{
+ "repeated": [
+  {
+   "exp": "E0",
+   "test": "repeated5x5",
+   "r2_mean": 0.3264,
+   "r2_std": 0.0073,
+   "r2_min": 0.314,
+   "r2_max": 0.3356
+  },
+  {
+   "exp": "E5",
+   "test": "repeated5x5",
+   "r2_mean": 0.324,
+   "r2_std": 0.0093,
+   "r2_min": 0.308,
+   "r2_max": 0.3367
+  },
+  {
+   "exp": "E7",
+   "test": "repeated5x5",
+   "r2_mean": 0.2854,
+   "r2_std": 0.0856,
+   "r2_min": 0.1175,
+   "r2_max": 0.3495
+  },
+  {
+   "exp": "E8",
+   "test": "repeated5x5",
+   "r2_mean": 0.755,
+   "r2_std": 0.0211,
+   "r2_min": 0.7138,
+   "r2_max": 0.7705
+  }
+ ],
+ "holdout": [
+  {
+   "exp": "E0",
+   "test": "holdout20",
+   "r2": 0.3747,
+   "rmse": 0.2271,
+   "mae": 0.1428
+  },
+  {
+   "exp": "E5",
+   "test": "holdout20",
+   "r2": 0.3665,
+   "rmse": 0.2286,
+   "mae": 0.1432
+  },
+  {
+   "exp": "E7",
+   "test": "holdout20",
+   "r2": 0.3815,
+   "rmse": 0.2259,
+   "mae": 0.1415
+  },
+  {
+   "exp": "E8",
+   "test": "holdout20",
+   "r2": 0.6832,
+   "rmse": 0.1617,
+   "mae": 0.097
+  }
+ ],
+ "spatial_blocks": [
+  {
+   "block": "lat4",
+   "exp": "E0",
+   "spatial_r2": 0.1375
+  },
+  {
+   "block": "lat4",
+   "exp": "E8",
+   "spatial_r2": 0.5386
+  },
+  {
+   "block": "lon4",
+   "exp": "E0",
+   "spatial_r2": 0.091
+  },
+  {
+   "block": "lon4",
+   "exp": "E8",
+   "spatial_r2": 0.1364
+  },
+  {
+   "block": "kmeans4",
+   "exp": "E0",
+   "spatial_r2": -0.0638
+  },
+  {
+   "block": "kmeans4",
+   "exp": "E8",
+   "spatial_r2": -0.2605
+  }
+ ]
+}
