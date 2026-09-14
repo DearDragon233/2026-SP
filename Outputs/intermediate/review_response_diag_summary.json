@@ -1,0 +1,38 @@
+{
+ "conformal": {
+  "n_train": 70,
+  "n_cal": 70,
+  "n_test": 94,
+  "qhat": 2.0829,
+  "raw": {
+   "PICP_90": 0.7766,
+   "MPW": 0.6229
+  },
+  "conformal": {
+   "PICP_90": 0.8617,
+   "MPW": 0.7887
+  },
+  "Q50_R2_test": 0.4095
+ },
+ "targetB_bound": [
+  {
+   "k": 4,
+   "idw_self_R2": 0.3524,
+   "n": 234
+  },
+  {
+   "k": 8,
+   "idw_self_R2": 0.4168,
+   "n": 234
+  },
+  {
+   "k": 16,
+   "idw_self_R2": 0.4278,
+   "n": 234
+  }
+ ],
+ "variogram": {
+  "yield_reach_km": 4.62,
+  "resid_reach_km": 4.62
+ }
+}
