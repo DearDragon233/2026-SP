@@ -1,0 +1,5 @@
+﻿Model,SpatialScheme,pooled_gap,fold_gap,note
+XGBoost,lat_block,0.2875,0.5906,pooled primary / fold secondary; checker=add-based standard board
+XGBoost,checker_2d,0.0031,0.0025,pooled primary / fold secondary; checker=add-based standard board
+RF,lat_block,0.1315,0.4847,pooled primary / fold secondary; checker=add-based standard board
+RF,checker_2d,-0.0392,-0.0361,pooled primary / fold secondary; checker=add-based standard board

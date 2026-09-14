@@ -53,11 +53,15 @@ python zenodo_cv.py            # 独立数据源验证 (~2min)
 
 | 文件 | 内容 |
 |---|---|
-| `cv_scheme_comparison.csv` | 3 CV 方案 × 3 模型的 R²/RMSE |
-| `cv_optimism_gap.csv` | 随机 CV 相对空间 CV 的乐观偏差 |
+| `review_response_diag_seeds_v2.csv` | **权威台账**：3 CV 方案 × 2 模型 × 3 种子，pooled/fold 双口径显式列 |
+| `cv_optimism_gap.csv` | 乐观偏差（pooled 主口径 + fold 辅助，已重生成双列版） |
+| `review_response_250m_seeds.csv` | 250m 线 3 种子台账（E0/E8 × 随机/纬度块/LOBO8） |
 | `qrf_uncertainty.csv` | 234 网格 Q10/Q50/Q90 逐格区间 |
-| `yield_source_sensitivity.csv` | 四产量目标 × 三模型性能矩阵 |
+| `yield_source_sensitivity.csv` | 四产量目标 × 三模型性能矩阵（历史口径，pooled） |
 | `zenodo_cv_results.csv` | 独立数据源（ChinaWheatYield30m）CV 结果 |
+| `CV_LEDGER_CANONICAL.md` | 台账唯一口径声明（cv_scheme_comparison.csv 已标 DEPRECATED） |
+
+大文件说明：`Data/2021ChinaWheatYield30m.tif`（1.1GB）不进 git，来源与校验记录在 `26SP_data_registry.json`。
 
 ## 团队
 

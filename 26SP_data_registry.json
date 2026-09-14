@@ -66,6 +66,15 @@
       "C_blend": 234,
       "D_zenodo": 22,
       "note": "canonical targets; see Paper/Outline_v3.1_diagnostic.md 2.3"
+    },
+    "china_wheat_yield_30m_tif": {
+      "file": "Data/2021ChinaWheatYield30m.tif",
+      "size_mb": 1088,
+      "git_tracking": "EXCLUDED via .gitignore (Data/*.tif)",
+      "source": "Zhao et al. 2023 ESSD, DOI 10.5194/essd-15-4047-2023, https://doi.org/10.5194/essd-15-4047-2023 (CC BY 4.0)",
+      "download": "zenodo.org record (ChinaWheatYield30m 2021 tif)",
+      "sha256": "62aaefe026b9f91ca422c9d0493aeeb79255bb9df1094794e47fe2f89d0fdfc4",
+      "note": "W13-N4: verify integrity after re-download with this hash"
     }
   },
   "documents": {

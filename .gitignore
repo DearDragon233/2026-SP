@@ -43,3 +43,7 @@ Outputs/intermediate/
 
 # Config — environment lock
 config/environment.yml
+*.tiff 
+
+# W13-N4: large binary data files (record source in 26SP_data_registry.json instead)
+Data/*.tif
