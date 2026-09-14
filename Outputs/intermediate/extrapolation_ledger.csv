@@ -1,0 +1,11 @@
+﻿scheme,exp,r2_pooled,rmse,mae,n_blocks
+LOBO_kmeans8_geo,E0,-0.4255,0.3145,0.2054,8
+LOBO_kmeans8_geo,E5,-0.4136,0.3132,0.2017,8
+LOBO_kmeans8_geo,E8,-0.8256,0.3559,0.2393,8
+LOBO_kmeans8_geo,M0,-0.3554,0.3066,0.2099,8
+envspace_predq4,E0,-0.3714,0.3085,0.211,4
+envspace_predq4,E5,-0.3491,0.3059,0.21,4
+envspace_predq4,E8,-0.1467,0.2821,0.1834,4
+envspace_featk4,E0,-0.1616,0.2839,0.2471,4
+envspace_featk4,E5,0.0123,0.2618,0.2198,4
+envspace_featk4,E8,-0.055,0.2705,0.2105,4

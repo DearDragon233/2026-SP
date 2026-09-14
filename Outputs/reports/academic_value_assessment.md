@@ -50,7 +50,7 @@
 
 ## 四、期刊方向建议
 
-1. **首选：Agricultural and Forest Meteorology（SCI Q1）**——"Hybrid environmental-residual mapping of county-level winter wheat yield: dual-mode cross-validation reveals what spatial CV actually tests"。卖点：混合模型 + 双模式评估框架 + 诚实负结果，符合该刊方法学偏好。
+1. **首选：Agricultural and Forest Meteorology（SCI Q1）**——"Hybrid environmental-residual mapping of county-level winter wheat yield: dual-mode cross-validation reveals what spatial CV actually tests"。卖点：混合模型 + 双模式评估框架 + 外推梯度谱（fig13，0.769→-0.83 六方案单调衰减）+ 诚实负结果，符合该刊方法学偏好。**LOBO 实验已按该刊审稿预期补齐**。
 2. **备选：Computers and Electronics in Agriculture（SCI Q1）**——偏 ML 工程实现与可复现管线。
 3. **保底：Frontiers in Plant Science / Agronomy（Q1-Q2）**——作为"环境指纹×机器学习"主线的 250m 精细化章节。
 
