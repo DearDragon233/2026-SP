@@ -36,7 +36,7 @@
 
 **坐标入模对照 M0**:同一 XGBoost 加入 lon/lat 两列(60 特征)。
 
-**特征精简 E5/E7**:折内增益重要性排序取 top-25 后重训练;E7 在 E5 基础上与岭回归(Ridge,α=1)0.5/0.5 混合。
+**特征精简 E5/E7**：折内增益重要性排序取 top-25 后重训练（XGBoost 实际仅 18 个特征获得非零增益，故有效特征数 k=18；M5 同理 k=17）；E7 在 E5 基础上与岭回归（Ridge，α=1）0.5/0.5 混合。
 
 ### 2.3 双模式交叉验证
 
@@ -50,7 +50,21 @@
 
 ### 3.1 混合模型的精度增益
 
-随机 5 折 CV 下(图 10,表 1):基线 E0 池化 R2=0.3258(折级 0.3211±0.1211,RMSE=0.216 t/ha);混合模型 E8 达 **0.7694**(折级 0.7693±0.0624),相对增益 +136%;RMSE 由 0.216 降至 **0.126** t/ha(-42%),MAE 由 0.137 降至 0.080 t/ha。折内特征精简(E5,25 特征)使调整 R2 从 0.164 升至 0.281(+71%)而池化 R2 几乎不变;E7 进一步将池化 R2 提至 0.3423、调整 R2 0.3004。
+随机 5 折 CV 下（图 10、表 1）：基线 E0 池化 R²=0.3258（折级 0.3211±0.1211，RMSE=0.216 t/ha）；混合模型 E8 达 **0.7694**（折级 0.7693±0.0624），相对增益 +136%；RMSE 由 0.216 降至 **0.126** t/ha（-42%），MAE 由 0.137 降至 0.080 t/ha。折内特征精简（E5，有效特征 18 个）使调整 R² 从 0.164 升至 0.281（+71%）而池化 R² 几乎不变；E7 进一步将池化 R² 提至 0.3423、调整 R² 0.3004。
+
+**表 1 主实验台账（同折 seed=42，完整数字见 experiments_ledger_v3.csv）**
+
+| 实验 | 设计 | 特征数 | 随机CV池化R² | 调整R² | RMSE (t/ha) | MAE (t/ha) |
+|---|---|---|---|---|---|---|
+| E0 | 基线复刻 | 58 | 0.3258 | 0.1642 | 0.216 | 0.137 |
+| E1 | +年特异气候 7 列 | 65 | 0.3223 | 0.1349 | 0.217 | 0.137 |
+| E2 | +距平 4+交互 3 | 72 | 0.3237 | 0.1101 | 0.217 | 0.137 |
+| E5 | E2+折内增益精简 | 18 | 0.3239 | 0.2807 | 0.217 | 0.137 |
+| E7 | E5+Ridge 混合 | 18 | 0.3423 | 0.3004 | 0.214 | 0.135 |
+| E8 | E2+残差 IDW | 72 | **0.7694** | **0.6966** | **0.126** | **0.080** |
+| M0 | 基线+lon/lat | 60 | 0.6000 | 0.5000 | 0.167 | 0.111 |
+| M5 | E5+lon/lat | 17 | 0.6044 | 0.5806 | 0.166 | 0.110 |
+| M7 | E7+lon/lat | 17 | 0.5205 | 0.4917 | 0.182 | 0.119 |
 
 留出集(20%,n=61)验证:E0=0.3747,E5=0.3665,E7=0.3815,**E8=0.6832**。5 种子重复 CV:E0=0.3264±0.0073,E8=**0.7550±0.0211**(最差种子 0.7138),提升在不同折划分下稳定复现。
 
@@ -74,11 +88,11 @@
 
 E1(+2021 年 7 列逐格气候)R2=0.3223、E2(+距平+交互)=0.3237,均不高于 E0 的 0.3258。诊断:研究区空间跨度仅 ~25km,ERA5-Land 9km 有效分辨率下年气候面在县域内近乎常数(网格间 y21_tmean 极差 <1.5°C),与 WorldClim 背景高度共线,树模型将其增益让渡给已有特征。**结论**:小县域研究不必追逐年特异气候热点;土壤-地形+空间结构才是县域产量制图的主导信息源。该负结果对同类研究的特征工程投入具有直接的省资源参考价值。
 
-### 3.5 外推梯度谱：混合增益随空间连续性单调衰减
+### 3.5 外推梯度谱:混合增益随空间连续性单调衰减
 
-将 2.3 节的验证方案按空间连续性递减排列（图 13）：随机 5 折 → 纬度 4 块 → 经度 4 块 → KMeans 4 块 → LOBO 8 块（留一块 8 块 KMeans 聚类，n_block=30-71）→ 环境特征空间 KMeans 4 簇（58 维 z-score 聚类）。E8 的池化 R² 依次为 0.769 → 0.539 → 0.136 → -0.261 → **-0.826** → -0.055，呈严格单调衰减；纯环境模型 E0 同步衰减（0.326 → 0.138 → 0.091 → -0.064 → -0.426 → -0.162），但衰减幅度小。两点结论：（1）混合模型的增益全部来自空间连续性带来的残差可迁移性，一旦训练块与验证块在地理或特征空间中不再共享近邻结构，增益消失甚至反噬（E8 在 LOBO 下比 E0 更差，IDW 用远处残差外推放大了误差）；（2）环境特征分块下连 E5（环境模型+特征精简）也仅 0.012，说明 301 网格单年数据上环境外推本身不成立——下一步应以 Xiao2024 三时期面板（37,248 行）为外推检验场。
+将 2.3 节的验证方案按空间连续性递减排列(图 13):随机 5 折 → 纬度 4 块 → 经度 4 块 → KMeans 4 块 → LOBO 8 块(留一块 8 块 KMeans 聚类,n_block=30-71)→ 环境特征空间 KMeans 4 簇(58 维 z-score 聚类)。E8 的池化 R² 依次为 0.769 → 0.539 → 0.136 → -0.261 → **-0.826** → -0.055，呈严格单调衰减；纯环境模型 E0 同步衰减（0.326 → 0.138 → 0.091 → -0.064 → -0.426 → -0.162），但衰减幅度小。两点结论：（1）混合模型的增益全部来自空间连续性带来的残差可迁移性，一旦训练块与验证块在地理或特征空间中不再共享近邻结构，增益消失甚至反噬（E8 在 LOBO 下比 E0 更差，IDW 用远处残差外推放大了误差；LOBO 的 8 个块大小为 2-71 个网格，小块留出时外推难度最高）；（2）环境特征分块下连 E5（环境模型+特征精简）也仅 0.012，说明 301 网格单年数据上环境外推本身不成立——下一步应以 Xiao2024 三时期面板（37,248 行）为外推检验场。
 
-**Figure 13-** 六种交叉验证方案下 E0 与 E8 的池化 R² 谱线，横轴按空间连续性递减排列。(A) 制图模式（随机 5 折）：E8=0.769 对 E0=0.326，混合增益 +0.44。(B) 外推模式四种地理分块下两者相继失效，E8 在 LOBO 8 块跌至 -0.83，反噬纯环境模型（-0.43）。(C) 环境特征空间分块（KMeans 4 簇）下 E8=-0.06，与 E0（-0.16）无显著差异——残差修正对环境外推无贡献。
+**Figure 13-** 六种交叉验证方案下 E0 与 E8 的池化 R2 谱线,横轴按空间连续性递减排列。(A) 制图模式(随机 5 折):E8=0.769 对 E0=0.326,混合增益 +0.44。(B) 外推模式四种地理分块下两者相继失效,E8 在 LOBO 8 块跌至 -0.83,反噬纯环境模型(-0.43)。(C) 环境特征空间分块(KMeans 4 簇)下 E8=-0.06,与 E0(-0.16)无显著差异--残差修正对环境外推无贡献。
 
 ## 4 讨论
 
@@ -86,7 +100,7 @@ E1(+2021 年 7 列逐格气候)R2=0.3223、E2(+距平+交互)=0.3237,均不高�
 
 **对精度-外推权衡的启示**:E8 的 KMeans 块失败提示:当研究问题从"制图"转向"跨区推广/气候变化情景"时,混合模型应退回纯环境模型(E0/E2),或以环境空间而非地理空间定义外推边界。
 
-**局限**：（1）产量目标为遥感反演值（30m→250m 聚合），包含反演模型自身偏差，“观测-预测”一致性部分来自目标与特征的共同数据源效应（如 Sentinel 时序与气温的关联）；（2）单年目标（2021），年际外推未检验，外推梯度谱（3.5 节）显示所有模型在地理与环境外推下均失效，这是本文最需要后续工作补强的边界；（3）IDW 残差修正的 8 近邻参数未调优（固定值），更系统的超参搜索可能进一步提升；（4）E7 的 Ridge 混合增益在 5 种子检验下不稳定（0.285±0.086），本文不推荐；（5）KMeans 块 CV 的块间环境分布差异与块数选择敏感，本文仅用固定 k=4（纬度/经度块用 4 分位，LOBO 用 8 簇）。
+**局限**:(1)产量目标为遥感反演值(30m→250m 聚合),包含反演模型自身偏差,"观测-预测"一致性部分来自目标与特征的共同数据源效应(如 Sentinel 时序与气温的关联);(2)单年目标(2021),年际外推未检验,外推梯度谱(3.5 节)显示所有模型在地理与环境外推下均失效,这是本文最需要后续工作补强的边界;(3)IDW 残差修正的 8 近邻参数未调优(固定值),更系统的超参搜索可能进一步提升;(4)E7 的 Ridge 混合增益在 5 种子检验下不稳定(0.285±0.086),本文不推荐;(5)KMeans 块 CV 的块间环境分布差异与块数选择敏感,本文仅用固定 k=4(纬度/经度块用 4 分位,LOBO 用 8 簇)。
 
 **数据与代码可用性**:全部实验脚本(src/s5_r2_improvement/)、实验台账(experiments_ledger_v3.csv、spatial_cv_ledger.csv、verification_package.json)、特征表(fine250_v5_features.csv)与出版图(fig10-fig12,600dpi)见 GitHub 仓库 DearDragon233/2026-SP。
 
@@ -104,6 +118,6 @@ E1(+2021 年 7 列逐格气候)R2=0.3223、E2(+距平+交互)=0.3237,均不高�
 
 ## Abstract (EN, draft)
 
-County-scale crop yield mapping increasingly relies on environmental-covariate machine learning, yet random cross-validation (CV) systematically inflates reported accuracy through spatial autocorrelation. Using 301 cultivated-grid cells (250 m) of winter wheat in Pinggu District, Beijing, we establish an environmental baseline (XGBoost, 58 climatic–topographic–soil features; pooled random-CV R² = 0.326) and propose a **hybrid environmental–residual mapping model**: gradient-boosted trees fit the environmental response, while training-fold residuals are propagated to predictions via 8-nearest-neighbour inverse-distance weighting — a machine-learning equivalent of regression kriging in which environmental and spatial signals are explicitly decoupled. The hybrid raises pooled random-CV R² to 0.769 (adjusted R² 0.164 → 0.697; RMSE 0.216 → 0.126 t/ha), holds R² = 0.683 on a 20 % hold-out, and 0.755 ± 0.021 across five random seeds. A **dual-mode validation framework** — random CV for mapping use, and three geographic blocking schemes plus leave-one-block-out (LOBO) for transfer use — shows the hybrid gain decays monotonically with spatial connectivity (0.769 → 0.539 → 0.136 → −0.261 → −0.826), even turning detrimental relative to the pure environmental model under LOBO, whereas coordinate-inclusion (R² = 0.600) underperforms residual decoupling in the mapping mode. Year-specific ERA5-Land climate layers add no skill at county extent (ΔR² ≤ 0.004), indicating that within a ~25 km domain soil, terrain and spatial structure dominate yield variation. We conclude that hybrid residual mapping should be framed — and validated — as an interpolation enhancer rather than an extrapolator, and recommend environmental-space transfer tests on multi-year panels as the boundary condition for operational deployment.
+County-scale crop yield mapping increasingly relies on environmental-covariate machine learning, yet random cross-validation (CV) systematically inflates reported accuracy through spatial autocorrelation. Using 301 cultivated-grid cells (250 m) of winter wheat in Pinggu District, Beijing, we establish an environmental baseline (XGBoost, 58 climatic-topographic-soil features; pooled random-CV R2 = 0.326) and propose a **hybrid environmental-residual mapping model**: gradient-boosted trees fit the environmental response, while training-fold residuals are propagated to predictions via 8-nearest-neighbour inverse-distance weighting - a machine-learning equivalent of regression kriging in which environmental and spatial signals are explicitly decoupled. The hybrid raises pooled random-CV R2 to 0.769 (adjusted R2 0.164 → 0.697; RMSE 0.216 → 0.126 t/ha), holds R2 = 0.683 on a 20 % hold-out, and 0.755 ± 0.021 across five random seeds. A **dual-mode validation framework** - random CV for mapping use, and three geographic blocking schemes plus leave-one-block-out (LOBO) for transfer use - shows the hybrid gain decays monotonically with spatial connectivity (0.769 → 0.539 → 0.136 → -0.261 → -0.826), even turning detrimental relative to the pure environmental model under LOBO, whereas coordinate-inclusion (R2 = 0.600) underperforms residual decoupling in the mapping mode. Year-specific ERA5-Land climate layers add no skill at county extent (ΔR2 ≤ 0.004), indicating that within a ~25 km domain soil, terrain and spatial structure dominate yield variation. We conclude that hybrid residual mapping should be framed - and validated - as an interpolation enhancer rather than an extrapolator, and recommend environmental-space transfer tests on multi-year panels as the boundary condition for operational deployment.
 
 **Keywords**: winter wheat; yield mapping; hybrid model; regression kriging; spatial cross-validation; XGBoost; inverse distance weighting
