@@ -25,7 +25,7 @@
 │   └── Archive/            # 历史版本（v3.0、pre-W11/W12 备份）
 ├── Data/                     # 原始数据（Xiao2024 等）
 ├── Outputs/
-│   ├── pinggu_environmental_data.csv  # 原始环境矩阵
+│   ├── pinggu_environmental_data.csv  # [LEGACY] 原始环境矩阵（18 格地形缺失，已被现役表取代）
 │   ├── figures/main/         # 出版级图表（fig01-13，诊断线 01-08 + 250m 线 09-13，600dpi png+tiff；fig08 为三面板签名图）
 │   ├── figures/qa/           # 质量审计图（qa01-06）
 │   ├── figures/supp/         # 补充图

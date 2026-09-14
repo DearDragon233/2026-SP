@@ -1,0 +1,14 @@
+# 2026-SP reproducibility package (W16-P6)
+# Python 3.13 (D:\PythonAbout\python.exe)
+scikit-learn==1.8.0
+xgboost==3.4.1
+pandas>=2.0
+numpy>=1.26
+scipy>=1.11
+lightgbm>=4.0
+quantile-forest>=1.3
+shap>=0.44
+rasterio>=1.3
+matplotlib>=3.8
+optuna>=3.4
+# seeds used: 7/21/42/123/2026 (5-seed) and subsets (7/21/42 = 3-seed canonical)

@@ -3,7 +3,7 @@
   "last_updated": "2026-09-14-W12",
   "data_sources": {
     "environmental": {
-      "file": "Outputs/pinggu_environmental_data.csv",
+      "file": "Outputs/intermediate/data_with_yield_ensemble_full.csv",
       "grids": 234,
       "variables": 73,
       "resolution": "0.0417 deg (anisotropic ~3.6 km E-W x 4.6 km N-S, cell ~16.4 km2)",
@@ -13,7 +13,12 @@
       "variables_modeling": 24,
       "missing_rate_raw": "0.3% (raw 73 cols)",
       "missing_rate_modeling": "0% (24 modeling cols after audit)",
-      "note": "W12: two-level granularity added; 3.5km/4.6km ambiguity resolved as anisotropic grid"
+      "note": "W16-P4: canonical pointer moved to active ensemble table (zero missing, 71 modeling feats); legacy raw matrix deprecated",
+      "legacy": {
+        "file": "Outputs/pinggu_environmental_data.csv",
+        "issue": "73 cols; terrain vars have 18 NaN grids (SW warm zone pattern) - SRTM extraction tile/CRS issue; SUPERSEDED",
+        "note": "kept for audit trail; do NOT use in pipelines"
+      }
     },
     "variety_traits": {
       "file": "Data/Variety/Variety_Wheat_Traits.csv",
