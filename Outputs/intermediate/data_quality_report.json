@@ -1,0 +1,58 @@
+{
+ "master_shape": [
+  1786,
+  125
+ ],
+ "baseline_rows": 234,
+ "new_rows": 1552,
+ "missing_rates": {
+  "目标与管理": {
+   "baseline_%": 100.0,
+   "new_%": 0.0
+  },
+  "环境-气候": {
+   "baseline_%": 44.19,
+   "new_%": 0.0
+  },
+  "环境-土壤": {
+   "baseline_%": 100.0,
+   "new_%": 35.19
+  },
+  "地形": {
+   "baseline_%": 25.0,
+   "new_%": 85.6
+  }
+ },
+ "yield_outliers_new": {
+  "n_zscore_gt3": 0,
+  "n_iqr": 0,
+  "range": [
+   14.89,
+   16.368
+  ],
+  "mean": 15.708,
+  "std": 0.312,
+  "normality_p": 0.0
+ },
+ "unit_checks": {
+  "Yield_t_ha": true,
+  "WN_kg_ha": true,
+  "irrigation_mm": true,
+  "bio1_degC_x10": false
+ },
+ "spatial_bbox_ok": {
+  "n_out_of_bbox": 0
+ },
+ "temporal": {
+  "new_period": "History (Xiao2024 baseline, ~2000-2014 mean)",
+  "scenario_periods": "2030s/2060s stored separately (37248 rows)"
+ },
+ "cross_source": {
+  "n_pairs": 1552,
+  "pearson_r": 0.38,
+  "p": 2.174162559882101e-54,
+  "rds_mean": 15.708,
+  "ref_mean": 7.186,
+  "note": "rds Yield 为轮作体系优化产量(t/ha)，ref 为小麦单季参考产量(t/ha)，均值差异符合预期"
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "sample_backtrace_ok": true,
+ "rds_backtrace_match": true,
+ "model_loadable": {
+  "csv_readable": true,
+  "total_cols": 124,
+  "numeric_cols": 119,
+  "env_feature_cols_available": 53,
+  "yield_nonnull": 1552,
+  "source_batch_counts": {
+   "Xiao2024_rds_History": 1552,
+   "Baseline_234grid": 234
+  }
+ },
+ "smoke_cv_r2": 0.501,
+ "backtrace_note": "int() truncation fixed with round(); rds Yield backtrace MATCH independently confirms gridcell linkage"
+}

@@ -1,9 +1,8 @@
-# 2026-SP 重构版 README
+# 北京市平谷区冬小麦-夏玉米轮作体系 环境指纹×机器学习育种模型 | Environmental Fingerprint × Machine Learning Breeding Model for the Winter Wheat–Summer Maize Rotation System in Pinggu, Beijing
 
-# 环境指纹能否解释区域产量变异？| Can Environmental Fingerprints Explain Regional Yield Variability?
-
-> 系统性诊断空间产量建模中的循环验证与乐观偏差 —— 以北京平谷区 234 网格冬小麦为例
+> 空间显式、多维度的产量预测与农艺措施优化 —— 以北京平谷区 234 网格环境指纹矩阵为基础（26SP 项目大纲原题目）
 >
+> **数据补强（2026-09-14）**: 产量主数据集已扩充至 1,786 行（7.6× 基线），全部免授权公开数据，详见 `Outputs/reports/data_augmentation_report_stamen.html`
 > **在线工具**: [桃园农事气象助手](https://taoyuan-weather.pages.dev/) (实践延伸)
 > **License**: MIT
 
