@@ -1,0 +1,3 @@
+﻿target,scheme,fold_mean,fold_std,pooled,rmse,y_std
+Xiao2024_panel_1552,random,0.4994,0.0509,0.4991,0.2205,0.312
+Xiao2024_panel_1552,checker,0.1653,0.1261,0.1711,0.2837,0.312

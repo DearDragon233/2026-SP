@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 W4 ADVANCE: 补强管线（Agronomy 审稿加固）
 =============================================
@@ -10,9 +10,9 @@ W4 ADVANCE: 补强管线（Agronomy 审稿加固）
   Outputs/intermediate/cv_scheme_comparison.csv   CV 方案×模型 对比表
   Outputs/intermediate/qrf_uncertainty.csv        逐网格分位数预测
   Outputs/intermediate/yield_source_sensitivity.csv 敏感性汇总
-  Outputs/figures/main/fig05_cv_scheme_comparison.png/.tiff
-  Outputs/figures/main/fig06_qrf_uncertainty.png/.tiff
-  Outputs/figures/main/fig07_source_sensitivity.png/.tiff
+  Outputs/figures/main/fig04_cv_scheme_comparison.png/.tiff
+  Outputs/figures/main/fig07_qrf_uncertainty.png/.tiff
+  Outputs/figures/main/fig05_source_sensitivity.png/.tiff
 Author: Peng | 2026-09-12
 """
 import pandas as pd, numpy as np, os, warnings
@@ -225,8 +225,8 @@ for ax, mdl in zip(axes, ['XGBoost', 'LightGBM', 'RF']):
     ax.spines[['top', 'right']].set_visible(False)
 fig5.suptitle('Spatial CV vs Random CV: quantifying spatial-autocorrelation optimism\n'
               'Blended yield target, 234 grids, 5-fold per scheme', fontweight='bold', fontsize=13, y=1.04)
-fig5.savefig(os.path.join(OUT_MAIN, 'fig05_cv_scheme_comparison.png'), dpi=600, facecolor='white')
-fig5.savefig(os.path.join(OUT_MAIN, 'fig05_cv_scheme_comparison.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
+fig5.savefig(os.path.join(OUT_MAIN, 'fig04_cv_scheme_comparison.png'), dpi=600, facecolor='white')
+fig5.savefig(os.path.join(OUT_MAIN, 'fig04_cv_scheme_comparison.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
 plt.close(); print("    fig05 done", flush=True)
 
 # ============================================================
@@ -265,8 +265,8 @@ ax.set_xlabel('Q90–Q10 width (t/ha)'); ax.set_ylabel('Grids')
 ax.set_title('C. Interval width distribution\n(narrower = more certain)', fontweight='bold', loc='left')
 ax.spines[['top', 'right']].set_visible(False)
 fig6.suptitle('Quantile Random Forest uncertainty quantification\n(spatial 5-fold, latitude blocks)', fontweight='bold', fontsize=13, y=1.04)
-fig6.savefig(os.path.join(OUT_MAIN, 'fig06_qrf_uncertainty.png'), dpi=600, facecolor='white')
-fig6.savefig(os.path.join(OUT_MAIN, 'fig06_qrf_uncertainty.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
+fig6.savefig(os.path.join(OUT_MAIN, 'fig07_qrf_uncertainty.png'), dpi=600, facecolor='white')
+fig6.savefig(os.path.join(OUT_MAIN, 'fig07_qrf_uncertainty.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
 plt.close(); print("    fig06 done", flush=True)
 
 # ============================================================
@@ -302,8 +302,8 @@ ax.set_xlim(lim); ax.set_ylim(lim)
 ax.spines[['top', 'right']].set_visible(False)
 fig7.suptitle('Yield-target source sensitivity: is the model learning real variance?\n'
               'Same features; three target constructions compared', fontweight='bold', fontsize=13, y=1.04)
-fig7.savefig(os.path.join(OUT_MAIN, 'fig07_source_sensitivity.png'), dpi=600, facecolor='white')
-fig7.savefig(os.path.join(OUT_MAIN, 'fig07_source_sensitivity.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
+fig7.savefig(os.path.join(OUT_MAIN, 'fig05_source_sensitivity.png'), dpi=600, facecolor='white')
+fig7.savefig(os.path.join(OUT_MAIN, 'fig05_source_sensitivity.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
 plt.close(); print("    fig07 done", flush=True)
 
 print("\n" + "="*64)

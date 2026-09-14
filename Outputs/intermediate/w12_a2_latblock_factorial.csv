@@ -1,0 +1,5 @@
+﻿part,design,fold_mean,fold_std,pooled
+A2,lat_q5 x old200,0.0229,0.1823,0.2521
+A2,lat_q5 x optuna428,-0.0147,0.2363,0.2212
+A2,lat_q4 x old200,-0.1947,0.3001,0.1143
+A2,lat_q4 x optuna428,-0.2133,0.3203,0.1194

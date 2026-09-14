@@ -1,4 +1,4 @@
-"""
+﻿"""
 Week 1-2 Extension: County-Level Yield Supplement via Spatial Prediction
 =========================================================================
 Method (paper-grade):
@@ -484,8 +484,8 @@ fig.suptitle('Week 1-2: Yield-Aware Feature Audit — Ridge Spatial Prediction +
              f'Pinggu Wheat Yield, 234 Grids, 71 Env Variables | Agronomy (2026)',
              fontsize=16, fontweight='bold', y=1.01)
 
-png_path = os.path.join(OUT_MAIN, 'fig01_feature_audit_dashboard.png')
-tiff_path = os.path.join(OUT_MAIN, 'fig01_feature_audit_dashboard.tiff')
+png_path = os.path.join(OUT_MAIN, 'fig02_feature_audit_dashboard.png')
+tiff_path = os.path.join(OUT_MAIN, 'fig02_feature_audit_dashboard.tiff')
 fig.savefig(png_path, dpi=600, facecolor='white')
 fig.savefig(tiff_path, dpi=600, facecolor='white', pil_kwargs={'compression':'lzw'})
 plt.close()

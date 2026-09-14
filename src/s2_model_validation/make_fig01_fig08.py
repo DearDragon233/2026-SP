@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 W6 FIG: 补制 fig01 研究区地图 + fig08 独立源验证图
 fig01: 平谷区 234 网格 + 产量来源分布（A 区域区位；B 网格与产量来源；C 数据源柱状）
@@ -147,8 +147,8 @@ if os.path.exists(cv_path):
 
     fig8.suptitle('Independent data source validation: ChinaWheatYield30m 2021 confirms minimal environmental predictive capacity',
                   fontweight='bold', fontsize=12, y=1.03)
-    fig8.savefig(os.path.join(OUT_MAIN, 'fig08_independent_validation.png'), dpi=600, facecolor='white')
-    fig8.savefig(os.path.join(OUT_MAIN, 'fig08_independent_validation.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
+    fig8.savefig(os.path.join(OUT_MAIN, 'fig06_independent_validation.png'), dpi=600, facecolor='white')
+    fig8.savefig(os.path.join(OUT_MAIN, 'fig06_independent_validation.tiff'), dpi=600, facecolor='white', pil_kwargs={'compression': 'lzw'})
     plt.close(); print("fig08 done", flush=True)
 else:
     print("zenodo_cv_results.csv not found, fig08 skipped")

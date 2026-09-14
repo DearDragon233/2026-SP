@@ -1,14 +1,19 @@
 {
   "project": "2026-SP",
-  "last_updated": "2026-07-28-final",
+  "last_updated": "2026-09-14-W12",
   "data_sources": {
     "environmental": {
       "file": "Outputs/pinggu_environmental_data.csv",
       "grids": 234,
       "variables": 73,
-      "resolution": "0.0417 deg (~4.6 km)",
+      "resolution": "0.0417 deg (anisotropic ~3.6 km E-W x 4.6 km N-S, cell ~16.4 km2)",
       "missing_rate": "0.3%",
-      "status": "ready"
+      "status": "ready",
+      "variables_raw": 73,
+      "variables_modeling": 24,
+      "missing_rate_raw": "0.3% (raw 73 cols)",
+      "missing_rate_modeling": "0% (24 modeling cols after audit)",
+      "note": "W12: two-level granularity added; 3.5km/4.6km ambiguity resolved as anisotropic grid"
     },
     "variety_traits": {
       "file": "Data/Variety/Variety_Wheat_Traits.csv",
@@ -46,6 +51,21 @@
       "source": "Dai(2011)/Meng(2013)/Liu(2020)/Chen(2002)/variety approval bulletins",
       "rows": 8,
       "columns": 13
+    },
+    "augmented_master": {
+      "file": "Outputs/intermediate/augmented_yield_master.csv",
+      "rows": 1786,
+      "panel_rows_nonnull": 1552,
+      "role": "DATA RESOURCE LAYER (not part of diagnostic 4-target framework nor 250m line): base for second-target check (6.7) and management-hypothesis test path (a); candidate material for future third paper",
+      "added": "W9 (2026-09-14)",
+      "status": "ready"
+    },
+    "diagnostic_targets": {
+      "A_observed": 43,
+      "B_interpolated": 234,
+      "C_blend": 234,
+      "D_zenodo": 22,
+      "note": "canonical targets; see Paper/Outline_v3.1_diagnostic.md 2.3"
     }
   },
   "documents": {
