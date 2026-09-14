@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W14 评审意见处理台账 · 2026-SP</title>
+<style>
+:root { --paper:#fafaf8; --ink:#1e2a38; --muted:#5c6b7a; --hair:#d9dde2; --navy:#1d3557; --accent:#b5623b; --soft:#eef1f4; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:Georgia,"Songti SC","SimSun",serif; background:var(--paper); color:var(--ink);
+  line-height:1.72; padding:44px 22px; }
+.page { max-width:1050px; margin:0 auto; }
+header { border-bottom:2px solid var(--ink); padding-bottom:20px; }
+.kicker { font-family:Verdana,sans-serif; font-size:11px; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--navy); margin-bottom:10px; }
+h1 { font-size:28px; font-weight:600; line-height:1.3; }
+.sub { color:var(--muted); font-size:14.5px; margin-top:10px; max-width:78ch; }
+h2 { font-size:19px; margin:42px 0 10px; padding-top:20px; border-top:1px solid var(--hair); font-weight:600; }
+h2 .no { color:var(--accent); font-size:11px; font-family:Verdana,sans-serif; letter-spacing:0.12em;
+  display:block; margin-bottom:5px; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; margin:12px 0; }
+th { font-family:Verdana,sans-serif; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted); text-align:left; border-bottom:2px solid var(--ink); padding:7px 8px; }
+td { border-bottom:1px solid var(--hair); padding:8px; vertical-align:top; }
+.id { font-family:Verdana,sans-serif; font-weight:700; color:var(--accent); font-size:11.5px; white-space:nowrap; }
+.st { font-family:Verdana,sans-serif; font-size:10px; font-weight:700; letter-spacing:0.05em;
+  padding:2px 8px; border:1.5px solid var(--ink); display:inline-block; white-space:nowrap; }
+.st.done { background:var(--ink); color:var(--paper); }
+.st.pending { border-color:var(--accent); color:var(--accent); }
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--hair); margin:22px 0; }
+.metric { padding:14px 12px; border-right:1px solid var(--hair); }
+.metric:last-child { border-right:none; }
+.metric .v { font-size:23px; font-weight:600; color:var(--navy); }
+.metric .k { font-family:Verdana,sans-serif; font-size:9.5px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px; }
+.panel { border:1px solid var(--hair); background:#fff; padding:16px 20px; margin:12px 0; }
+.panel h3 { font-size:14.5px; color:var(--navy); margin-bottom:6px; }
+.panel p { font-size:13px; margin:5px 0; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0; }
+code { font-family:Consolas,monospace; font-size:12px; background:var(--soft); padding:1px 5px; }
+img { max-width:100%; border:1px solid var(--hair); margin:10px 0; }
+.figcap { font-size:12px; color:var(--muted); margin:-4px 0 14px; }
+.foot { margin-top:44px; padding-top:14px; border-top:2px solid var(--ink);
+  font-family:Verdana,sans-serif; font-size:10px; color:var(--muted); letter-spacing:0.06em;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+@media (max-width:760px){ .metrics{grid-template-columns:repeat(2,1fr);} .two{grid-template-columns:1fr;} h1{font-size:22px;} }
+</style>
+</head><body><div class="page">
+
+<header>
+<div class="kicker">2026-SP · W14 REVIEW RESPONSE · 2026-09-14 深夜</div>
+<h1>导师评审意见处理台账（第四轮）</h1>
+<div class="sub">基准：《2026-SP_W14_闫军导师视角评审意见》。W14 七条行动逐条处置：6 条已落实（含 6 项新实验，数据全部落盘），1 条（#8 投稿物料）属写作期产物已给出框架；投稿策略 2 项待导师确认。评审闭环：每条意见可追台账 → 文件 → 数字。</div>
+</header>
+
+<div class="metrics">
+<div class="metric"><div class="v">7/7</div><div class="k">W14 行动条目逐条处置</div></div>
+<div class="metric"><div class="v">6</div><div class="k">新实验（剂量响应/嵌套/谱系/CI/物候/五种子）</div></div>
+<div class="metric"><div class="v">≈0</div><div class="k">0.72×变程棋盘 gap（安慰剂效应确认）</div></div>
+<div class="metric"><div class="v">[-0.20,-0.02]</div><div class="k">目标 A R² bootstrap 95% CI</div></div>
+</div>
+
+<h2><span class="no">Q1-Q3</span>三个核心问题的落实</h2>
+<table>
+<tr><th style="width:56px">意见</th><th style="width:200px">要求</th><th style="width:70px">状态</th><th>落实结果与证据</th></tr>
+<tr><td class="id">Q1+#2</td><td>块尺寸剂量响应实验 + 四处数字替换三段式</td><td><span class="st done">已落实</span></td><td><code>w14_dose_response.csv</code>：块边 0.5×/1×/2×/4× 变程时 pooled gap XGB +0.113/+0.033/+0.014/−0.006，RF +0.141/+0.023/−0.015/−0.021——<b>gap 随块尺寸缩小单调增大，≥1× 变程消失</b>。README 第 1 条、大纲摘要 Results、§5.2、§3.2.4 四处已替换为三段式（checker≈0 / lat +0.13~0.29 / 机制分离）。fig08 重制为三面板 signature figure（variogram+五方案谱系+剂量响应）。</td></tr>
+<tr><td class="id">Q2+#3</td><td>验证谱系补全外推端（LOBO/环境分块）</td><td><span class="st done">已落实</span></td><td><code>w14_q2_spectrum.csv</code>：随机 0.400±0.015 / 棋盘 0.367±0.008 / 纬度块 0.113±0.006 / <b>LOBO8 0.124±0.009 / 环境KMeans4 −0.136±0.014</b>。五方案各答一问（制图/自相关控制/梯度外推/区域外推/环境外推），写入大纲 §3.2 与 fig08 面板 B——诊断线与 250m 线 fig13 呼应，scenario-aware validation 完整形态成立。</td></tr>
+<tr><td class="id">Q3+#4</td><td>optuna428 来源声明+嵌套重调参敏感性</td><td><span class="st done">已落实</span></td><td>来源查证：<b>optuna428 确认来自 250m 线 E6 折内 Optuna 调优</b>（e6_tuned_params.json，5 折 best_params 在案），属迁移参数。嵌套检查（<code>w14_q3_nested_sensitivity.csv</code>）：诊断数据内 Optuna 12 trial×3 折重调参（best 176/4/0.091），两套参数下 random 0.400 vs 0.401、checker 0.367 vs 0.373——<b>结论对超参不敏感，gap≈0 非参数伪影</b>。声明已写入大纲 §3.3。</td></tr>
+</table>
+
+<h2><span class="no">Q4-Q6</span>写作与统计问题的落实</h2>
+<table>
+<tr><th style="width:56px">意见</th><th style="width:200px">要求</th><th style="width:70px">状态</th><th>落实结果与证据</th></tr>
+<tr><td class="id">Q4+#5</td><td>R²≈0 补 bootstrap CI，等效性表述</td><td><span class="st done">已落实</span></td><td><code>w14_q4_bootstrap_ci.json</code>（B=2000 网格重采样）：A 目标 E0 点估计 −0.062，**95% CI [−0.20, −0.02]**——整体位于零以下，大纲 §6.3 改写为"环境变量对实测产量变异的方差解释比例上界 ≈ 0"；C 目标 pooled 0.40 CI [0.25, 0.51] 同时报告。</td></tr>
+<tr><td class="id">Q5+#6</td><td>静态快照自我定位+物候期加权特征实验</td><td><span class="st done">已落实</span></td><td>①大纲 §8.1 置顶新增静态快照自我定位段（与管理假说焊接）；②<code>w14_q5_pheno_features.csv</code>：FDD（越冬冻害积寒）+HDF（灌浆期高温日数）两特征（Open-Meteo 2021 逐日构造，312 个数据点最近邻匹配 ≤0.55°）加入后 pooled 0.4002→0.4057（Δ+0.006，种子噪声内）——<b>动态表征县域内无增益</b>，与 250m 线 E1/E2 合流"时间分辨率价值边界"论点，写入 §8.1。</td></tr>
+<tr><td class="id">Q6+#7</td><td>5 种子+min（最差种子）报告</td><td><span class="st done">已落实</span></td><td><code>w14_q6_5seeds.csv</code>（seeds 7/21/42/123/2026）：XGB random 0.395±0.014 min 0.379；checker 0.375±0.011 min 0.357；lat4 0.121±0.011 min 0.105；RF random 0.368±0.023 min 0.329 等。<b>min 列已入台账</b>，五种子结论与三种子一致且更稳（lat4 五种子 0.121 vs 三种子 0.113）。</td></tr>
+<tr><td class="id">#8</td><td>Cover letter / S1 checklist / graphical abstract</td><td><span class="st pending">写作期框架</span></td><td>大纲已预埋三处锚点：§1.4 贡献声明含"接续本刊议程"定位句素材（点名 Agronomy 2026;16(12):1131 与 Rethinking 观点文）、§8.4 清单标注"转 Supplementary Table S1（九步框架逐项自评）"、图表清单标注 graphical abstract 素材（四目标×五方案矩阵热图）。正文成稿时产出。</td></tr>
+</table>
+
+<h2><span class="no">STRATEGY</span>投稿策略（待导师拍板）</h2>
+<div class="two">
+<div class="panel"><h3>维持两篇（导师倾向，更稳）</h3>
+<p>诊断线投 <b>Agronomy</b>（Methods/Agri-Engineering 板块，关键词 spatial cross-validation; benchmarking; yield mapping; target leakage），混合线投 <b>AFM/CEA</b>。风险低、节奏快（11 月投稿可保）。</p>
+<p><b>合并单篇（AFM 大论文）</b>：两线深度互锁（目标 B 上界+外推谱+时间分辨率边界三处合流），冲击力更强但 3-4 周工作量、单篇被拒损失大。</p>
+<p><b>需爸爸与学院导师最终确认</b>——唯一阻断项：邮件草稿在桌面待发。</p></div>
+<div class="panel"><h3>本轮关键数字速览（全部可溯源）</h3>
+<p>剂量响应 gap（XGB）：0.5× <b>+0.113</b> → 1× <b>+0.033</b> → 2× <b>+0.014</b> → 4× <b>−0.006</b></p>
+<p>五方案谱系：0.40 / 0.37 / 0.11 / 0.12 / <b>−0.14</b></p>
+<p>嵌套 vs 迁移参数：random 0.401/0.400、checker 0.373/0.367</p>
+<p>A 目标 CI [−0.20, −0.02]；C 目标 CI [0.25, 0.51]</p>
+<p>物候特征 Δ=+0.006（无增益）；五种子 min 全部在案</p></div>
+</div>
+
+<img src="fig08_variogram_block_defense.png" alt="fig08 三面板签名图">
+<div class="figcap">Figure 8（W14 三面板签名图）— (A) 产量/残差经验变差函数，变程 ≈4.6 km；(B) 五方案验证谱系 pooled R²（3 种子均值±SD）：随机 0.40、棋盘 0.37、纬度块 0.11、LOBO 0.12、环境空间分块 −0.14——插值端与外推端在同一设计内呈现；(C) 块尺寸-乐观偏差剂量响应：gap 从 0.5×变程的 +0.11~+0.14 单调收缩至 ≥1× 变程的 ≈0，证实未做变程设计的空间 CV 是安慰剂，蓝色竖带标注当前主口径 0.72×变程位置。</div>
+
+<h2><span class="no">SELFCHECK</span>自检记录与回归验证</h2>
+<table>
+<tr><th style="width:330px">检查项</th><th style="width:70px">结果</th><th>证据</th></tr>
+<tr><td>Q1 实验与 3.2.4 推理一致性</td><td><span class="st done">一致</span></td><td>0.72× 主口径落在 gap→0 过渡带，与"下界推理"预言吻合（推理与数据在同一点相遇）</td></tr>
+<tr><td>Q3 迁移参数 vs 嵌套参数交叉复现</td><td><span class="st done">一致</span></td><td>random/checker 两套参数差 ≤0.006；lat4 差 0.08（嵌套参数更优但方向不变）</td></tr>
+<tr><td>Q6 五种子 vs W13 三种子</td><td><span class="st done">一致</span></td><td>random 0.395 vs 0.400、checker 0.375 vs 0.367、lat4 0.121 vs 0.113（均值差异均在 SD 内）</td></tr>
+<tr><td>Q5 特征匹配质量</td><td><span class="st done">通过</span></td><td>312 数据点→234 网格最近邻 ≤0.55°（≤4.6km 网格尺度内）；batch_12 单 dict 格式已兼容</td></tr>
+<tr><td>旧数字清理（+0.020-0.061 单值叙事）</td><td><span class="st done">清零</span></td><td>README/摘要/5.2/3.2.4 四处全部替换三段式；grep 校验无残留</td></tr>
+<tr><td>HTML/文档完整性</td><td><span class="st done">通过</span></td><td>台账 HTML parser 校验 clean；大纲无占位符；旧版备份 Archive 2 份可回退</td></tr>
+</table>
+
+<h2><span class="no">HANDOVER</span>待决事项与下一步</h2>
+<div class="panel"><h3>待用户/导师拍板（2 项）</h3>
+<p><b>1. 期刊终选</b>：维持两篇（诊断线→Agronomy，混合线→AFM/CEA，导师倾向）vs 合并单篇（AFM 大论文）。建议：维持两篇，11 月投稿节奏可保。桌面邮件草稿确认后发导师。</p>
+<p><b>2. graphical abstract 与 S1 自评表</b>：随正文成稿产出（素材已备：四目标×五方案矩阵、§8.4 七项清单）。</p></div>
+<div class="panel"><h3>下一轮建议（优先级）</h3>
+<p><b>1. 诊断线正文成稿</b>（§1-§9，大纲证据全齐——本轮之后叙事已定稿：安慰剂诊断+剂量响应+谱系+上界等效性）。</p>
+<p><b>2. 折划分文件+environment.yml</b>（R1 遗留，复现包承诺兑现，半天）。</p>
+<p><b>3. Cover letter 初稿</b>（接续本刊议程定位句已有素材）。</p>
+<p><b>4. 混合线同步 W14 增量</b>：五种子+min 扩展至 250m 线主表（数字已在 review_response_250m_seeds.csv，补 min 列即可）。</p></div>
+
+<div class="foot"><span>2026-SP · W14 REVIEW RESPONSE LEDGER</span><span>Evidence: w14_dose_response / w14_q2_spectrum / w14_q3_nested_sensitivity / w14_q4_bootstrap_ci / w14_q5_pheno_features / w14_q6_5seeds · Fathom preset 04</span></div>
+</div></body></html>

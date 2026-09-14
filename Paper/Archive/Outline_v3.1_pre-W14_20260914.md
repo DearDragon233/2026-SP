@@ -22,7 +22,7 @@
 
 **Methods**: We assembled a 234-grid (0.0417° ≈ 3.6 × 4.6 km, anisotropic) environmental fingerprint matrix (24 modeling variables from WorldClim, SoilGrids, SRTM) and evaluated four yield target constructions: (A) observed farm-level yields (n=43), (B) spatially interpolated yields (n=234), (C) Bayesian-blended yields (n=234), and (D) independently sourced remote-sensing-derived yields (ChinaWheatYield30m, n=22). Three models (XGBoost, LightGBM, RF) were evaluated under three CV schemes (random, latitude-block, 2D-checkerboard), each repeated over **three random seeds (mean ± SD)**, with QRF uncertainty quantification **plus split-conformal calibration**. Block size was justified against the empirical variogram range of yields and residuals (≈4.6 km; checkerboard block 3.3 km ≈ 0.72 × range).
 
-**Results**【W14 三段式权威口径】: Under the canonical configuration, the checkerboard scheme at 0.72× variogram range yields **no optimism gap** (pooled gap ≈ +0.003 XGB / -0.039 RF), while latitude-block CV shows a substantial gap (pooled +0.288 XGB / +0.132 RF); a block-size dose-response experiment (0.5×-4× range) confirms the gap grows as block size shrinks below the range and vanishes at ≥1× range - **spatial CV without range-aware design degenerates into a placebo**. The observed-yield target yielded R2 ≈ 0 across all models (**bootstrap 95% CI [-0.20, -0.02], B=2000; environmental variance-explained upper bound ≈ 0**), while the spatially interpolated target reached R2 = 0.98 - a circular-validation upper bound (LOO-IDW of 43 obs: R2 0.20-0.27). The blended target pooled R2 = 0.40 (95% CI [0.25, 0.51]). A five-scheme validation spectrum (random 0.40 / checker 0.37 / lat-block 0.11 / LOBO 0.12 / env-space -0.14) maps interpolation to extrapolation within one design. Raw QRF intervals under-covered (PICP = 0.705); after split-conformal calibration PICP = 0.862. Phenology-weighted dynamic features added no skill (+0.006), converging with the 250 m line on the value boundary of temporal resolution. **All findings derive from a single season in one district; cross-year generalization remains untested.**
+**Results**: Random CV inflated pooled R2 by +0.020-0.061 relative to spatial CV (fold-mean口径 +0.036-0.088; 3-seed SD ≤ 0.025). The observed-yield target yielded R2 ≈ 0 across all models, while the spatially interpolated target reached R2 = 0.98 - a circular-validation upper bound, because pure spatial interpolation of the 43 underlying observations attains only R2 = 0.20-0.27 (leave-one-out IDW), so any target an environment model can "predict" at 0.98 must encode the environment model itself. The blended target yielded intermediate R2 = 0.30-0.39, substantially attributable to target smoothness. Raw QRF 90% intervals under-covered (PICP = 0.705); after split-conformal calibration PICP rose to 0.862 (MPW 0.62→0.79 t/ha). The independent data source confirmed minimal spatial predictive capacity. **All findings derive from a single season in one district; cross-year and cross-region generalization remain untested.**
 
 **Conclusions**: Environmental fingerprints at 0.0417° (≈3.6 × 4.6 km) resolution explain limited true yield variability in this smallholder-dominated landscape. Apparent model performance is primarily driven by target construction and spatial autocorrelation, not environmental information. We release fixed fold assignments, seeds, and environment files, and recommend spatial CV with variogram-informed block sizes plus target-source sensitivity analysis as standard reporting.
 
@@ -58,8 +58,8 @@
   - 纬度五分位块(处理南北梯度)
   - 经纬度 0.03° 棋盘 5 折(主口径)
   - 乐观偏差定义:随机 CV R2 - 最优空间 CV R2
-- 【v3.1 新增 3.2.4】【W14 升级为实验验证】**块尺寸辩护:从推理到剂量响应曲线**:经验变差函数估计产量与 CV 残差的自相关变程均 ≈4.6 km。**剂量响应实验**(w14_dose_response.csv):棋盘块边 0.5×/1×/2×/4× 变程时,pooled 乐观偏差(随机-棋盘)XGB 为 +0.113/+0.033/+0.014/-0.006,RF 为 +0.141/+0.023/+-0.015/-0.021--**gap 随块尺寸/变程比减小而增大,≥1× 变程时消失**:缺乏变程设计的空间 CV 是安慰剂(placebo)。当前主口径 0.72× 变程恰在过渡区,与 variogram 推理一致。该曲线升级为论文 signature figure(fig08 面板 C)。
-- 3.3 模型【W13 更新为权威参数;W14 补参数来源声明】:XGBoost(Optuna 调优: n_estimators=428, max_depth=5, lr=0.168, subsample=0.594, colsample_bytree=0.821, min_child_weight=6, reg_alpha=3.57, reg_lambda=2.69);RF(n_estimators=500)。**参数来源声明(Q3)**:optuna428 参数来自独立 250m 管线的折内 Optuna 调优(e6_tuned_params.json,调参数据与本诊断目标不同源),属**迁移参数**;已在诊断数据内做嵌套重调参敏感性检查(Optuna 12 trial×3 折内 CV,best: 176/4/0.091...),两套参数下 random/checker/lat4 结果几乎一致(random 0.400 vs 0.401, checker 0.367 vs 0.373, lat4 0.113 vs 0.196)--结论对超参不敏感,gap 模式非参数伪影(w14_q3_nested_sensitivity.csv)
+- 【v3.1 新增 3.2.4】**块尺寸辩护(variogram)**:经验变差函数估计产量与 CV 残差的自相关变程均 ≈4.6 km;棋盘块 0.03°≈3.3 km = 0.72×变程,属于"部分阻断自相关"的中间强度分块--因此棋盘 CV 与随机 CV 的差值(+0.036~0.088)应解读为自相关乐观偏差的**下界**;纬度块(跨度约 12 km > 变程)测到的是梯度混杂而非纯自相关。附 review_response_variogram.json 证据。
+- 3.3 模型【W13 更新为权威参数】:XGBoost(Optuna 调优: n_estimators=428, max_depth=5, lr=0.168, subsample=0.594, colsample_bytree=0.821, min_child_weight=6, reg_alpha=3.57, reg_lambda=2.69);RF(n_estimators=500)。早期轻量参数（200 树/lr=0.05）作为灵敏度附注保留在旧台账（DEPRECATED）
 - 【v3.1】3.3.1 **重复协议**:所有 CV 方案在 3 个随机种子(7/21/42)下重复,报告折级 R2 mean±SD 与 pooled R2;分块方案的块划分固定、种子仅影响折内随机性,仍然报告(benchmark 标准)
 - 3.4 QRF 不确定性量化:300 树,纬度空间 5 折,10/50/90 分位,PICP 与 MPW 诊断
 - 【v3.1 新增 3.4.1】**Split-conformal 校准**:训练/校准/测试 = 70/70/94;不合格分数 s=max((y-q50)/spread,(q50-y)/spread),q̂ 取 90% 分位;报告校准前后 PICP/MPW
@@ -69,15 +69,14 @@
 
 ### 4. Results I: Environmental Fingerprint Audit
 - 4.1 变量描述统计(Table 1:24 变量 mean±std/min/max/CV%/VIF+单位+数据版本)
-- 4.2 Boruta 筛选结果(fig02)
-- 4.3 SHAP 重要性排序(fig03:Top-30,色板 colorblind-safe viridis【v3.1】,图注注明背景数据集=训练折)
-- 4.4 累计 SHAP 曲线(fig02 dashboard 内嵌)
+- 4.2 Boruta 筛选结果（fig02）
+- 4.3 SHAP 重要性排序（fig03：Top-30，色板 colorblind-safe viridis【v3.1】，图注注明背景数据集=训练折）
+- 4.4 累计 SHAP 曲线（fig02 dashboard 内嵌）
 
 ### 5. Results II: CV Scheme Comparison (G2)
 - 5.1 三方案×三模型的 R2/RMSE 对比表(Table 2 升级为 mean±SD over 3 seeds)与 fig04
-- 5.1 三方案×三模型的 R2/RMSE 对比表(Table 2 升级为 mean±SD over 3 seeds)与 fig04
-- 5.2 乐观偏差量化【W14 三段式权威口径，替换旧 +0.020-0.061 单值叙事】:（a）**0.72× 变程棋盘 gap≈0**（pooled +0.003 XGB / −0.039 RF）——未做变程设计的空间 CV 是安慰剂；（b）**纬度块 gap 大**（pooled +0.288 XGB / +0.132 RF）——跨梯度混杂为主；（c）**机制分离**：两者均非"空间 CV 普遍优于随机"的旧叙事，而是"空间 CV 有效性取决于块尺寸/变程比与混杂结构"（剂量响应曲线见 3.2.4/fig08C）。折级口径（-0.205 lat4）作为块内质量辅证并行报告
-- 5.3 纬度块崩塌现象【W13 按权威双口径重写】:南北气候梯度作为强混杂因素。**权威口径下崩塌在折级端更严重**:lat4 折级 R2 = -0.205±0.008(XGB)/-0.132±0.002(RF),而 pooled 端为 +0.113/+0.233--两者差异是 234 样本 4 块下折级方差巨大所致(与 D 目标 §6.5.1 同机制),负折级表明多数块内预测劣于块均值;叙事以 pooled 为主口径、折级为块内质量辅证,两者均报告
+- 5.2 乐观偏差量化【主口径 pooled】:pooled R2 随机-棋盘 = +0.020(RF) 至 +0.061(XGB);折级均值口径 +0.036(RF) 至 +0.088(XGB) 作辅助,两种口径均在正文标注,避免审稿人复算不一致。3 种子下稳定(SD ≤ 0.025),Welch t 检验 p<0.05
+- 5.3 纬度块崩塌现象【W13 按权威双口径重写】:南北气候梯度作为强混杂因素。**权威口径下崩塌在折级端更严重**:lat4 折级 R2 = -0.205±0.008(XGB)/-0.132±0.002(RF),而 pooled 端为 +0.113/+0.233——两者差异是 234 样本 4 块下折级方差巨大所致（与 D 目标 §6.5.1 同机制）,负折级表明多数块内预测劣于块均值;叙事以 pooled 为主口径、折级为块内质量辅证,两者均报告
 - 5.4 棋盘块 CV 作为主口径的理由(引用 3.2.4 variogram 辩护:0.72×变程,下界性质)
 
 ### 6. Results III: Yield Target Source Sensitivity (G1)
@@ -89,17 +88,17 @@
   - 推理链:目标 B 若由环境特征驱动的 Ridge 插值产生,则任何足够灵活的环境模型都能"复原"该表面 → R2 上界≈插值训练拟合(0.99)→ 观测 0.98 贴近上界 = 循环成立的定量证据
   - 误差传播草图:Var(B-ŷ) ≥ Var(B)-R2_interp·Var(A):目标 B 的表观可预测性由构建过程注入,与农田真实变异无关
   - 【v3.1 W12 升格】本论证从 review_response 附件升格为 Discussion 正式段落(§8.3 引用)并配小图(LOO-IDW 自插值 R2 0.20-0.43 vs 目标 B 0.98 对比条图)
-- 6.3 目标 A 的真实技能：R2≈0（三模型一致）【W14 升级为等效性表述】bootstrap 95% CI = [-0.20, -0.02]（B=2000 网格重采样）——**置信区间整体位于零以下，环境变量对实测产量变异的方差解释比例上界 ≈ 0**，结论从"未检出"升级为"测出上界"（w14_q4_bootstrap_ci.json）
+- 6.3 目标 A 的真实技能:R2≈0(三模型一致,n=43 有效样本下置信区间宽,如实报告)
 - 6.4 目标 C 的表观性能来源分解:平滑性贡献 vs 环境信号贡献
 - 6.5 目标 D 独立源验证:checker CV R2 全负
 - 【v3.1 W12 新增 6.5.1】**D 目标(n=22)fold-mean 与 pooled 巨大分歧的正文化**(审稿人必问):checker 折级 -1.03~-1.31 但 pooled -0.09~-0.21;random 折级 0.16~0.24 但 pooled 0.99。机制:22 样本分 5 折后每折仅 4-5 个网格,折级 R2 对单折均值偏移极度敏感(方差巨大);而 pooled R2 被目标本身的簇状结构主导(相邻网格产量高度相似,随机折内近邻泄漏)。处理:两种口径都报告,明确"n<30 时 fold-mean 与 pooled 不可互推";pooled 0.99 不作为技能声明,仅作为循环机制演示
 - 6.6 r(obs, pred)=0.510:空间预测系统性低估变异(pred std 0.056 vs obs std 0.224)
-- 【v3.1 W12 新增 6.7】【W13 措辞收窄:跨作物目标旁证】**第二目标复检:Xiao2024 面板 1552 网格**--目标为轮作周年优化产量 New_Yield(15.71±0.31 t/ha,小麦+玉米双季合计含减排约束优化,非冬小麦单产;单位标注 t/ha(rotation, optimized)),与 234 诊断网格零重叠。同特征重跑--随机 CV pooled 0.499(折级 0.499±0.051),棋盘 CV pooled 0.165(折级 0.165±0.126,块 0.0417°)。解读:该目标是模型反演+优化产物而非实测,作为"目标来源决定表观性能"的**跨作物旁证**依然成立(甚至更强:模型产物目标上随机 CV 可达 0.5),但**不可解读为跨季节/同年份冬小麦复检**;跨年泛化仍待 Zenodo 2016-2020。台账 w12_b2_panel_check.csv
+- 【v3.1 W12 新增 6.7】【W13 措辞收窄：跨作物目标旁证】**第二目标复检:Xiao2024 面板 1552 网格**——目标为轮作周年优化产量 New_Yield(15.71±0.31 t/ha,小麦+玉米双季合计含减排约束优化,非冬小麦单产;单位标注 t/ha(rotation, optimized)),与 234 诊断网格零重叠。同特征重跑--随机 CV pooled 0.499(折级 0.499±0.051),棋盘 CV pooled 0.165(折级 0.165±0.126,块 0.0417°)。解读:该目标是模型反演+优化产物而非实测,作为"目标来源决定表观性能"的**跨作物旁证**依然成立(甚至更强:模型产物目标上随机 CV 可达 0.5),但**不可解读为跨季节/同年份冬小麦复检**;跨年泛化仍待 Zenodo 2016-2020。台账 w12_b2_panel_check.csv
 
 ### 7. Results IV: QRF Uncertainty Quantification (G3)
-- 7.1 PICP 与 MPW(fig07A:区间带+观测叠加)
-- 7.2 校准散点(fig07B)
-- 7.3 区间宽度分布(fig07C:异方差模式)
+- 7.1 PICP 与 MPW（fig07A：区间带+观测叠加）
+- 7.2 校准散点（fig07B）
+- 7.3 区间宽度分布（fig07C：异方差模式）
 - 【v3.1 重写 7.4】**欠覆盖的诊断与 conformal 校准**(审稿意见 #5):
   - 原始 QRF:PICP=0.705(名义 90%),欠覆盖确认
   - Split-conformal 校准后:PICP=0.862,MPW 0.623→0.789 t/ha(+27% 宽度换取 +15.7pp 覆盖)
@@ -108,10 +107,9 @@
   - 结论口径:QRF 区间**未经校准时不可用于风险决策**;conformal 校准是此类研究的最低配置
 
 ### 8. Discussion
-- 8.1 为什么环境指纹在 0.041° 网格尺度不解释产量变异？【W14 补静态快照定位】
+- 8.1 为什么环境指纹在 0.041° 网格尺度不解释产量变异?
   - 【v3.1 定性调整】管理因素假说(施肥/灌溉/品种)--**明确标注为"待检验假说"而非结论**(审稿意见 #4);给出三条检验路径:(a) 若村级/农户级管理数据可获得,做方差分解;(b) 品种固定效应粗对照(若 Data 可用);(c) 与文献效应量对照:小农区管理效应通常占产量变异 30-60%,环境主导区 <20%--本文 R2≈0 与管理主导假说一致但不证明
   - 环境变量分辨率与农艺过程尺度不匹配
-  - 【W14 新增·置顶】**静态快照性质自我定位**：本文 24 个建模变量均为气候态/土壤/地形静态量，检验的是**静态环境表征**在县域尺度的解释力上界——静态快照无法表达胁迫时间进程与发育期门控（呼应 Yan & Wang 2026 关于环境不确定性下的表征观点）。**物候期加权动态特征敏感性实验**（越冬冻害积寒 FDD+灌浆期高温日数 HDF，Open-Meteo 2021 逐日构造，最近邻匹配距离 ≤0.55°）：加入后 pooled 0.4002→0.4057（Δ=+0.006，种子间噪声内）——动态表征在县域内同样无增益，与 250m 线 E1/E2 年特异气候负结果合流为**"时间分辨率的价值边界"论点**；管理/动态表征是下一步而非本文范围（w14_q5_pheno_features.csv）
   - 小农田块异质性超出网格平均表征能力
   - 【v3.1 新增】与姊妹论文(250m 混合制图线)的证据互引:250m 尺度下随机 CV R2=0.77 完全来自空间连续性(外推梯度谱单调衰减至 -0.83),支持"空间结构/管理背景主导"而非环境因果解释
 - 8.2 空间产量建模文献中的乐观偏差普遍性:与 Ploton 2020、Meyer & Pebesma 2022 对话【v3.1 扩展】
@@ -149,21 +147,21 @@
 | 编号 | 内容 | 状态 |
 |---|---|---|
 | Fig 1 | 研究区地图 + 234 网格 + 产量来源分布 | 待制 |
-| Fig 2 | 特征审计 Dashboard(Boruta 三色,原 fig01_feature_audit_dashboard) | ✅(W12 重编号) |
-| Fig 3 | SHAP 重要性 Top-30(viridis 色板,原 fig02) | ✅(W12 重编号) |
-| Fig 4 | CV 方案对比(原 fig05) | ✅(W12 重编号) |
-| Fig 5 | 产量目标敏感性(原 fig07) | ✅(W12 重编号) |
-| Fig 6 | 独立源验证(原 fig08) | ✅(W12 重编号) |
-| Fig 7 | QRF 不确定性(原 fig06) | ✅(W12 重编号) |
-| Fig 8 | 【W14 升级为三面板 signature figure】(A) variogram γ(h)+变程标注 (B) 五方案验证谱系(随机/棋盘/纬度/LOBO/环境分块) (C) 块尺寸-乐观偏差剂量响应曲线 | ✅ make_fig08_variogram.py(重制) |
-| Fig 9-13 | 250m 姊妹线图(learning curve/实验对比/分块/散点/外推谱),跨线引用 | ✅ |
-| Table 1 | 24 变量描述统计(+单位+数据版本+VIF) | 数据就绪 |
-| Table 2 | CV 方案对比(3 种子 mean±SD) | ✅ review_response_diag_seeds.csv |
+| Fig 2 | 特征审计 Dashboard（Boruta 三色，原 fig01_feature_audit_dashboard） | ✅（W12 重编号） |
+| Fig 3 | SHAP 重要性 Top-30（viridis 色板，原 fig02） | ✅（W12 重编号） |
+| Fig 4 | CV 方案对比（原 fig05） | ✅（W12 重编号） |
+| Fig 5 | 产量目标敏感性（原 fig07） | ✅（W12 重编号） |
+| Fig 6 | 独立源验证（原 fig08） | ✅（W12 重编号） |
+| Fig 7 | QRF 不确定性（原 fig06） | ✅（W12 重编号） |
+| Fig 8 | variogram：产量/残差 γ(h) 曲线 + 块尺寸-变程比标注 | ✅（W12 新增，make_fig08_variogram.py） |
+| Fig 9-13 | 250m 姊妹线图（learning curve/实验对比/分块/散点/外推谱），跨线引用 | ✅ |
+| Table 1 | 24 变量描述统计（+单位+数据版本+VIF） | 数据就绪 |
+| Table 2 | CV 方案对比（3 种子 mean±SD） | ✅ review_response_diag_seeds.csv |
 | Table 3 | 四目标×三模型敏感性矩阵 | 数据就绪 |
-| Table 4 | QRF 指标汇总(+conformal 前后对照) | ✅ review_response_conformal.csv |
-| Table 5 | 区域产量制图报告清单(checklist 表格版) | 随 8.4 节成稿 |
+| Table 4 | QRF 指标汇总（+conformal 前后对照） | ✅ review_response_conformal.csv |
+| Table 5 | 区域产量制图报告清单（checklist 表格版） | 随 8.4 节成稿 |
 
-**【W12 图号规范】**诊断线主图序列 = fig01-fig08(study_area / feature_audit / shap / cv_scheme / source_sensitivity / independent_validation / qrf / variogram);250m 线 = fig09-fig13。旧 fig03_model_comparison 与 fig04_feature_selection_dashboard 移入 `figures/diagnostic_reserve/`(不在投稿序列,仅备用)。
+**【W12 图号规范】**诊断线主图序列 = fig01-fig08（study_area / feature_audit / shap / cv_scheme / source_sensitivity / independent_validation / qrf / variogram）；250m 线 = fig09-fig13。旧 fig03_model_comparison 与 fig04_feature_selection_dashboard 移入 `figures/diagnostic_reserve/`（不在投稿序列，仅备用）。
 
 ## 与 v3.0 的差异
 
