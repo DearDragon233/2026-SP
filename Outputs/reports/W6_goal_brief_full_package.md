@@ -85,12 +85,15 @@ Layer 4 敏感性诊断层
 
 | 编号 | 数据集 | 来源 | 许可 | 分辨率 | 覆盖年份 | 获取方式 | 获取时间 | 获取状态 |
 |---|---|---|---|---|---|---|---|---|
-| EXT-1 | ChinaWheatYield30m | Zenodo 10.5281/zenodo.7360753（Zhao et al. 2023, ESSD） | CC-BY-4.0 | 30m | 2016-2021 | Zenodo 直链（浏览器下载）；脚本被 403 拦截 | 2026-09-12 | ✅ 2021 年已下载（1088MB），2016-2020 待获取 |
+| EXT-1 | ChinaWheatYield30m | Zenodo 10.5281/zenodo.7360753（Zhao et al. 2023, ESSD 15, 4047-4063, https://doi.org/10.5194/essd-15-4047-2023） | CC-BY-4.0 | 30m | 2016-2021 | Zenodo 直链（浏览器下载）；脚本被 403 拦截 | 2026-09-12 | ✅ 2021 年已下载（1088MB），2016-2020 待获取 |
+| EXT-6 | 中国冬小麦分布（WheatMapNCP） | Li et al. 2026, Scientific Data / PMC | 待确认 | 30m | 2000-2024 | PMC 论文附录 | 未获取 | ⏳ 可用于麦田掩膜精化，获取前需确认许可 |
 | EXT-2 | Xiao2024 实测产量 | 课题组内部（Xiao 2024 数据） | 内部使用 | 3.5km 网格 | 2021 | 项目内置 | 2026-07 | ✅ 已入库 |
 | EXT-3 | WorldClim 2.1 | worldclim.org | CC-BY-SA 4.0 | 2.5min | 1970-2000 均值 | 官网下载 | 2026-07 | ✅ 已入库（bio1-19 + 月值 tavg/prec） |
 | EXT-4 | SoilGrids 250m | soilgrids.org（ISRIC） | CC-BY-4.0 | 250m | 当前 | 官网下载 | 2026-07 | ✅ 已入库（8 项土壤理化） |
 | EXT-5 | SRTM DEM | earthexplorer.usgs.gov | 公共领域 | 30m | — | 官网下载 | 2026-07 | ✅ 已入库（srtm_60_04） |
 | EXT-6 | 中国冬小麦分布（WheatMapNCP） | Li et al. 2026, Scientific Data / PMC | 待确认 | 30m | 2000-2024 | PMC 论文附录 | 未获取 | ⏳ 可用于麦田掩膜精化 |
+
+台账链接核查（2026-09-14）：EXT-1 Zenodo=200、EXT-3 WorldClim=200、EXT-4 SoilGrids=200、EXT-5 EarthExplorer=200、Zhao 2023 DOI=302→essd.copernicus.org（有效）、GitHub 仓库=200，全部可访问；EXT-6 尚未获取，获取前需确认许可。
 
 数据台账说明：全部已获取数据的来源可追溯，许可条款允许学术再分析。Zenodo 2016-2020 五年份文件因 API 反爬（403）暂未自动下载，需通过浏览器手动获取或联系作者（Zhao et al.）批量提供。
 

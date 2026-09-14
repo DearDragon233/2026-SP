@@ -1,0 +1,5 @@
+﻿Scheme,Model,R2_pooled_repro,R2_pooled_first,match
+random_5fold,XGBoost,0.1255,0.1255,True
+random_5fold,RF,0.2196,0.2196,True
+checker_4fold,XGBoost,0.9743,0.9743,True
+checker_4fold,RF,0.982,0.982,True
