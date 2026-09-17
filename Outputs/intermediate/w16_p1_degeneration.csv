@@ -1,7 +1,7 @@
-﻿scheme,mean_nn_otherblock_km,pooled_mean,pooled_std,gap_vs_random
-random,0.0,0.4002,0.0146,
-checker_0.5x,2.32,0.2869,0.0085,-0.1133
-checker_1x,2.32,0.3668,0.0078,-0.0334
-checker_2x,2.3,0.3866,0.0076,-0.0136
-checker_4x,2.4,0.4064,0.0037,0.0062
-lat4,5.98,0.1127,0.0061,-0.2875
+﻿scheme,mean_nn_otherblock_km,pooled_mean,pooled_std,gap_random_minus_scheme,note
+random,0.0,0.4002,0.0146,0.0,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
+checker_0.5x,2.32,0.2869,0.0085,0.1133,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
+checker_1x,2.32,0.3668,0.0078,0.0334,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
+checker_2x,2.3,0.3866,0.0076,0.0136,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
+checker_4x,2.4,0.4064,0.0037,-0.0062,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
+lat4,5.98,0.1127,0.0061,0.2875,"gap = random - scheme (positive = scheme more honest); lat4/LOBO/env gaps come from cutting the elevation gradient, checker gaps ~0 because NN distance stays ~2.3-2.4 km"
