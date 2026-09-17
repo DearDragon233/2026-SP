@@ -1,0 +1,7 @@
+﻿批次号,数据内容,来源,许可,获取/处理时间,处理方式,规模,状态
+BATCH-01,平谷基线 234 网格（环境指纹 73 变量 + 实测/融合产量）,课题组自建 + Xiao2024 Figshare (DOI 10.6084/m9.figshare.24471919.v5),CC BY 4.0（外部部分）,2026-07,项目内置,234 行,基线，未改动
+BATCH-02,Xiao2024 Allregions.rds 平谷子集（History 基准期）,D:\2026-SP\Data\Management\Xiao2024\Allregions.rds；源自 Xiao et al. 2024 Nature Food 5:59-71，Figshare DOI 10.6084/m9.figshare.24471919.v5,CC BY 4.0，允许学术使用与再分发，无需申请,2026-09-14（本轮从本地库存解析）,pyreadr 0.5.6 解析 + gridcell→经纬度行主序映射（NCP 1320 列，经 67876→117.7E/40.3N 验证）,1552 行（1552 个 1km 网格×1 行基准期）,已入库主数据集
+BATCH-03,Xiao2024 Allregions.rds 平谷子集（2030s/2060s 情景）,同 BATCH-02,CC BY 4.0,2026-09-14,同上；6 GCM×2 SSP 展开,37248 行（情景数据，单独存放不混入主表）,已入库（独立情景文件）
+BATCH-04,Xiao2024 三个 1km 参考图层（WheatYield/N/Irrigation_ref.tif）,同上目录,CC BY 4.0,2026-09-14,rasterio 点采样 234 网格,234 行×3 列（38 网格有效产量）,已入库主数据集
+BATCH-05,WorldClim 2.1 bio19+月值（1552 点采样）,D:\2026-SP\Data\WorldClim\wc2.1_2.5m_*（官网 worldclim.org，CC BY-SA 4.0）,CC BY-SA 4.0（由 WorldClim 授权再分发）,2026-09-14（本轮采样）,rasterio 逐点采样，1552/1552 全覆盖,50 列×1552 行,已入库
+BATCH-06,SoilGrids 2.0 0-5cm 7 项（1552 点采样）,D:\2026-SP\Data\SoilGrids_wgs84\*_0-5cm_mean_5000.tif（ISRIC soilgrids.org，CC BY 4.0）,CC BY 4.0,2026-09-14,rasterio+pyproj 投影采样（ESRI:54052→4326）；nitrogen.tif 源文件损坏未入库,7 列×1552 行（73% 覆盖）,已入库（缺 nitrogen，见缺口登记）

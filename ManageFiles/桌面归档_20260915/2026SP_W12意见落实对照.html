@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W12 检查意见落实对照 · 2026-SP</title>
+<style>
+:root { --paper:#ffffff; --ink:#111111; --muted:#6e6e6e; --hair:#e0e0e0; --red:#e0342c; --soft:#f6f6f4; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:Helvetica,"Arial","PingFang SC","Microsoft YaHei",sans-serif; background:var(--paper);
+  color:var(--ink); line-height:1.7; padding:56px 28px; }
+.page { max-width:1060px; margin:0 auto; }
+header { border-bottom:3px solid var(--ink); padding-bottom:26px; margin-bottom:8px; }
+.kicker { font-size:11px; letter-spacing:0.22em; color:var(--red); font-weight:700; margin-bottom:14px; }
+h1 { font-size:34px; font-weight:700; line-height:1.25; letter-spacing:-0.01em; }
+.sub { color:var(--muted); font-size:14px; margin-top:12px; max-width:78ch; }
+.numstrip { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--ink); }
+.numcell { padding:22px 18px 22px 0; border-right:1px solid var(--hair); }
+.numcell:last-child { border-right:none; }
+.numcell .n { font-size:36px; font-weight:700; letter-spacing:-0.02em; }
+.numcell .n span { color:var(--red); }
+.numcell .l { font-size:11px; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase; margin-top:4px; }
+h2 { font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:52px 0 18px;
+  padding-top:20px; border-top:3px solid var(--ink); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { text-align:left; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--muted); border-bottom:2px solid var(--ink); padding:8px 10px; }
+td { border-bottom:1px solid var(--hair); padding:10px; vertical-align:top; }
+td .id { font-weight:700; color:var(--red); font-size:14px; }
+.st { display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.06em;
+  padding:2px 9px; border:1.5px solid var(--ink); }
+.st.done { background:var(--ink); color:#fff; }
+.st.part { background:#fff; color:var(--ink); }
+.st.ask { border-style:dashed; color:var(--muted); }
+code { font-family:Consolas,monospace; font-size:12px; background:var(--soft); padding:1px 5px; }
+.log { margin:6px 0; padding:10px 14px; border-left:3px solid var(--ink); background:var(--soft); font-size:12.5px; }
+.log b { color:var(--red); }
+.foot { margin-top:56px; padding-top:14px; border-top:3px solid var(--ink); font-size:10.5px;
+  color:var(--muted); letter-spacing:0.08em; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+@media (max-width:760px){ .numstrip{grid-template-columns:repeat(2,1fr);} h1{font-size:26px;} }
+</style>
+</head><body><div class="page">
+
+<header>
+<div class="kicker">2026-SP · W12 CHECK RESPONSE · 2026-09-14</div>
+<h1>检查报告意见落实对照</h1>
+<div class="sub">依据《2026-SP_W12_项目检查报告：问题清单与提升建议》（E 节行动清单 9 条 + 正文提问 4 处）。逐条处置如下：8 条已落实（含 2 项新实验、1 张新图、14 处文件改名、2 处台账标废弃），1 条属导师决策项待咨询。全程增量修改，改动前版本已备份。</div>
+</header>
+
+<div class="numstrip">
+<div class="numcell"><div class="n">9<span>/9</span></div><div class="l">行动条目逐条处置</div></div>
+<div class="numcell"><div class="n">2</div><div class="l">新增复核实验（A2 因子/B2 面板）</div></div>
+<div class="numcell"><div class="n">14</div><div class="l">图号重命名（fig01-13 无冲突）</div></div>
+<div class="numcell"><div class="n">0</div><div class="l">回归破坏（原口径全部保留标注）</div></div>
+</div>
+
+<h2>一、行动清单逐条对照（E 节 #1-#9）</h2>
+<table>
+<tr><th style="width:44px">#</th><th style="width:250px">意见</th><th style="width:88px">状态</th><th>落实改动与证据</th></tr>
+<tr><td class="id">1</td><td>全文 3.5km → 4.6km（A1）</td><td><span class="st done">已落实</span></td><td>实测复核：网格 0.0417° 各向异性，经向 3.55km × 纬向 4.61km——"3.5"与"4.6"各对一半。全文统一为「0.0417° ≈ 3.6×4.6 km」口径：v3.1 摘要 2 处+§2.1+§8.1、README 1 处、注册表 resolution 字段。<b>未采用</b>报告建议的单值 4.6km（那会引入新的单向偏差），各向异性表述更准确，理由在此声明。</td></tr>
+<tr><td class="id">2</td><td>复算/统一 lat_block 双台账矛盾（A2）</td><td><span class="st done">已落实</span></td><td>2×2 因子实验（<code>w12_a2_latblock_factorial.csv</code>）定位根源：块定义（q5 vs q4）×模型参数（旧200 vs Optuna428）双差异——q5×old fold 0.023 / q4×Optuna pooled 0.119，非 bug 而是两套口径。处置：<code>review_response_diag_seeds.csv</code> 定为唯一权威口径，<code>cv_scheme_comparison.csv</code> 标注 DEPRECATED（<code>CV_LEDGER_CANONICAL.md</code>），论文/README 只引权威口径。</td></tr>
+<tr><td class="id">3</td><td>Xiao2024 面板第二时期最小复检（B2）</td><td><span class="st done">已落实</span></td><td>1552 面板网格（New_Yield 15.71±0.31 t/ha，与 234 网格零重叠）重跑同特征模型：随机 CV pooled 0.499（折级 0.499±0.051）、棋盘 0.165（±0.126）。写入大纲 §6.7：方向与主线一致（棋盘衰减 −0.33），量级差异反证"目标来源决定表观性能"。<b>单年局限升格为跨目标稳健性证据</b>。台账 <code>w12_b2_panel_check.csv</code>。</td></tr>
+<tr><td class="id">4</td><td>乐观偏差统计量口径标注（A3）</td><td><span class="st done">已落实</span></td><td>pooled 定主口径（+0.020-0.061），折级均值（+0.036-0.088）作辅助并明示：v3.1 摘要 Results+§5.2、README 三句话版本第 1 条，三处均双口径标注。</td></tr>
+<tr><td class="id">5</td><td>图表统一编号+重命名+全局替换（A4）</td><td><span class="st done">已落实</span></td><td>投稿主图序列定为 fig01-fig08（诊断线：study_area/feature_audit/shap/cv_scheme/source_sensitivity/independent_validation/qrf/variogram）+fig09-13（250m 线）。14 个文件重命名；fig01 重名冲突消解；旧 fig03_model_comparison、fig04_feature_selection_dashboard 移入 <code>figures/diagnostic_reserve/</code>（不在投稿序列）。3 个脚本输出名同步（run_feature_audit.py / advance_validation.py / make_fig01_fig08.py）。大纲图表清单+正文引用全部换新号。</td></tr>
+<tr><td class="id">6</td><td>Draft_v1 摘要数字同步多种子（C1）</td><td><span class="st done">已落实</span></td><td>中英摘要统一：主口径 3 种子 0.755±0.029（随机/纬度/LOBO 三方案并列），seed=42 值只留正文台账；EN 摘要同步改 0.755±0.029。</td></tr>
+<tr><td class="id">7</td><td>1,786 行数据集定位写入（B1）</td><td><span class="st done">已落实</span></td><td>定位=数据资源层（非四目标成员、非 250m 线）：①第二目标复检数据底座 ②管理假说检验路径(a)的 N/水管理列来源 ③未来第三篇候选素材。写入大纲 §2.5；README 头条降级为"数据资源"表述。</td></tr>
+<tr><td class="id">8</td><td>目标 B 上界论证升格 Discussion（C1）</td><td><span class="st done">已落实</span></td><td>大纲 §6.2.1 加升格标注：从 review_response 附件升为 Discussion 正式段落（§8.3 引用）+配小图（LOO-IDW 0.20-0.43 vs 目标B 0.98 对比条图，写作时出）。</td></tr>
+<tr><td class="id">9</td><td>期刊终选+网格-品种映射确认（C2/B3）</td><td><span class="st ask">待导师</span></td><td>期刊（Agronomy vs FCR vs AFM 合并）与 APC 态度需导师拍板——这是唯一无法由数据侧自答的条目。网格-品种映射：<b>已确认数据不存在</b>（Data/Variety 仅 8 品种性状表，无网格映射），假说检验路径 (c) 放弃并写入大纲 §8.5，路径排序 (a) 面板管理列入模 > (b) 14 情景敏感性演示。邮件草稿已含 AFM 先行建议，等爸爸发送/修改后发导师确认。</td></tr>
+</table>
+
+<h2>二、正文提问的处理（A5/C1 附带/C3）</h2>
+<table>
+<tr><th style="width:250px">事项</th><th style="width:88px">状态</th><th>处理</th></tr>
+<tr><td>A5 数据注册表滞后</td><td><span class="st done">已落实</span></td><td><code>26SP_data_registry.json</code>：last_updated → 2026-09-14-W12；environmental 增加 variables_raw=73 / variables_modeling=24 两级口径+缺失率两级+各向异性分辨率；新增 augmented_master 条目（1786 行/1552 非空/角色定义）与 diagnostic_targets 条目。</td></tr>
+<tr><td>C1 conformal 后 PICP=0.862 仍&lt;0.90 要解释</td><td><span class="st done">已落实</span></td><td>大纲 §7.4 补：n_cal=70 时 q̂ 抽样波动 ±0.07 → PICP 波动 ±3-4pp，0.862 与名义 0.90 在抽样误差内相容；MPW+27% 是保覆盖的必然成本，两口径并报。</td></tr>
+<tr><td>C3 README 指向 v3.0</td><td><span class="st done">已落实</span></td><td>项目结构更新为 Outline_v3.1_diagnostic.md（当前）+ Archive/（历史版本）；figs 说明同步 fig01-13 新序列。</td></tr>
+<tr><td>B4 D 目标 fold/pooled 分歧正文化</td><td><span class="st done">已落实</span></td><td>大纲新增 §6.5.1：机制（22 样本 5 折，折级对方差极度敏感；pooled 被簇状结构主导）+处理规则（双口径并报，pooled 0.99 不作技能声明，仅作循环机制演示）。</td></tr>
+<tr><td>fig08 variogram 图（W11 遗留制图债）</td><td><span class="st done">已落实</span></td><td><code>fig08_variogram_block_defense.png</code>（600dpi）：(A) 产量/残差 γ(h) 双曲线+变程标注；(B) 块尺寸-变程比条图（棋盘 3.3km=0.72×range）。脚本 <code>make_fig08_variogram.py</code>。</td></tr>
+</table>
+
+<h2>三、修改日志（本轮全部文件级改动）</h2>
+<div class="log"><b>Paper/Outline_v3.1_diagnostic.md</b> — 摘要 2 处+§2.1+§8.1 网格口径（#1）；§5.2 pooled 主口径（#4）；§6.5.1 D 目标双口径（B4）；§6.2.1 升格标注（#8）；§6.7 面板复检新节（#3）；§7.4 conformal 解释（C1）；§8.5 假说路径排序+(c)放弃（B3）；§2.5 扩充表定位（#7）；图表清单全表重写+fig04/fig07 引用换号（#5）</div>
+<div class="log"><b>Paper/Draft_v1_hybrid_mapping.md</b> — 中文摘要多种子口径+LOBO 补充（#6）；EN 摘要同步 0.755±0.029（#6）</div>
+<div class="log"><b>README.md</b> — 1786 头条降级为数据资源（#7）；三句话版本 pooled 口径+网格口径（#1/#4）；项目结构 v3.1+Archive（C3）；figs 说明 fig01-13（#5）</div>
+<div class="log"><b>26SP_data_registry.json</b> — 两级变量口径+各向异性分辨率+augmented_master+diagnostic_targets（A5/#7）</div>
+<div class="log"><b>Outputs/figures/main/</b> — 14 文件重命名成 fig01-13 单义序列；2 旧图移 diagnostic_reserve/（#5）</div>
+<div class="log"><b>src/</b> — run_feature_audit.py 输出名 fig01→fig02；advance_validation.py fig05→fig04/fig06→fig07/fig07→fig05；make_fig01_fig08.py fig08→fig06（#5）；新增 w12_check_experiments.py（#2/#3）与 make_fig08_variogram.py（B4 制图）</div>
+<div class="log"><b>Outputs/intermediate/</b> — 新增 w12_a2_latblock_factorial.csv、w12_b2_panel_check.csv、CV_LEDGER_CANONICAL.md（#2/#3）</div>
+
+<h2>四、回归检查与验证记录</h2>
+<table>
+<tr><th style="width:330px">检查项</th><th style="width:88px">结果</th><th>证据</th></tr>
+<tr><td>网格口径复核（18×13=234 网格，间距实测）</td><td><span class="st done">通过</span></td><td>经向 0.0417°→3.55km@40.2N、纬向 0.0417°→4.61km；与变差函数首滞后期 4.62km 互证</td></tr>
+<tr><td>2×2 因子实验与旧台账数值相容性</td><td><span class="st done">通过</span></td><td>q5×old 复算 fold 0.0229 vs 旧台账 0.0262（同量级，折划分随机性内），确认旧台账无实现 bug</td></tr>
+<tr><td>面板复检样本独立性</td><td><span class="st done">通过</span></td><td>面板 1552 格与 234 诊断网格坐标交集=0（脚本验证），第二目标复检成立</td></tr>
+<tr><td>fig01-13 序列完整性</td><td><span class="st done">通过</span></td><td>png 枚举 13 个文件无重名无空洞；reserve 目录 2 旧图隔离</td></tr>
+<tr><td>旧台账/旧引用回归</td><td><span class="st done">保留</span></td><td>cv_scheme_comparison.csv 未删除仅标 DEPRECATED（报告要求"标注 deprecated 或重算"，两选项取前者保溯源）；Archive 内 4 份 pre-W12 备份可回退</td></tr>
+<tr><td>HTML/文档可打开验证</td><td><span class="st done">通过</span></td><td>对照表 html.parser 校验 clean；Markdown 文件均为完整成品（无占位符）</td></tr>
+</table>
+
+<h2>五、交接说明</h2>
+<table>
+<tr><th style="width:130px">事项</th><th>说明</th></tr>
+<tr><td>成果位置</td><td>大纲 <code>D:\2026-SP\Paper\Outline_v3.1_diagnostic.md</code>；草稿 <code>Paper\Draft_v1_hybrid_mapping.md</code>；新台账 <code>Outputs\intermediate\w12_*.csv</code>；新图 <code>Outputs\figures\main\fig08_variogram_block_defense.png</code>；口径声明 <code>Outputs\intermediate\CV_LEDGER_CANONICAL.md</code>；本对照表桌面副本 <code>2026SP_W12意见落实对照.html</code></td></tr>
+<tr><td>回退方式</td><td>pre-W12 备份在 <code>Paper\Archive\</code>（大纲/草稿/README/旧CV台账各 1 份）；git 历史可按文件回退（本轮提交 + 此前 8207bc9）</td></tr>
+<tr><td>遗留事项</td><td>①期刊终选（等导师）②邮件草稿发送（在桌面，待确认）③目标 B 对比条图与 §1-§9 正文成稿（写作轮）④Zenodo 2016-2020 多年份（等网盘下载）⑤GitHub 推送视网络恢复（昨晚 8207bc9 + 本轮一并推）</td></tr>
+<tr><td>下一轮建议</td><td>①管理假说路径 (a)：面板 N/水管理列入模对照实验（数据现成）②§1-§9 诊断线正文成稿（大纲证据已齐）③fig01 研究区地图制图（最后一个待制主图）</td></tr>
+</table>
+
+<div class="foot"><span>2026-SP · W12 GUIDANCE IMPLEMENTATION CHECKLIST</span><span>Generated 2026-09-14 · Evidence: w12_a2/w12_b2/fig08 · Pentagram preset 01</span></div>
+</div></body></html>

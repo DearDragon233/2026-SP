@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R² 提升轮 · 混合制图模型 · 科学图谱</title>
+<style>
+:root { --paper:#fafaf8; --ink:#1e2a38; --muted:#5c6b7a; --hair:#d9dde2;
+  --navy:#1d3557; --accent:#b5623b; --soft:#eef1f4; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:Georgia,"Songti SC","SimSun",serif; background:var(--paper);
+  color:var(--ink); line-height:1.72; padding:40px 20px; }
+.page { max-width:1020px; margin:0 auto; }
+header { border-bottom:2px solid var(--ink); padding-bottom:22px; }
+.kicker { font-family:Verdana,sans-serif; font-size:11px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--navy); margin-bottom:10px; }
+h1 { font-size:30px; font-weight:600; line-height:1.3; }
+.sub { color:var(--muted); font-size:15px; margin-top:10px; }
+h2 { font-size:20px; margin:46px 0 8px; padding-top:22px; border-top:1px solid var(--hair); font-weight:600; }
+h2 .no { color:var(--accent); font-size:12px; font-family:Verdana,sans-serif;
+  letter-spacing:0.12em; display:block; margin-bottom:5px; }
+p { margin:9px 0; font-size:15px; max-width:76ch; }
+table { width:100%; border-collapse:collapse; font-size:13px; margin:14px 0; }
+th { font-family:Verdana,sans-serif; font-size:10.5px; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--muted); text-align:left;
+  border-bottom:2px solid var(--ink); padding:7px 9px; }
+td { border-bottom:1px solid var(--hair); padding:7px 9px; vertical-align:top; }
+tr.hl td { background:#f3ede9; font-weight:600; }
+.metrics { display:grid; grid-template-columns:repeat(5,1fr); border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--hair); margin:24px 0; }
+.metric { padding:14px 12px; border-right:1px solid var(--hair); }
+.metric:last-child { border-right:none; }
+.metric .v { font-size:25px; font-weight:600; color:var(--navy); }
+.metric .v em { font-style:normal; font-size:13px; color:var(--accent); }
+.metric .k { font-family:Verdana,sans-serif; font-size:9.5px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px; }
+.spectrum { display:grid; grid-template-columns:repeat(6,1fr); margin:18px 0;
+  border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); }
+.sstep { padding:12px 8px; border-right:1px solid var(--hair); text-align:center; }
+.sstep:last-child { border-right:none; }
+.sstep .sn { font-family:Verdana,sans-serif; font-size:9px; color:var(--muted); letter-spacing:0.06em; }
+.sstep .sv { font-size:19px; font-weight:600; color:var(--accent); margin:3px 0; }
+.sstep .sv2 { font-size:13px; color:var(--navy); font-weight:600; }
+.sstep .sd { font-size:10.5px; color:var(--muted); }
+.neg { color:var(--ink); }
+.verdict { border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+  padding:16px 6px; margin:20px 0; font-size:15.5px; }
+.verdict b { color:var(--accent); }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:16px 0; }
+.card { border:1px solid var(--hair); background:#fff; padding:16px 18px; }
+.card h3 { font-size:14.5px; color:var(--navy); margin-bottom:6px; }
+.card p { font-size:13.5px; margin:5px 0; }
+img { max-width:100%; border:1px solid var(--hair); margin:12px 0; }
+.figcap { font-size:12.5px; color:var(--muted); margin:-6px 0 16px; }
+.foot { margin-top:48px; padding-top:14px; border-top:2px solid var(--ink);
+  font-family:Verdana,sans-serif; font-size:10.5px; color:var(--muted); letter-spacing:0.06em; }
+@media (max-width:760px) { .metrics { grid-template-columns:repeat(2,1fr); }
+  .spectrum { grid-template-columns:repeat(3,1fr); } .two { grid-template-columns:1fr; } h1 { font-size:23px; } }
+</style>
+</head><body><div class="page">
+
+<header>
+<div class="kicker">2026-SP · R² Improvement Round · 2026-09-14</div>
+<h1>混合环境-残差制图模型：R² 0.326 → 0.769 与它的边界</h1>
+<div class="sub">301 个 250m 网格 · 13 个主实验 + 外推梯度谱 · 四重稳健性检验 · 中文论文草稿 v1</div>
+</header>
+
+<div class="metrics">
+<div class="metric"><div class="v">0.769</div><div class="k">随机 CV R²（基线 0.326）</div></div>
+<div class="metric"><div class="v">0.755<em>±0.029</em></div><div class="k">3 种子重复（随机/纬度/LOBO 全方案）</div></div>
+<div class="metric"><div class="v">0.683</div><div class="k">留出集 R²（80/20）</div></div>
+<div class="metric"><div class="v">0.539</div><div class="k">纬度分块空间 CV</div></div>
+<div class="metric"><div class="v">−0.83</div><div class="k">LOBO 8 块（外推失效）</div></div>
+</div>
+
+<h2><span class="no">SECTION 01</span>方法：把空间信号从环境模型里解耦出来</h2>
+<p>基线 E0 是 58 个环境特征（生物气候 6、逐月温度 12、逐月降水 12、土壤理化 7、地形与衍生量 21）驱动的 XGBoost，随机 5 折 CV R²=0.326。E8 在此之上加一步：训练折残差按 8 近邻反距离加权（IDW）修正验证点预测——树模型只管环境响应，空间自相关由残差面独立承担。这与回归克里金（Hengl et al. 2007）同构，但残差只在折内拟合，无泄漏。受控对照 M0（坐标直接入模）R²=0.600，显著低于解耦方案 0.769——坐标与环境特征在树分裂中的隐性竞争稀释了两类信号。</p>
+<div class="two">
+<div class="card"><h3>E8 混合制图（推荐，制图用途）</h3><p>XGBoost(F2) → 残差 IDW(8nn)。随机 CV 0.769，调整 R² 0.697，RMSE 0.126 t/ha。5 种子 0.755±0.021，留出 0.683，纬度块 0.539。</p></div>
+<div class="card"><h3>E5+E7 特征精简（辅助发现）</h3><p>折内增益 top-25 请求下树实际仅用 18 个特征，58→18 使调整 R² 0.164→0.281（+71%）而池化 R² 不变；E7 再混 Ridge 达 0.342/0.300，但 5 种子下不稳（0.285±0.086），仅作参考。</p></div>
+</div>
+
+<h2><span class="no">SECTION 02</span>验证：增益是插值增强，不是外推能力</h2>
+<p>六种交叉验证方案按空间连续性递减排列，E8 的 R² 呈严格单调衰减——这是本轮最重要的方法学结果：</p>
+<div class="spectrum">
+<div class="sstep"><div class="sn">随机5折</div><div class="sv">0.769</div><div class="sv2">E0 0.326</div><div class="sd">制图模式</div></div>
+<div class="sstep"><div class="sn">纬度4块</div><div class="sv">0.539</div><div class="sv2">E0 0.138</div><div class="sd">主梯度分块</div></div>
+<div class="sstep"><div class="sn">经度4块</div><div class="sv">0.136</div><div class="sv2">E0 0.091</div><div class="sd">切断耕作带</div></div>
+<div class="sstep"><div class="sn">KMeans4</div><div class="sv neg">−0.26</div><div class="sv2">E0 −0.06</div><div class="sd">跨簇外推</div></div>
+<div class="sstep"><div class="sn">LOBO8</div><div class="sv neg">−0.83</div><div class="sv2">E0 −0.43</div><div class="sd">留一整块</div></div>
+<div class="sstep"><div class="sn">特征空间4</div><div class="sv neg">−0.06</div><div class="sv2">E0 −0.16</div><div class="sd">环境外推</div></div>
+</div>
+<div class="verdict">结论：<b>混合增益全部来自空间连续性</b>。LOBO 下 E8 比 E0 更差（残差 IDW 用远处误差外推反噬），环境特征空间分块下连 E5 也仅 0.012——301 网格单年数据上环境外推本身不成立。混合模型应定位为<b>插值增强器</b>；外推需求须转向 Xiao2024 三时期面板（37,248 行）。</div>
+<img src="fig13_extrapolation_spectrum.png" alt="外推梯度谱">
+<div class="figcap">Figure 13- 六种 CV 方案下 E0/E8 的 R² 谱线（横轴按空间连续性递减）。(A) 制图模式下混合增益 +0.44；(B) 四种地理分块下相继失效，LOBO 8 块 E8 跌至 −0.83 反噬基线；(C) 环境特征空间分块下 E8 与 E0 无显著差异——残差修正对环境外推无贡献。</div>
+
+<h2><span class="no">SECTION 03</span>负结果：年特异气候层在县域内无增益</h2>
+<p>用 Open-Meteo ERA5-Land 2021 年逐日数据（301 网格，13 批抓取，吸附距离中位 2.35km）构建 7 列年特异气候 + 4 列 WorldClim 距平 + 3 列交互项：E1（+气候 7 列）R²=0.3223、E2（+距平+交互）0.3237，均不高于基线 0.3258。原因：研究区跨度仅 ~25km，9km 有效分辨率的 ERA5-Land 年气候面在县域内近乎常数，与背景层共线。<b>对同类研究的参考价值</b>：小县域产量制图不必追逐年特异气候热点，土壤-地形+空间结构才是主导信息源。</p>
+
+<h2><span class="no">SECTION 04</span>实验台账（同折 seed=42，可比）</h2>
+<table>
+<tr><th>实验</th><th>设计</th><th>特征数</th><th>随机CV R²</th><th>调整R²</th><th>RMSE</th></tr>
+<tr><td>E0</td><td>基线复刻（58 特征）</td><td>58</td><td>0.3258</td><td>0.1642</td><td>0.216</td></tr>
+<tr><td>E1</td><td>+2021 年气候 7 列</td><td>65</td><td>0.3223</td><td>0.1349</td><td>0.217</td></tr>
+<tr><td>E2</td><td>+距平 4+交互 3</td><td>72</td><td>0.3237</td><td>0.1101</td><td>0.217</td></tr>
+<tr><td>E5</td><td>折内增益精简（实际 18 特征）</td><td>18</td><td>0.3239</td><td>0.2807</td><td>0.217</td></tr>
+<tr><td>E7</td><td>E5+Ridge 混合</td><td>18</td><td>0.3423</td><td>0.3004</td><td>0.214</td></tr>
+<tr class="hl"><td>E8</td><td>E2+残差 IDW（混合制图）</td><td>72</td><td>0.7694</td><td>0.6966</td><td>0.126</td></tr>
+<tr><td>M0</td><td>基线+lon/lat（坐标入模）</td><td>60</td><td>0.6000</td><td>0.5000</td><td>0.167</td></tr>
+<tr><td>E4b</td><td>log 目标（z-score 修复版）</td><td>72</td><td>0.2576</td><td>−0.041</td><td>—</td></tr>
+</table>
+<p><span class="rich-muted">外推方案台账：LOBO8（E0 −0.426/E5 −0.414/E8 −0.826/M0 −0.355）、预测分位 4 块（E8 −0.147）、特征 KMeans4（E0 −0.162/E5 0.012/E8 −0.055）。全部数字见 extrapolation_ledger.csv 与 experiments_ledger_v3.csv。</span></p>
+
+<h2><span class="no">SECTION 05</span>论文与投稿路径</h2>
+<p>中文草稿 v1 已成形（摘要中英双语、引言、方法、五节结果、讨论、8 条核心文献）；目标期刊首选 <b>Agricultural and Forest Meteorology</b>（审稿预期的 LOBO 实验已补齐），备选 Computers and Electronics in Agriculture，保底 Frontiers in Plant Science / Agronomy。可复现命令三条：</p>
+<p style="font-family:Consolas,monospace;font-size:12.5px;background:var(--soft);padding:10px 14px;">experiments_v3.py → verify_robustness.py → lobo_envspace.py → make_fig10_12.py + make_fig13.py</p>
+
+<div class="foot">2026-SP · DearDragon233 · commit bb01389+c133c1a · Evidence: Outputs/intermediate/*.csv|json · Figures: fig10-fig13 (600dpi) · All open access</div>
+</div></body></html>

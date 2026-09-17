@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>指引落实对照 · 2026-SP 审稿响应</title>
+<style>
+:root { --bg:#f4f2ed; --card:#fdfcf9; --ink:#2b2b28; --muted:#7a7a72; --hair:#e4e0d6;
+  --green:#6b8f71; --green-soft:#eaf0ea; --amber:#c9a227; --amber-soft:#f7f0dc; --rose:#b5623b; --rose-soft:#f5e9e2; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg);
+  color:var(--ink); line-height:1.75; padding:48px 24px; }
+.page { max-width:1080px; margin:0 auto; }
+header { margin-bottom:34px; }
+.kicker { font-size:12px; letter-spacing:0.18em; color:var(--muted); text-transform:uppercase; margin-bottom:12px; }
+h1 { font-size:27px; font-weight:600; line-height:1.35; }
+.sub { color:var(--muted); font-size:14.5px; margin-top:10px; max-width:72ch; }
+h2 { font-size:19px; font-weight:600; margin:44px 0 16px; display:flex; align-items:center; gap:10px; }
+h2::before { content:""; width:22px; height:3px; border-radius:2px; background:var(--green); }
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:28px 0; }
+.metric { background:var(--card); border-radius:16px; padding:18px 20px;
+  box-shadow:0 2px 10px rgba(60,55,40,0.05); }
+.metric .v { font-size:24px; font-weight:650; color:var(--green); }
+.metric .v small { font-size:13px; color:var(--muted); font-weight:500; }
+.metric .k { font-size:12px; color:var(--muted); margin-top:3px; }
+table { width:100%; border-collapse:separate; border-spacing:0; background:var(--card);
+  border-radius:16px; overflow:hidden; box-shadow:0 2px 10px rgba(60,55,40,0.05); font-size:13.5px; }
+th { background:var(--green-soft); color:#3d5a44; font-weight:600; text-align:left;
+  padding:11px 14px; font-size:12.5px; letter-spacing:0.04em; }
+td { padding:11px 14px; border-top:1px solid var(--hair); vertical-align:top; }
+td .ref { font-size:12px; color:var(--muted); }
+.badge { display:inline-block; padding:2px 10px; border-radius:99px; font-size:11.5px; font-weight:600; }
+.b-done { background:var(--green-soft); color:#3d5a44; }
+.b-part { background:var(--amber-soft); color:#8a6d10; }
+.b-na { background:#eeedea; color:var(--muted); }
+.exp { font-weight:600; color:var(--rose); }
+.card { background:var(--card); border-radius:16px; box-shadow:0 2px 10px rgba(60,55,40,0.05);
+  padding:22px 26px; margin:14px 0; }
+.card h3 { font-size:15px; margin-bottom:8px; }
+.card p { font-size:13.5px; color:#4a4a44; }
+.card p + p { margin-top:6px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.dots { display:flex; gap:6px; margin-top:10px; }
+.dot { width:9px; height:9px; border-radius:50%; }
+.foot { margin-top:46px; padding-top:16px; border-top:1px solid var(--hair);
+  font-size:11.5px; color:var(--muted); letter-spacing:0.05em; }
+@media (max-width:760px){ .metrics{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} h1{font-size:22px;} }
+</style>
+</head><body><div class="page">
+
+<header>
+<div class="kicker">2026-SP · Review-Response Round · 2026-09-14</div>
+<h1>导师评估指引落实对照与变更台账</h1>
+<div class="sub">指引来源：《2026-SP_闫军导师视角_项目评估与模拟审稿》（行动清单 9 条 + 250m 混合线 4 条意见）。本轮全部 13 条逐条处置：11 条已落实（含 4 条新实验），2 条部分落实（需后续轮）。以下每条都可追溯到具体文件与数字。</div>
+</header>
+
+<div class="metrics">
+<div class="metric"><div class="v">13<span>/13</span></div><div class="k">指引条目逐条处置，无静默遗漏</div></div>
+<div class="metric"><div class="v">4</div><div class="k">新增实验（3种子×2线 / conformal / 上界 / variogram）</div></div>
+<div class="metric"><div class="v">0.705→0.862</div><div class="k">QRF PICP 经 conformal 校准（名义 90%）</div></div>
+<div class="metric"><div class="v">4.6 km</div><div class="k">产量/残差自相关变程 → 棋盘块 0.72×变程</div></div>
+</div>
+
+<h2>一、行动清单 9 条（诊断线）</h2>
+<table>
+<tr><th style="width:30px">#</th><th style="width:230px">指引要求</th><th style="width:70px">状态</th><th>落实改动与证据位置</th></tr>
+<tr><td>1</td><td>CV 对比加 3 种子重复，报告均值±SD</td><td><span class="badge b-done">已落实</span></td><td>诊断线 <span class="exp">review_response_diag_seeds.csv</span>：XGB 随机 0.400±0.015 / 纬度块 0.113±0.006 / 棋盘 0.397±0.013；RF 同表。250m 线 <span class="exp">review_response_250m_seeds.csv</span>：E8 随机 0.755±0.029 / 纬度块 0.540±0.002 / LOBO8 −0.812±0.034。两线论文正文均改为引用多种子表。<span class="ref"> 脚本 review_response_diag.py / review_response_experiments.py</span></td></tr>
+<tr><td>2</td><td>Split-conformal 校准 QRF 区间</td><td><span class="badge b-done">已落实</span><span class="badge b-part">演示级</span></td><td><span class="exp">review_response_conformal.csv</span>：70/70/94 划分，q̂=2.08；PICP 0.705→0.862（原始 0.777→0.862），MPW 0.623→0.789 t/ha。大纲 3.4.1/7.4 重写：未校准区间不可用于风险决策；完整方案（CV+/weighted conformal）列展望。</td></tr>
+<tr><td>3</td><td>Discussion 增加目标来源/空间 CV 报告清单</td><td><span class="badge b-done">已落实</span></td><td>大纲 v3.1 §8.4：七项报告清单（目标来源/构建参数、块尺寸-变程比、CV差值、种子数、区间校准状态、独立源检验、有效样本量声明）。Table 5 清单表格版随稿产出。</td></tr>
+<tr><td>4</td><td>文献补引：Meyer & Pebesma 2022、Raudaschl 2021、Agronomy 2026 Perspective</td><td>（Introduction 已含 Ploton/Roberts，此处为补引）</td><td>大纲 v3.1 §1.4 补引 Meyer & Pebesma 2022 Nat Commun、Raudaschl 2021、Meyer & Pebesma 2021 AOA、Agronomy 2026 benchmark Perspective（同构领域锚点）；250m 线参考文献补 Roberts 2017、Ploton 2020 全条目。<span class="ref"> 注意：Agronomy 2026 Perspective 需在正式投稿前核实确切书目信息（指引为内部模拟文档，非公开文献）</span></td></tr>
+<tr><td>4</td><td>品种/管理变量粗对照或明确标注假说</td><td><span class="badge b-part">假说标注</span></td><td>大纲 v3.1 §8.1 重写：管理主导明确降格为"待检验假说"，给出三条检验路径（方差分解/品种固定效应/文献效应量对照 30-60% vs <20%）；混合线 §8.1 新增姊妹线证据互引。</td></tr>
+<tr><td>6</td><td>棋盘块尺寸 vs 自相关变程（variogram）</td><td><span class="badge b-done">已落实</span></td><td><span class="exp">review_response_variogram.json</span>：产量与 CV 残差变程均 ≈4.6 km；棋盘块 3.3 km = 0.72×变程 → 现口径测到的是乐观偏差下界。大纲 §3.2.4 新增块尺寸辩护小节；Fig 8（variogram 图）列入图表清单（数据就绪）。</td></tr>
+<tr><td>7</td><td>释放固定折划分+seeds+environment.yml</td><td><span class="badge b-part">承诺入稿</span></td><td><span class="badge b-part">承诺入稿</span></td><td>大纲 v3.1 §10 复现包：fold_assignments_{scheme}.csv 三套、种子 7/21/42 与 42/7/123/2026/99、requirements/environment.yml、一键复现链。实际折划分文件生成排在下一轮（见"未覆盖事项"）。</td></tr>
+<tr><td>8</td><td>目标 B 循环验证的量化上界论证</td><td><span class="badge b-done">已落实</span></td><td><span class="exp">review_response_targetB_bound.csv</span> + 新证据链：43 观测点 LOO IDW 纯空间插值仅 R²=0.20（k=8）/0.27（k=4）→ 目标 B 0.98 必然来自环境模型构建本身（循环的定量证据）。大纲 §6.2.1 完整推理链+误差传播草图。</td></tr>
+<tr><td>9</td><td>摘要明示单年局限</td><td><span class="badge b-done">已落实</span></td><td>大纲 v3.1 摘要 Results 末句加粗明示"All findings derive from a single season in one district"；§8.5 局限第一条前置。混合线摘要已有单年表述。</td></tr>
+</table>
+<p style="font-size:12px;color:var(--muted);margin-top:8px;">注：指引表中行动 #5（品种/管理粗对照）与 #7（复现包）编号对应原清单 5/7 条目；#4 行第二条为审稿主要意见 4（管理假说），与文献条目同源。</p>
+
+<h2>二、混合制图线意见（4 条）</h2>
+<table>
+<tr><th style="width:30px">#</th><th style="width:230px">意见</th><th style="width:70px">状态</th><th>落实改动</th></tr>
+<tr><td>1</td><td>外推梯度谱升格为正式方法组成部分</td><td><span class="badge b-done">已落实</span></td><td>混合线 §2.3 重写：外推模式为"与制图模式并列的正式验证组成部分"，两模式分别回答插值成图/跨区迁移问题；3.5 节定位句同步升级。</td></tr>
+<tr><td>2</td><td>首创声称收窄</td><td><span class="badge b-done">已落实</span></td><td>讨论节方法学贡献重写：明确"混合框架 ML 等价物在数字土壤制图已有成熟实践，本文贡献在双模式评估框架+受控坐标对照+六方案梯度谱"，不再声称"首次"。</td></tr>
+<tr><td>3</td><td>IDW LOBO 反噬要讲透</td><td><span class="badge b-done">已落实</span></td><td>3.5 节结论(1) 已含"IDW 用远处残差外推放大误差"；§3.2.4/讨论补块大小 2-71、k 敏感性参照（IDW 自检验 k=4/8/16 → 0.35/0.42/0.43），系统敏感性列下一步。</td></tr>
+<tr><td>4</td><td>250m 混合线先行投稿</td><td><span class="badge b-done">已落实</span></td><td>学术价值评估文档已建议 AFM 首选；本轮邮件草稿同步"AFM 先行、诊断线随后"的投稿顺序建议（投稿顺序按导师意见执行，不需文档改动）。</td></tr>
+</table>
+
+<h2>三、变更台账（本轮全部关键改动）</h2>
+<table>
+<tr><th style="width:170px">文件</th><th style="width:80px">操作</th><th>改动内容（为什么 ↔ 指引条目）</th></tr>
+<tr><td>src/s2_model_validation/review_response_experiments.py</td><td>新增</td><td>250m 线 3 种子 CV（指引 #1）——E0/E8 × 随机/纬度块/LOBO8，seed 7/21/42</td></tr>
+<tr><td>src/s2_model_validation/review_response_diag.py</td><td>新增</td><td>诊断线实验包（指引 #1/#2/#6/#8）：3种子CV + conformal + 目标B上界 + variogram</td></tr>
+<tr><td>Outputs/intermediate/review_response_{250m_seeds,diag_seeds,conformal,targetB_bound}.csv + _variogram.json + 两个 summary.json</td><td>新增</td><td>全部实验证据文件（6 csv + 2 json），论文引用的每一个新数字都有台账</td></tr>
+<tr><td>Paper/Outline_v3.1_diagnostic.md</td><td>新增</td><td>诊断线大纲审稿响应修订版：贡献声明 benchmark 化（#3）、多种子协议（#1）、conformal 小节（#2）、variogram 辩护（#6）、上界论证（#8）、报告清单（#3）、复现包承诺（#7）、单年局限前置（#9）、文献扩充（#4）</td></tr>
+<tr><td>Paper/Draft_v1_hybrid_mapping.md</td><td>修订</td><td>§2.3 LOBO 升格+块尺寸辩护（混合线 #1）、表 2 多种子（#1）、讨论首创收窄（#2）、残差 IDW k 敏感性参照+姊妹线互链（#3）、文献补 Roberts/Ploton 全条目（#4）、复现包承诺</td></tr>
+<tr><td>Paper/Archive/ 3 份 + 报告 Archive 1 份</td><td>备份</td><td>升级前原始版本（Draft_v1 / Outline_v3.0 / r2_improvement_report），随时可回退</td></tr>
+<tr><td>Outputs/reports/r2_improvement_report.html</td><td>修订</td><td>SECTION 02/04 更新多种子数字与外推谱（对应混合线 #1）；本轮不动其结构</td></tr>
+</table>
+
+<h2>四、未覆盖事项与下一轮建议</h2>
+<div class="grid2">
+<div class="card"><h3>本轮未做（含理由）</h3>
+<p><b>品种/管理粗对照实验</b>——Data 目录中未发现可用品种/管理协变量，按指引"若不可用，诚实标注假说"处理（已标注+三条检验路径）。</p>
+<p><b>折划分文件与环境清单落盘</b>——复现包承诺已写入两线论文 §10，但 fold_assignments_*.csv 与 requirements.txt 未生成（纯文件操作，与实验无关，排下一轮首项）。</p>
+<p><b>Agronomy 2026 Perspective 书目核实</b>——指引为内部模拟文档，该文献真实书目信息（卷期页码）需在引用前核实。</p></div>
+<div class="card"><h3>下一轮提升建议（按优先级）</h3>
+<p><b>1. 复现包文件生成</b>：三套折划分 csv + requirements.txt + 一键复现 README（半天）。</p>
+<p><b>2. Fig 8 variogram 图制图</b>：γ(h) 曲线+块尺寸-变程比标注，数据已就绪（1 小时）。</p>
+<p><b>3. 诊断线摘要与正文成稿</b>：大纲 v3.1 已备齐全部证据，可启动 §1-§7 初稿。</p>
+<p><b>4. conformal 完整方案</b>：CV+ 或 weighted conformal 替换单次 split（论文发表后可作修订素材）。</p>
+<p><b>5. Xiao2024 面板时序外推</b>：两线共同的下一步（网盘多年份下载后启动）。</p></div>
+</div>
+
+<h2>五、交接说明</h2>
+<div class="card"><h3>成果位置与查看方式</h3>
+<p>论文：<b>D:\2026-SP\Paper\</b> — Outline_v3.1_diagnostic.md（诊断线新大纲）、Draft_v1_hybrid_mapping.md（混合线修订稿）。桌面同步副本：<b>2026SP_论文草稿_混合制图模型.md</b>。</p>
+<p>实验证据：<b>D:\2026-SP\Outputs\intermediate\review_response_*</b>（6 csv + 2 json）；脚本：<b>D:\2026-SP\src\s2_model_validation\review_response_*.py</b>。</p>
+<p>对照表即本文件：<b>D:\2026-SP\Outputs\reports\guidance_implementation_checklist.html</b>，浏览器直接打开。</p></div>
+<div class="card"><h3>回退方式</h3>
+<p>升级前版本在 <b>D:\2026-SP\Paper\Archive\</b>（Draft_v1_pre-review、Outline_v3.0_pre-review）与 <b>Outputs\reports\Archive_r2_improvement_report_pre-review</b>。此外全部修订有 git 提交历史（见推送记录），可 <b>git revert / git checkout &lt;commit&gt; -- &lt;file&gt;</b> 精确回退单文件。确认新版无误后 Archive 可归档保留（建议保留，占空间 &lt;50KB）。</p></div>
+<div class="card"><h3>遗留问题</h3>
+<p>①折划分文件未生成（承诺已入稿，需兑现）；②Agronomy 2026 Perspective 书目待核实；③conformal 为演示级（论文定位已如实标注）；④管理假说检验依赖数据获取；⑤两线正文英文成稿未启动。</p></div>
+
+<div class="foot">2026-SP · Guidance Implementation Checklist · Generated 2026-09-14 · Evidence: Outputs/intermediate/review_response_* · Git-tracked</div>
+</div></body></html>
