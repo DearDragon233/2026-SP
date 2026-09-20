@@ -2,7 +2,8 @@
 Data/WorldClim/*.tif
 Data/SoilGrids_wgs84/*.tif
 Data/SRTM/*.tif
-Data/Management/Xiao2024/*.tif
+# Xiao2024 small reference rasters (~1.4MB each) are tracked; big files go to release data-v1
+# Data/Management/Xiao2024/*.tif
 Data/Management/Xiao2024/*.rds
 
 # Python
