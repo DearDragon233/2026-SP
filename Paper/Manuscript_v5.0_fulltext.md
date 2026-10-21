@@ -152,6 +152,8 @@ For model-derived yield targets, apparent skill is manufactured by target constr
 
 **Fig 14** Detectability synthesis. (a) national variance partitioning E/M/E+M; (b) Pinggu n=43 under matched versus over-regularised models; (c) climate transfer (pattern skill vs pooled R2); (d) two-domain optimism gaps (checkerboard family vs gradient cutting).
 
+**Fig 15** Target-semantics diagnostics. (a) Scenario-response fingerprint: perturbing the management reference surface around its published optimum yields diminishing returns to maize N and a penalty to surplus irrigation, a shape compatible with optimised-reference semantics (and, as the collinearity analysis shows, not uniquely diagnostic of it); (b) inter-target agreement at county scale: the interpolated process-model surface B versus the satellite retrieval D on their 22 common grids (Pearson r = 0.46), with the blend target C showing no spatial structure against D (r = -0.01).
+
 **Fig 16** Co-construction bias. (a) two published products disagree (r=0.017, 5,652 cells); (b) the same environmental model "explains" both at R2 near 0.65.
 
 **Fig 17** Intermittent inter-annual agreement (pairwise pattern matrix) and provincial statistical arbitration (NBS survey vs products).
