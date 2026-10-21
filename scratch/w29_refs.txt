@@ -1,0 +1,30 @@
+## References
+
+[1] Lobell, D.B.; Roberts, M.J.; Schlenker, W.; Braun, N.; Little, B.B.; Rejesus, R.M.; Hammer, G.L. Greater sensitivity to drought accompanies maize yield increase in the U.S. Midwest. *Science* 2014, 344, 516-519.
+[2] Ray, D.K.; Gerber, J.S.; MacDonald, G.K.; West, P.C. Climate variation explains a third of global crop yield variability. *Nat. Commun.* 2015, 6, 5989.
+[3] van Klompenburg, T.; Kassahun, A.; Catal, C. Crop yield prediction using machine learning: A systematic literature review. *Comput. Electron. Agric.* 2020, 177, 105709.
+[4] Xiao, J.; Liu, E.; Zhao, Z.; et al. Optimization of nitrogen and water management for cereal production in China. *Nat. Food* 2024, 5, 59-71. Data: figshare, DOI 10.6084/m9.figshare.24471919.
+[5] Zhao, X.; et al. A 30 m annual winter wheat yield dataset of China (2016-2021). *Earth Syst. Sci. Data* 2023, 15, 4047-4063. Data: Zenodo, DOI 10.5281/zenodo.7360753.
+[6] Ploton, P.; Mortier, F.; Rejou-Mechain, M.; et al. Spatial validation reveals poor predictive performance of large-scale ecological mapping models. *Nat. Commun.* 2020, 11, 4540.
+[7] Meyer, H.; Pebesma, E. Machine learning-based global maps of ecological variables and the challenge of assessing them. *Nat. Commun.* 2022, 13, 2208.
+[8] Roberts, D.R.; Bahn, V.; Ciuti, S.; et al. Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure. *Ecography* 2017, 40, 913-929.
+[9] Raudaschl, R.S.; Lederer, N.; Samimi, C.; Fassnacht, S.R.; Kiese, R. On the subsampling strategy for cross-validation of spatially autocorrelated data. *Ecol. Model.* 2022, 467, 109920.
+[10] Wadoux, A.M.J.-C.; Heuvelink, G.B.M.; de Bruin, S.; Brus, D.J. Spatial cross-validation is not the right way to evaluate map accuracy. *Ecol. Model.* 2021, 401, 115211.
+[11] Yan, M.; Yan, J.; et al. Standardizing benchmarks for plant genomic prediction. *Agronomy* 2026, 16, 1131.
+[12] Yan, J.; Wang, X. Rethinking genomic selection under environmental uncertainty: toward learnable and dynamic environmental representations. *Front. Plant Sci.* 2025, 17, 1754446.
+[13] Fick, S.E.; Hijmans, R.J. WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. *Int. J. Climatol.* 2017, 37, 4302-4315.
+[14] Poggio, L.; de Sousa, L.M.; Batjes, N.H.; et al. SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. *SOIL* 2021, 7, 217-240.
+
+## Declarations
+
+**Funding**: This research received no external funding. *[to be confirmed by the team]*
+
+**Institutional Review Board Statement**: Not applicable; this study involves no human or animal subjects.
+
+**Informed Consent Statement**: Not applicable.
+
+**Data Availability Statement**: All data are public: WorldClim 2.1, SoilGrids 2.0, SRTM (public domain), the Xiao et al. panel (CC BY 4.0, figshare 10.6084/m9.figshare.24471919), ChinaWheatYield30m (CC BY 4.0, Zenodo 10.5281/zenodo.7360753; years 2016-2021), Open-Meteo ERA5-Land (CC BY 4.0), and National Bureau of Statistics provincial yields. File-level SHA-256 checksums are provided in the data manifest; rasters ship via the repository data release; fold assignments, seeds, parameters, and all statistical ledgers are frozen in the code repository, and every number in this paper regenerates from a scripted ledger.
+
+**Conflicts of Interest**: The authors declare no conflict of interest.
+
+**Author Contributions**: Conceptualisation, methodology, software, data curation, formal analysis, and writing (original draft), Y.P.; validation, visualisation, and writing (review and editing), all authors; supervision and project administration, [advisor]. All authors have read and agreed to the published version of the manuscript. *[co-author names and ORCIDs to be completed]*

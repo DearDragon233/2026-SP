@@ -1,0 +1,21 @@
+**Fig 2** Feature-audit dashboard. Distributions, missingness, and pairwise-correlation structure of the 24 modelling variables across the 234 grids; variance-inflation factors with the screening threshold; Boruta classification (confirmed/tentative/rejected) over 50 iterations with five shadow attributes. The audit that later isolated an SRTM extraction defect in an early data build (18 grids with missing terrain values, concentrated in the warm south-west) is documented in the repository history.
+
+**Fig 3** SHAP importance, top 30 variables. XGBoost Shapley values computed on training folds; points coloured by variable domain (climate, soil, topography); check-marks denote Boruta-confirmed variables. The leading variables (bio9, December mean temperature, bio11) are winter-temperature expressions of the single elevation axis identified in Fig 9 and are rank-unstable within that collinear block.
+
+**Fig 5** Target-source sensitivity. Pooled cross-validated R2 of the same environmental models against all four targets: A (process-model baseline, n = 43, R2 near zero under every scheme), B (interpolation of A, R2 = 0.98 versus a leave-one-out interpolation bound of 0.20-0.27), C (Bayesian blend, intermediate), and D (satellite retrieval, n = 22, fold-level and pooled statistics diverging exactly as small-block variance predicts).
+
+**Fig 6** Independent-source validation. Cross-validation of environmental models against the satellite-retrieval target D under random and checkerboard schemes; checkerboard fold-level R2 is negative for all models while pooled statistics remain ambiguous at n = 22.
+
+**Fig 7** QRF uncertainty and conformal calibration. Prediction-interval bands with observations overlaid (a), calibration coverage versus the nominal 90% (b), and interval-width distribution showing heteroscedastic widening in the high-yield south-west (c); raw PICP 0.705 rises to 0.862 after split-conformal calibration at a width cost of 0.62 to 0.79 t/ha, roughly 2.6 times the target standard deviation.
+
+**Fig 8** Block-size defence and degeneration mechanism. (a) Empirical variograms of yield and cross-validation residuals (range about 4.6 km); (b) optimism gap versus block size in target-field range units for both domains; (c) the mechanism probe: between-block nearest-neighbour distance remains 2.3-2.4 km for every checkerboard size in the county domain, identifying silent degeneration into random splits.
+
+**Fig 9** Principal-component diagnostics. Loadings of the 24 variables on PC1 versus elevation (r = -0.94) and per-axis R2 of targets on PC1-PC5, establishing the one-axis structure of the environmental fingerprint.
+
+**Fig 10** Learning curves of the 250-m hybrid pipeline. Out-of-fold skill versus training-set size for the environmental baseline and the hybrid environmental-residual model.
+
+**Fig 11** Blocking sensitivity of the 250-m hybrid. Pooled R2 under latitude, longitude, and K-means blocking: hybrid gains vanish when spatial continuity is cut, identifying the gain as interpolation enhancement rather than extrapolation skill.
+
+**Fig 12** Observed-predicted scatter, 250-m line. Random five-fold out-of-fold predictions for the environmental baseline (R2 = 0.326) versus the hybrid (R2 = 0.769), with the 1:1 line; high-yield underestimation of the baseline is corrected by the residual term.
+
+**Fig 13** Extrapolation-gradient spectrum. Pooled R2 of baseline and hybrid models across six validation schemes ordered by decreasing spatial connectivity (random, latitude blocks, longitude blocks, K-means, leave-one-block-out, environment-space blocks): monotone decay to -0.83 quantifies the interpolation-versus-extrapolation boundary.
