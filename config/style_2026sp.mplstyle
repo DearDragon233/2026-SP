@@ -1,5 +1,6 @@
-# 2026-SP matplotlib style ¡ª S6 maintains this file
-# Applied by both S5 and S6 for visual consistency across all 19 figures
+# 2026-SP matplotlib style - S6 maintains this file
+# Applied by both S5 and S6 for visual consistency across all figures (UTF-8 repaired W23)
+# 2026-SP matplotlib style â€” S6 maintains this file
 font.family: Arial
 font.size: 10
 axes.labelsize: 11
