@@ -1,0 +1,32 @@
+[
+  {
+    "shape_id": "62558664B24564619291654",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=113.31481&latitude=33.55114&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "ebb952162d1a507c757d90d4137cfdc91e342679850c12498627d9e44f879915"
+  },
+  {
+    "shape_id": "62558664B28967036934036",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=112.81313&latitude=34.14392&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "e7cdb0a2109c0c2e27e28f91ee0d4cd8d1c9f4573309d5b56a8fb17937c7206c"
+  },
+  {
+    "shape_id": "62558664B34724802369377",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=113.20378&latitude=33.99266&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "c67e35beb99a815c6f1602a51500a895431ea123342af4976da939103476fe6a"
+  },
+  {
+    "shape_id": "62558664B35615742538573",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=113.00511&latitude=33.90827&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "d24b3b0d5f00b3618852956d82cac32a83d1061c52e3f6441a68e25937b24a8a"
+  },
+  {
+    "shape_id": "62558664B50190649056880",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=113.52633&latitude=33.28584&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "762e75e8b244bb913721837ca275b9d6526063138d21803d9c9b1d295657c96f"
+  },
+  {
+    "shape_id": "62558664B52121078683591",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MIN%2CT2M_MAX%2CPRECTOTCORR&community=AG&longitude=112.73437&latitude=33.77919&start=20161001&end=20210430&format=JSON&time-standard=LST",
+    "sha256": "5120bbe6659b601713fb2ae51cad956d09940228223dc4b223abbf70c875aa6e"
+  }
+]

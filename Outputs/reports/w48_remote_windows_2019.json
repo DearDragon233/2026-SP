@@ -1,0 +1,109 @@
+{
+  "source": "https://zenodo.org/records/7360753/files/2019ChinaWheatYield30m.tif?download=1",
+  "size_bytes": 1515887297,
+  "shape_ids": [
+    "62558664B24564619291654",
+    "62558664B28967036934036",
+    "62558664B34724802369377",
+    "62558664B35615742538573",
+    "62558664B50190649056880",
+    "62558664B52121078683591"
+  ],
+  "byte_ranges": [
+    {
+      "start": 0,
+      "end_exclusive": 2500000,
+      "sha256": "dd1d408aa4b928d2582de29bd7d4d2f8cdc4b22cbff4a28360b8265e6f0c2e4f"
+    },
+    {
+      "start": 852757416,
+      "end_exclusive": 853130263,
+      "sha256": "f0facda0df7f49bea966b0098b69358e353d779ce29415b019a25101ccafb573"
+    },
+    {
+      "start": 867687553,
+      "end_exclusive": 868310430,
+      "sha256": "db4f3143e99f2464296b86fde3b0bfee33164174659756b79c57f7d981d17312"
+    },
+    {
+      "start": 884103109,
+      "end_exclusive": 884962379,
+      "sha256": "71efbd15a0f961cb14f1e09c3e51167e82992ccfdd397899f731b4d9cbd7006f"
+    },
+    {
+      "start": 899219964,
+      "end_exclusive": 900141046,
+      "sha256": "88bb9c4ce43cc21e0511a7ad50fc1ce51ca9198824372766c3860f465dcb974b"
+    },
+    {
+      "start": 914046681,
+      "end_exclusive": 915102066,
+      "sha256": "a32d5cb2dd61d0cf2f61cb47b3cc6f6c4ec4cc4fa547de8ad62450232594b277"
+    },
+    {
+      "start": 928673097,
+      "end_exclusive": 929775331,
+      "sha256": "74c6bb7240ec4b7ade58ff29d65a050a4f8304093251e919941811cad3016f87"
+    },
+    {
+      "start": 943433492,
+      "end_exclusive": 944360503,
+      "sha256": "2567c8b1bdf24e0e51338d0396f7ebf5fe8dd24b0f0b96d9fedeadaa5f01e18e"
+    },
+    {
+      "start": 957950824,
+      "end_exclusive": 958541967,
+      "sha256": "a7fbed54a05f619ae7b2b855d013a338e245351a45252d8438dd6f582503f47a"
+    },
+    {
+      "start": 972976373,
+      "end_exclusive": 973890047,
+      "sha256": "3b04ea1859ffc677f2d4514bd1c7cdbfd3688cb88c1186cd6f8c1bc9442a6fb9"
+    },
+    {
+      "start": 988254645,
+      "end_exclusive": 989757451,
+      "sha256": "19ea9f74aef6546a591c64b91befc1f12a78571785a9f6ebef20dde495f4869d"
+    },
+    {
+      "start": 1005523999,
+      "end_exclusive": 1007258035,
+      "sha256": "06c934374c387b1940ada6c32a3f3e9d6f0f8fcd41e9153863f6563ccfa8b3de"
+    },
+    {
+      "start": 1022490518,
+      "end_exclusive": 1024215541,
+      "sha256": "d8acab7c81c79870d78cb5c11a3470f69d0387462f87b3035895356e2b13a5d6"
+    },
+    {
+      "start": 1039947519,
+      "end_exclusive": 1041559077,
+      "sha256": "1efae755ff1c76053c394049d9886bbe185529709e896b602bcfc228875ea249"
+    },
+    {
+      "start": 1058282038,
+      "end_exclusive": 1059684287,
+      "sha256": "4de220fa9852adc31ff135e5cc782d4536f22d56df4e9da30ae5002bf7d9eef1"
+    },
+    {
+      "start": 1076413994,
+      "end_exclusive": 1077750831,
+      "sha256": "a65188d96bf08fb1ed7468c6f094809038832f04a1c480a52a77e13b03acdffd"
+    },
+    {
+      "start": 1095531869,
+      "end_exclusive": 1096072355,
+      "sha256": "62f9548042d0d29c76ff985bf6faabc91eb010c5225f1e6c4fb5efc91ef4375d"
+    },
+    {
+      "start": 1112817495,
+      "end_exclusive": 1113447476,
+      "sha256": "15804f71f9d079fafdee881938c13fc370fbeac1f84f7ff449f78872f4ff40d9"
+    },
+    {
+      "start": 1129609065,
+      "end_exclusive": 1129873242,
+      "sha256": "5beadc1e580512688463a3d6bf8f611c514b96a41619af1ba687ba768d1487d8"
+    }
+  ]
+}

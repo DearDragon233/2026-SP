@@ -21,16 +21,22 @@ def main():
     parser.add_argument("year", type=int, choices=range(2016, 2022))
     parser.add_argument("--raster", type=Path, help="A complete raster or a verified pilot subset for the selected year")
     parser.add_argument("--additional-stats", type=Path, help="Additional official statistics with area in ha")
+    parser.add_argument("--only-additional", action="store_true", help="Pair only the official statistics provided explicitly")
     parser.add_argument("--output", type=Path, help="Save the results to this CSV path")
     args = parser.parse_args()
+    if args.only_additional and not args.additional_stats:
+        parser.error("--only-additional requires --additional-stats")
     raster = args.raster or DOWNLOAD / f"{args.year}ChinaWheatYield30m.tif"
-    with INPUT.open(encoding="utf-8-sig", newline="") as source:
-        all_rows = list(csv.DictReader(source))
+    all_rows = []
+    if not args.only_additional:
+        with INPUT.open(encoding="utf-8-sig", newline="") as source:
+            all_rows = list(csv.DictReader(source))
     if args.additional_stats:
         with args.additional_stats.open(encoding="utf-8-sig", newline="") as source:
             for row in csv.DictReader(source):
                 row["sown_mu"] = str(float(row["sown_ha"]) * 15)
-                row["reported_kg_per_mu"] = str(float(row["reported_kg_ha"]) / 15)
+                reported = row["reported_kg_ha"]
+                row["reported_kg_per_mu"] = str(float(reported) / 15) if reported else ""
                 all_rows.append(row)
     keys = [(row["province"], row["county"], row["harvest_year"]) for row in all_rows]
     if len(set(keys)) != len(keys):
@@ -40,7 +46,8 @@ def main():
         if not (np.isfinite(area) and np.isfinite(production) and min(area, production) > 0):
             raise ValueError(f"Source area and production must be positive: {row}")
         kg_mu = production * 1000 / area
-        if abs(kg_mu - float(row["reported_kg_per_mu"])) > 0.51:
+        reported = row["reported_kg_per_mu"]
+        if reported and abs(kg_mu - float(reported)) > 0.51:
             raise ValueError(f"Source area, output and yield are inconsistent: {row}")
     rows = [row for row in all_rows if int(row["harvest_year"]) == args.year]
     if not rows:

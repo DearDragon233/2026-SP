@@ -1,0 +1,49 @@
+{
+  "source": "https://zenodo.org/records/7360753/files/2020ChinaWheatYield30m.tif?download=1",
+  "size_bytes": 1161043745,
+  "shape_ids": [
+    "62558664B24564619291654"
+  ],
+  "byte_ranges": [
+    {
+      "start": 0,
+      "end_exclusive": 2500000,
+      "sha256": "42413d5a0531546eb51bd6038fd2c01e49fe5bc9db4c02fd130f1fbcaa2f8327"
+    },
+    {
+      "start": 722265335,
+      "end_exclusive": 722906749,
+      "sha256": "0fb22c1975092906a5cdd91019dff4e9358bbdb743daea1fbef38275c451e03f"
+    },
+    {
+      "start": 736906583,
+      "end_exclusive": 738314629,
+      "sha256": "80041256e040f56c389f009a402e26356bda641d115002213cf19ef2b69f6fb9"
+    },
+    {
+      "start": 752767786,
+      "end_exclusive": 754293471,
+      "sha256": "68e35f28e96861459cd6b6fccc4645dc1e9d2ff2b90c4dfebc8cb0f46cfc5b28"
+    },
+    {
+      "start": 767820582,
+      "end_exclusive": 769268112,
+      "sha256": "0a0137c60c4f375606ae5d456a94342303906052ebb02b255ac1563db5d5e444"
+    },
+    {
+      "start": 783277554,
+      "end_exclusive": 784523295,
+      "sha256": "15c9a705a35f4aa36b42043d61627198a17e9cdea00cb5d9e0023755d7168030"
+    },
+    {
+      "start": 799158675,
+      "end_exclusive": 800015447,
+      "sha256": "cc11bbd88327d59552e8dab557303d29e844af327923381eec134d25ac5c2dc0"
+    },
+    {
+      "start": 814416715,
+      "end_exclusive": 815152966,
+      "sha256": "8e2cdb6f7be2b5e4e710da24861059fa92f557bdd1dd1c372bd6e16c25d14940"
+    }
+  ]
+}

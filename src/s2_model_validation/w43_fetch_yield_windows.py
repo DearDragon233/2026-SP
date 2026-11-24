@@ -8,6 +8,7 @@ import re
 import struct
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 import rasterio
 from rasterio.features import geometry_window
@@ -71,10 +72,12 @@ def tile_ranges(header, src, geometries):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("year", type=int, choices=range(2016, 2022))
+    parser.add_argument("--statistics", type=Path, action="append", help="Use these county-year CSVs instead of the pilot inputs")
+    parser.add_argument("--prefix", default="w43", help="Prefix for the local subset and its verification manifest")
     args = parser.parse_args()
     year = args.year
     ids = set()
-    for source in SOURCES:
+    for source in args.statistics or SOURCES:
         with source.open(encoding="utf-8-sig", newline="") as data:
             ids.update(r["shape_id"] for r in csv.DictReader(data) if int(r["harvest_year"]) == year)
     if not ids:
@@ -99,7 +102,7 @@ def main():
         dest.write(body)
         records.append({"start": start, "end_exclusive": start+len(body), "sha256": hashlib.sha256(body).hexdigest()})
 
-    dest = DOWNLOAD / f"w43_{year}_counties.sparse.tif"
+    dest = DOWNLOAD / f"{args.prefix}_{year}_counties.sparse.tif"
     partial = dest.with_suffix(".part")
     records = []
     with partial.open("wb") as file, ThreadPoolExecutor(max_workers=4) as pool:
@@ -109,7 +112,7 @@ def main():
             write_range(file, records, start, body)
     partial.replace(dest)
     manifest = {"source": url, "size_bytes": size, "shape_ids": sorted(ids), "byte_ranges": records}
-    (OUTPUT / f"w43_remote_windows_{year}.json").write_text(json.dumps(manifest, indent=2)+"\n", encoding="utf-8")
+    (OUTPUT / f"{args.prefix}_remote_windows_{year}.json").write_text(json.dumps(manifest, indent=2)+"\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

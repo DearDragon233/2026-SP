@@ -1,0 +1,2 @@
+province,county,harvest_year,statistics_crop,stats_kg_ha,remote_winter_wheat_kg_ha,remote_minus_stats_kg_ha,county_pixel_centres,positive_remote_pixel_centres,stats_sown_ha,remote_positive_ha,remote_area_to_stats_sown_area,scope_note,shape_id
+河南省,叶县,2020,小麦,6016.863,6089.959,73.096,1893177,1093186,59300.000,81804.119,1.37950,县级公报小麦统计,62558664B24564619291654
