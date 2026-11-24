@@ -1,21 +1,8 @@
-# 中国作物面积与农业气象站产量
+# CropArea_figshare — 中国作物面积 disaggregation 数据（Yu Le 组）
 
-## 中国作物面积
-
-数据来自 Li 等的 [Figshare v4（10.6084/m9.figshare.26028769.v4）](https://api.figshare.com/v2/articles/26028769/versions/4)，许可为 CC BY 4.0。中国区包括 1980–2022 年 43 个逐年 GeoTIFF 和波段说明 `Band_Name.docx`。像元存储分作物面积（公顷），空间分辨率约 10 km。项目据此识别小麦和玉米空间覆盖。格网面积无法作为实测单产标签，也无法从同一作物波段直接拆出冬小麦或夏玉米。
-
-从仓库根目录运行以下命令。去掉 `--download` 可单独核验本地文件。脚本使用官方清单逐文件核对长度与 MD5，原始文件存放于本目录的 `download/`。
-
-```bash
-python src/s2_model_validation/w36d_check_downloads.py --download
-```
-
-本轮已核对 44 个中国区文件，共 161,508,095 字节，2016–2022 年项目重叠期覆盖完整。
-
-## 中国主要作物站点产量
-
-高静等的[数据论文](https://zgnyqx.ieda.org.cn/EN/10.3969/j.issn.1000-6362.2026.03.012)描述了 1981–2022 年 618 个农业气象站的七类作物产量观测。本轮未核实该版本原始站点表的公开下载入口。平谷覆盖及其县平均单产年份等待站表核对。取得授权数据后，将原始文件放入 `Data/CMA_agromet/download/`，分别核对地段单产和县平均单产的单位、缺失编码及站点对应关系。
-
-## 平谷空间覆盖核验
-
-`python src/s2_model_validation/w38_crop_area_support.py` 使用中国区第 12 波段（小麦）和第 14 波段（玉米），按 234 个环境网格中心归入原始面积像元，生成 `Outputs/reports/w38_crop_area_support.csv`。2016–2022 年每年覆盖 54 个不同面积像元。2021 年有遥感小麦单产估计的 22 个网格中心只落在 7 个面积像元。像元内中心共享面积值，面积特征的评估需在空间分组中防止共享像元跨折。这里的覆盖统计以网格中心为准，不代表对平谷行政边界内面积求和。
+来源: figshare DOI 10.6084/m9.figshare.26028769.v1（Nature Sci. Data 论文 s41597-025-05572-x 配套数据）
+文件: CHN_1980.tif … CHN_2022.tif（43 个年度文件，各含 14 波段 = 14 种作物）
+波段: whea(12)=小麦、maiz(14)=玉米、soyb/rice/bean/rape/vege 等；单位 = 公顷/10km 像元；EPSG:4326
+验证: 2021 年 NCP 窗口 whea 合计 1710 万 ha、maiz 1399 万 ha——量级合理（含豫鲁皖苏冀京津陕部分）
+本组使用: whea/maiz 面积作为县年协变量（W39 平谷消融示无增益；全国尺度待检验）与轮作核对
+未入库部分: Africa(1961-2022, 42 crops)/USA(2008-2022, 15 crops) 仍在原 zip（浏览器下载目录备份）
