@@ -8,7 +8,7 @@ import fitz
 
 ROOT = r"D:\2026-SP"
 SRC = os.path.join(ROOT, "Paper", "Manuscript_v5.0_fulltext.md")
-OUT = os.path.join(ROOT, "Paper", "Manuscript_v5.0_pub_format_CEA.pdf")
+OUT = os.path.join(ROOT, "Paper", "Manuscript_v5.0_MDPI_format.pdf")
 FIGDIR = os.path.join(ROOT, "Outputs", "figures", "main")
 
 A4 = (595, 842)
@@ -180,7 +180,7 @@ render_tail(tail)
 # ---------------- MDPI-style footers (two-pass) ----------------
 total = len(doc)
 for i, pg in enumerate(doc):
-    pg.insert_text((ML, A4[1]-30), "Comput. Electron. Agric. 2026, 000, 000000", fontname=ITAL, fontsize=7.5, color=(0.35,0.35,0.35))
+    pg.insert_text((ML, A4[1]-30), f"Agronomy 2026, 16, 0000", fontname=ITAL, fontsize=7.5, color=(0.35,0.35,0.35))
     pg.insert_text((ML+W - 40, A4[1]-30), f"{i+1} of {total}", fontname=ITAL, fontsize=7.5, color=(0.35,0.35,0.35))
     pg.draw_line((ML, A4[1]-36), (ML+W, A4[1]-36), color=(0.85,0.85,0.85), width=0.5)
 

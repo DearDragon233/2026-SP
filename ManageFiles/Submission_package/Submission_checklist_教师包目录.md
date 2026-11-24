@@ -1,4 +1,6 @@
-# 投稿清单（Computers and Electronics in Agriculture / Elsevier）与教师包目录
+# 投稿清单（Agronomy / MDPI）与教师包目录
+
+> 2026-11-24 切回 Agronomy：APC 经闫军老师编委年度全额减免解决（MDPI 政策：每位编委每年一次全额减免）；CAU 在 IOAP 名单内（10% 折扣作后备）。
 
 ## A. MDPI 投稿清单（Submission Checklist）
 
