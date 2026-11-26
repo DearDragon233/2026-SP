@@ -1,0 +1,7 @@
+﻿training_label,model,test_rows,mae_kg_ha,rmse_kg_ha,bias_kg_ha
+statistics,mean,19,920.4,921.1,-920.4
+statistics,ridge,19,380.2,422.4,-380.2
+statistics,rf,19,655.3,657.0,-655.3
+remote,mean,19,1181.9,1182.4,-1181.9
+remote,ridge,19,696.8,717.5,-696.8
+remote,rf,19,435.8,437.0,-435.8
