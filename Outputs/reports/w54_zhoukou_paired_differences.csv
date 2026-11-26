@@ -1,0 +1,7 @@
+﻿model,comparison,omission_unit,omitted,test_rows,mae_difference_kg_ha
+ridge,statistics_minus_same_label_mean,all,,19,-540.21
+ridge,remote_minus_same_label_mean,all,,19,-485.08
+ridge,remote_minus_statistics,all,,19,316.58
+random_forest,statistics_minus_same_label_mean,all,,19,-265.14
+random_forest,remote_minus_same_label_mean,all,,19,-746.06
+random_forest,remote_minus_statistics,all,,19,-219.47

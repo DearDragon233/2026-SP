@@ -1,0 +1,15 @@
+{
+ "pattern_pearson_r": -0.787,
+ "pattern_spearman": -0.781,
+ "n": 19,
+ "mean_pred": 7144.0,
+ "mean_obs": 7524.3,
+ "mean_train": 6603.8,
+ "pred_sd": 156.1,
+ "obs_sd": 33.9,
+ "mae_ridge": 380.2,
+ "mae_oracle_constant": 27.6,
+ "mae_ridge_recentred_oracle": 172.9,
+ "advantage_raw_kg": 540.2,
+ "advantage_after_removing_level_(both_recentred)": -145.3
+}

@@ -1,0 +1,31 @@
+{
+ "n_test": 19,
+ "years": {
+  "2019": 5,
+  "2020": 7,
+  "2021": 7
+ },
+ "counties": 7,
+ "weather_series": 7,
+ "train_stats_yield_range": [
+  4469.5,
+  7509.1
+ ],
+ "train_stats_yield_mean": 6603.8,
+ "test_yield_mean": 7524.3,
+ "test_rows_all6_features_in_train_range": 0,
+ "test_rows_5plus_in_range": 0,
+ "mean_bias_by_county": {
+  "商水": -396.9,
+  "太康": -351.3,
+  "沈丘": -382.2,
+  "西华": -399.5,
+  "郸城": -385.9,
+  "项城": -349.9,
+  "鹿邑": -391.8
+ },
+ "bias_sign_consistency_stat_ridge": {
+  "negative": 19,
+  "positive": 0
+ }
+}

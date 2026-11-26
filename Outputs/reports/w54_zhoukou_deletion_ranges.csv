@@ -1,0 +1,7 @@
+﻿model,comparison,min_diff,max_diff,n_deletions,min_at,max_at
+ridge,statistics_minus_same_label_mean,-620.11,-424.4,17,2021,2020
+ridge,remote_minus_same_label_mean,-579.43,-389.11,17,2021,2020
+ridge,remote_minus_statistics,296.73,345.98,17,2020,2019
+random_forest,statistics_minus_same_label_mean,-276.68,-257.09,17,2021,2020
+random_forest,remote_minus_same_label_mean,-754.11,-736.89,17,2020,2019
+random_forest,remote_minus_statistics,-235.58,-210.57,17,2020,2021
