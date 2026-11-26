@@ -1,0 +1,18 @@
+{
+ "set": "primary (pre-registered)",
+ "arm": "remote/random_forest",
+ "n": 6,
+ "r": 0.92,
+ "p_perm": 0.0168,
+ "ci_lo": 0.428,
+ "ci_hi": 0.999,
+ "n_boot": 19660,
+ "counties_years": [
+  "汝州市-2019",
+  "郏县-2019",
+  "宝丰县-2019",
+  "鲁山县-2019",
+  "叶县-2020",
+  "叶县-2021"
+ ]
+}

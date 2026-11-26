@@ -1,0 +1,13 @@
+﻿set,arm,n,r,p_perm,mae_model,mae_mean,adv_raw,adv_recentred,obs_sd
+primary,remote/random_forest,6,0.92,0.0168,1528.1,891.7,-636.4,102.6,756.8
+primary,remote/ridge,6,-0.33,0.4788,1490.6,891.7,-599.0,-102.1,756.8
+primary,statistics/random_forest,6,-0.203,0.7682,1410.8,1022.2,-388.6,-27.3,756.8
+primary,statistics/ridge,6,-0.143,0.7672,1519.2,1022.2,-496.9,-45.7,756.8
+unscreened,remote/random_forest,9,0.897,0.0059,1412.6,757.3,-655.3,76.8,645.8
+unscreened,remote/ridge,9,-0.273,0.5228,1325.6,757.3,-568.3,-91.4,645.8
+unscreened,statistics/random_forest,9,-0.071,0.8708,1287.3,896.7,-390.6,-17.3,645.8
+unscreened,statistics/ridge,9,-0.153,0.7352,1367.3,896.7,-470.6,-42.2,645.8
+strict,remote/random_forest,3,0.999,0.3321,1685.1,1147.4,-537.7,147.2,916.4
+strict,remote/ridge,3,0.999,0.3336,1921.1,1147.4,-773.7,57.7,916.4
+strict,statistics/random_forest,3,0.999,0.3345,1688.4,1252.9,-435.5,15.9,916.4
+strict,statistics/ridge,3,0.999,0.3326,1835.6,1252.9,-582.7,46.1,916.4

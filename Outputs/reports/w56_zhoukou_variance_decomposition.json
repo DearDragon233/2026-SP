@@ -1,0 +1,22 @@
+{
+ "statistics/ridge": {
+  "r_countyyear_n19": -0.787,
+  "r_within_county_demeaned_n19": -0.878,
+  "r_county_means_n7": 0.207
+ },
+ "remote/ridge": {
+  "r_countyyear_n19": -0.794,
+  "r_within_county_demeaned_n19": -0.906,
+  "r_county_means_n7": 0.37
+ },
+ "observed_variance": {
+  "total": 1150,
+  "between_county": 184,
+  "share_between": 0.16,
+  "county_mean_range": [
+   7507,
+   7543
+  ]
+ },
+ "loo_sign_stable": true
+}

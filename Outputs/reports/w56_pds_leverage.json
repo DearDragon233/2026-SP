@@ -1,0 +1,47 @@
+{
+ "n": 6,
+ "r_all": 0.92,
+ "spearman_all": 0.88,
+ "distinct_predictions": 4,
+ "distinct_weather_series": 3,
+ "counties_per_weather_series": {
+  "88800dd2dbb99e6a": 1,
+  "8be565f33b6f4ba7": 2,
+  "d2e11929f5e96c73": 3
+ },
+ "tied_prediction_groups": [
+  {
+   "prediction": 7020.2,
+   "county_years": [
+    "宝丰县 2019",
+    "汝州市 2019",
+    "郏县 2019"
+   ]
+  }
+ ],
+ "leave_one_out_r_range": [
+  0.523,
+  0.945
+ ],
+ "most_influential": {
+  "omitted": "鲁山县 2019",
+  "observed": 3930.2,
+  "predicted": 6689.1,
+  "r_without": 0.523,
+  "spearman_without": 0.783,
+  "coverage_ratio": 1.003
+ },
+ "observed_min": 3930.2,
+ "observed_mean_without_min": 5791.6,
+ "gap_min_to_rest": 1861.3,
+ "predicted_range": [
+  6689.1,
+  7203.1
+ ],
+ "observed_range": [
+  3930.2,
+  6048.8
+ ],
+ "r_without_lowest_observed": 0.738,
+ "n_without_lowest_observed": 4
+}

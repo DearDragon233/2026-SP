@@ -1,7 +1,7 @@
 # 论文 2 投稿包 — Agronomy (MDPI)
 
 > 2026-11-26。按用户指示：**闫老师暂不署名、作者列表暂不声明**——本包只含论文本体与投稿 Agronomy 所需的技术材料。
-> 状态：论文本体 v1.0 完成；全文 50/50 数字声明通过台账审计；五幅主图按投稿标准重绘。
+> 状态：论文本体 v1.0 完成；全文 93/93 数字声明通过台账审计（含杠杆诊断与过时数字守卫）；五幅主图按投稿标准重绘；正文经 humanizer + nature-polishing 润色。
 
 ## 一、论文本体
 
@@ -33,10 +33,11 @@
 - 偏移校正：`w46_offset_diagnostic.csv`
 - 平顶山：`w48_pds_frozen.csv`、`w49_pds_oof.csv`、`w49_pds_primary_metrics.csv`、`w50_pds_paired_differences.csv`
 - 周口：`w53_zhoukou_coverage.csv`、`w53_zhoukou_frozen_external.csv`、`w53_zhoukou_external_scores.csv`、`w54_zhoukou_oof.csv`、`w54_zhoukou_deletion_ranges.csv`、`w54_zhoukou_county_bias.csv`、`w54_zhoukou_decomposition.json`
-- 全站分解与检验：`w54_level_pattern_decomposition_all_sites.csv`、`w54_pattern_permutation_tests.csv`
+- 全站分解与检验（**预注册口径**）：`w56_level_pattern_decomposition_preregistered.csv`（平顶山为主口径 n=6）、`w54_pattern_permutation_tests.csv`、`w56_pds_by_set.csv`、`w56_pds_primary_bootstrap.json`
+- 杠杆与县内分解：`w56_pds_leverage.json`、`w56_zhoukou_leverage.json`、`w56_zhoukou_variance_decomposition.json`
 - 对照臂：`w53_r6_control_arm.json`
 - 六年矩阵：`w37_pattern_matrix.csv`、`w37_sixyear_grid.csv`
-- 审计脚本：`scratch/audit_paper2.py`（50/50 PASS）
+- 审计脚本：`scratch/audit_paper2.py`（93/93 PASS）
 
 ## 四、投稿前待办（作者侧）
 
@@ -51,8 +52,9 @@
 
 ## 五、诚实声明（审稿人可能追问的点）
 
-1. **平顶山格局技能（r=0.90）基于 n=9**，bootstrap CI [0.23, 0.98] 很宽——正文已明确写成"假说"而非结论；
+1. **平顶山格局技能（r=0.92）基于预注册主口径 n=6**，bootstrap CI [0.43, 0.999]；且经杠杆诊断，该相关几乎完全由鲁山 2019 一个县年支撑（去掉后 r=0.52）——六个县年只有 4 个不同预测值、3 条天气序列。正文已如实写明并定位为"假说"。**润色前的版本误用了不筛面积比的 n=9 口径，已更正。**
 2. **周口"成功"被分解实验推翻**——初稿曾写"模型迁移出真实技能"，经水平/格局分解后更正为"完全是水平效应、县际排序反向"；W51 草稿旧版已同步改写；
-3. **Table 4 计数曾写错**（凭印象 11/9，台账实为 12/8），已由程序化审计抓出并修正；
+3. **Table 4 计数曾写错**（凭印象 11/9，台账实为 12/8），已由程序化审计抓出并修正；平顶山口径更正后该计数不变；
+6. **周口的反向排序是县内年际效应**：县均值仅差 36 kg/ha（县际方差占 16%），去县均值后 r=−0.88；留一稳健（−0.83 至 −0.76）。正文按"县年层面反向"表述。
 4. **参考文献曾有三处错误**（ref 6 标题与内容、ref 7 第一作者、ref 13 不确定的文献），已核实更正；
 5. 外部测试仅覆盖河南两个地市；天气序列粗（周口 8 县仅 7 条）；无站点级实测。

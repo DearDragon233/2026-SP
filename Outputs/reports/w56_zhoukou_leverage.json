@@ -1,0 +1,40 @@
+{
+ "statistics/ridge": {
+  "r_all": -0.787,
+  "spearman": -0.781,
+  "loo_r_min": -0.825,
+  "loo_r_max": -0.755,
+  "sign_stable_under_loo": true,
+  "county_mean_r_n7": 0.207
+ },
+ "remote/ridge": {
+  "r_all": -0.794,
+  "spearman": -0.799,
+  "loo_r_min": -0.826,
+  "loo_r_max": -0.765,
+  "sign_stable_under_loo": true,
+  "county_mean_r_n7": 0.37
+ },
+ "statistics/RF": {
+  "r_all": -0.595,
+  "spearman": -0.602,
+  "loo_r_min": -0.672,
+  "loo_r_max": -0.532,
+  "sign_stable_under_loo": true,
+  "county_mean_r_n7": -0.081
+ },
+ "remote/RF": {
+  "r_all": 0.342,
+  "spearman": 0.477,
+  "loo_r_min": 0.296,
+  "loo_r_max": 0.508,
+  "sign_stable_under_loo": true,
+  "county_mean_r_n7": -0.032
+ },
+ "_design": {
+  "n": 19,
+  "counties": 7,
+  "weather_series": 7,
+  "distinct_predictions_stat_ridge": 11
+ }
+}
