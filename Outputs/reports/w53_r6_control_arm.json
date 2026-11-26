@@ -1,0 +1,27 @@
+{
+ "full_features": {
+  "statistics": {
+   "mean": 920.4409912280719,
+   "ridge": 380.22670628901085,
+   "rf": 655.2981856066457
+  },
+  "remote": {
+   "mean": 1181.8799356725149,
+   "ridge": 696.8047300348688,
+   "rf": 435.8234852131944
+  }
+ },
+ "no_shared_precip": {
+  "statistics": {
+   "mean": 920.4409912280719,
+   "ridge": 384.52439009697736,
+   "rf": 668.0537099320782
+  },
+  "remote": {
+   "mean": 1181.8799356725149,
+   "ridge": 792.3476348997868,
+   "rf": 408.9426059279366
+  }
+ },
+ "verdict": "remote-RF transfer skill persists after dropping the two precipitation columns that overlap satellite-product inputs (435.8 -> 408.9, still 2.9x better than its own mean baseline); full lineage independence remains unresolved (temperature inputs may share upstream sources)"
+}
