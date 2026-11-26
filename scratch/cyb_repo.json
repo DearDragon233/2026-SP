@@ -1,0 +1,194 @@
+[
+  {
+    "name": ".github",
+    "path": ".github",
+    "sha": "a65ac8abfe0d4ec7ecfd31e13a7426f769c63632",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/.github?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/.github",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/a65ac8abfe0d4ec7ecfd31e13a7426f769c63632",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/.github?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/a65ac8abfe0d4ec7ecfd31e13a7426f769c63632",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/.github"
+    }
+  },
+  {
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "sha": "bd5205ec64532c15e44f0ffbbf48f00156009556",
+    "size": 165,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/.gitignore?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/.gitignore",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/bd5205ec64532c15e44f0ffbbf48f00156009556",
+    "download_url": "https://raw.githubusercontent.com/WUR-AI/AgML-CY-Bench/main/.gitignore",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/.gitignore?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/bd5205ec64532c15e44f0ffbbf48f00156009556",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/.gitignore"
+    }
+  },
+  {
+    "name": "CONTRIBUTING.md",
+    "path": "CONTRIBUTING.md",
+    "sha": "64fe9a665a5dab7faf59a10dcac338d0ab0cd930",
+    "size": 3278,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/CONTRIBUTING.md?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/CONTRIBUTING.md",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/64fe9a665a5dab7faf59a10dcac338d0ab0cd930",
+    "download_url": "https://raw.githubusercontent.com/WUR-AI/AgML-CY-Bench/main/CONTRIBUTING.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/CONTRIBUTING.md?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/64fe9a665a5dab7faf59a10dcac338d0ab0cd930",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/CONTRIBUTING.md"
+    }
+  },
+  {
+    "name": "LICENSE",
+    "path": "LICENSE",
+    "sha": "8dc3f0f92d076e9bd5c2fb4451a771907b499122",
+    "size": 889,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/LICENSE?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/LICENSE",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/8dc3f0f92d076e9bd5c2fb4451a771907b499122",
+    "download_url": "https://raw.githubusercontent.com/WUR-AI/AgML-CY-Bench/main/LICENSE",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/LICENSE?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/8dc3f0f92d076e9bd5c2fb4451a771907b499122",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/LICENSE"
+    }
+  },
+  {
+    "name": "README.md",
+    "path": "README.md",
+    "sha": "845b355ab28650449d44ffb4aa15268134a3fd47",
+    "size": 14559,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/README.md?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/README.md",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/845b355ab28650449d44ffb4aa15268134a3fd47",
+    "download_url": "https://raw.githubusercontent.com/WUR-AI/AgML-CY-Bench/main/README.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/README.md?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/845b355ab28650449d44ffb4aa15268134a3fd47",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/README.md"
+    }
+  },
+  {
+    "name": "cybench",
+    "path": "cybench",
+    "sha": "ec1941a05268788fa62dcbb77869501c906d0042",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/cybench?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/cybench",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/ec1941a05268788fa62dcbb77869501c906d0042",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/cybench?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/ec1941a05268788fa62dcbb77869501c906d0042",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/cybench"
+    }
+  },
+  {
+    "name": "data_preparation",
+    "path": "data_preparation",
+    "sha": "a1d5f8340ac848746f38bd5477d24ff33fba9446",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/data_preparation?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/data_preparation",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/a1d5f8340ac848746f38bd5477d24ff33fba9446",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/data_preparation?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/a1d5f8340ac848746f38bd5477d24ff33fba9446",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/data_preparation"
+    }
+  },
+  {
+    "name": "doc",
+    "path": "doc",
+    "sha": "31249f6c19ee4755b04bdf41207c6e376b2a59e8",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/doc?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/doc",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/31249f6c19ee4755b04bdf41207c6e376b2a59e8",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/doc?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/31249f6c19ee4755b04bdf41207c6e376b2a59e8",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/doc"
+    }
+  },
+  {
+    "name": "notebooks",
+    "path": "notebooks",
+    "sha": "6a9c1c426cc6bcc316972549fd295a066a6a0924",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/notebooks?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/notebooks",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/6a9c1c426cc6bcc316972549fd295a066a6a0924",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/notebooks?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/6a9c1c426cc6bcc316972549fd295a066a6a0924",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/notebooks"
+    }
+  },
+  {
+    "name": "pyproject.toml",
+    "path": "pyproject.toml",
+    "sha": "a1df56e9906bc35e4c0f25a03b3d3ac068d462ec",
+    "size": 932,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/pyproject.toml?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/pyproject.toml",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/a1df56e9906bc35e4c0f25a03b3d3ac068d462ec",
+    "download_url": "https://raw.githubusercontent.com/WUR-AI/AgML-CY-Bench/main/pyproject.toml",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/pyproject.toml?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/blobs/a1df56e9906bc35e4c0f25a03b3d3ac068d462ec",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/blob/main/pyproject.toml"
+    }
+  },
+  {
+    "name": "results_baselines",
+    "path": "results_baselines",
+    "sha": "7f0ae526be142f9603962e1b0d2e7c4a6b06cd79",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/results_baselines?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/results_baselines",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/7f0ae526be142f9603962e1b0d2e7c4a6b06cd79",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/results_baselines?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/7f0ae526be142f9603962e1b0d2e7c4a6b06cd79",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/results_baselines"
+    }
+  },
+  {
+    "name": "tests",
+    "path": "tests",
+    "sha": "fd8f85d57af4970d3ecbf0b23d0f3833aa8f5961",
+    "size": 0,
+    "url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/tests?ref=main",
+    "html_url": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/tests",
+    "git_url": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/fd8f85d57af4970d3ecbf0b23d0f3833aa8f5961",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/contents/tests?ref=main",
+      "git": "https://api.github.com/repos/WUR-AI/AgML-CY-Bench/git/trees/fd8f85d57af4970d3ecbf0b23d0f3833aa8f5961",
+      "html": "https://github.com/WUR-AI/AgML-CY-Bench/tree/main/tests"
+    }
+  }
+]
