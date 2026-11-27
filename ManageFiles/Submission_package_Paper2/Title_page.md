@@ -16,7 +16,7 @@ Yucheng Peng, pengyucheng@cau.edu.cn
 
 | Author | Email | ORCID |
 |---|---|---|
-| Yucheng Peng | pengyucheng@cau.edu.cn | [to be registered] |
+| Yucheng Peng | pengyucheng@cau.edu.cn | 0009-0006-3922-5866 |
 | Yangyi Liang | 2024333010116@cau.edu.cn | 0009-0009-7749-7901 |
 | Xiaotong Shang | 2024333010110@cau.edu.cn | 0009-0005-3264-2141 |
 | Xihao Lin | 2024333020414@cau.edu.cn | 0009-0006-2491-6330 |
