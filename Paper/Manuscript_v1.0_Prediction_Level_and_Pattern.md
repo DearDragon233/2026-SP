@@ -1,8 +1,8 @@
 # Level and Pattern in Transferred County Wheat Yield Models: Weather Features, Training Labels and a Training-Mean Baseline Across Three North China Regions
 
-**Manuscript v1.0** | 2026-11-26 | Target: Agronomy (MDPI) | Authors: [to be declared]
+**Manuscript v1.0** | 2026-11-26 | Target: Agronomy (MDPI) | Authors: Yucheng Peng, Yangyi Liang, Xiaotong Shang, Xihao Lin
 
-> Author list, affiliations, corresponding author and funding are deliberately left open at this stage. Every number in this manuscript regenerates from a frozen ledger in the repository (section mapping in Table 5).
+> Every number in this manuscript regenerates from a frozen ledger in the repository (section mapping in Table 5).
 
 ---
 
@@ -195,6 +195,12 @@ The external evidence covers two prefectures of one province. The Pingdingshan p
 ## 5. Conclusions
 
 Under blocked validation on official county-year statistics of North China winter wheat, six weather features and three fixed estimators, we found the following. Weather features beat a training-mean baseline only in forward-year validation within the same prefectures. Under leave-region and joint holdout the mean was best. In the external tests, the largest raw gain (Zhoukou, ridge) was entirely a level effect, and its county-year ordering was inverse to observation within counties (r = -0.88 after removing county means), and the only significant positive rank skill (Pingdingshan, satellite-trained random forest, r = 0.92 on six county-years, dependent on one county-year) came with the highest raw error. Raw and de-levelled advantage agreed in sign for 12 of the 20 fitted model arms. We recommend that county-scale transfer studies report level error and within-region rank skill separately, retain the training-mean baseline, and run a paired label-source comparison on a common statistical target before adopting satellite-derived training labels.
+
+---
+
+---
+
+## Declarations
 
 ---
 
