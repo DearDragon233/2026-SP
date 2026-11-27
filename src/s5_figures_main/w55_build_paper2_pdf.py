@@ -6,7 +6,7 @@ import fitz
 
 ROOT = r"D:\2026-SP"
 SRC = os.path.join(ROOT, "Paper", "Manuscript_v1.0_Prediction_Level_and_Pattern.md")
-OUT = os.path.join(ROOT, "Paper", "Manuscript_v1.0_Prediction_Agronomy_format.pdf")
+OUT = os.path.join(ROOT, "Paper", "Manuscript_v1.0_Prediction_Agronomy_format_v2.pdf")
 FIGDIR = os.path.join(ROOT, "ManageFiles", "Submission_package_Paper2", "figures")
 
 A4 = (595, 842); ML = MR = 54; MT, MB = 58, 64

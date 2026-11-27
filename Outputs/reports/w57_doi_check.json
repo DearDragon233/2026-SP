@@ -1,0 +1,124 @@
+[
+ {
+  "num": 1,
+  "text": "Lobell, D.B.; Roberts, M.J.; Schlenker, W.; Braun, N.; Little, B.B.; Rejesus, R.M.; Hammer, G.L. Greater sensitivity to drought accompanies maize yield increase in the U.S. Midwest. *Science* 2014, 344, 516-519.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 2,
+  "text": "Ray, D.K.; Gerber, J.S.; MacDonald, G.K.; West, P.C. Climate variation explains a third of global crop yield variability. *Nat. Commun.* 2015, 6, 5989.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 3,
+  "text": "van Klompenburg, T.; Kassahun, A.; Catal, C. Crop yield prediction using machine learning: A systematic literature review. *Comput. Electron. Agric.* 2020, 177, 105709.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 4,
+  "text": "Zhao, X.; et al. A 30 m annual winter wheat yield dataset of China (2016-2021). *Earth Syst. Sci. Data* 2023, 15, 4047-4063. DOI: 10.5194/essd-15-4047-2023.",
+  "status": "FOUND",
+  "doi": "10.5194/essd-15-4047-2023",
+  "cr_title": "ChinaWheatYield30m: a 30 m annual winter wheat yield dataset from 2016 to 2021 in China",
+  "cr_authors": [
+   "Zhao",
+   "Han",
+   "Zheng"
+  ],
+  "cr_year": 2023,
+  "cr_journal": "Earth System Science Data",
+  "cr_volume": "15",
+  "cr_page": "4047-4063",
+  "first_author_match": true,
+  "title_words_in_ours": false
+ },
+ {
+  "num": 5,
+  "text": "Li, X.; Yu, L.; Du, Z.; Liu, X. Tracking spatiotemporal dynamics of crop-specific areas through machine learning and statistics disaggregating. *Sci. Data* 2025. DOI: 10.1038/s41597-025-05572-x.",
+  "status": "DOI-LOOKUP-FAILED",
+  "detail": "HTTPError: HTTP Error 429: Too Many Requests"
+ },
+ {
+  "num": 6,
+  "text": "Zhang, G.; et al. Integrating multi-source remote sensing and crop growth model for phenology-driven wheat yield prediction in the North China Plain. *J. Sci. Food Agric.* 2026, 106, 9468-9478. DOI: 10.1002/jsfa.70947.",
+  "status": "FOUND",
+  "doi": "10.1002/jsfa.70947",
+  "cr_title": "Integrating multi‐source remote sensing and crop growth model for phenology‐driven wheat yield prediction in the North China Plain",
+  "cr_authors": [
+   "Zhang",
+   "Quan",
+   "Zhao"
+  ],
+  "cr_year": 2026,
+  "cr_journal": "Journal of the Science of Food and Agriculture",
+  "cr_volume": "106",
+  "cr_page": "9468-9478",
+  "first_author_match": true,
+  "title_words_in_ours": false
+ },
+ {
+  "num": 7,
+  "text": "Kallenberg, M.; Paudel, D.; Ofori-Ampofo, S.; Baja, H.; et al. CY-Bench: a comprehensive benchmark dataset for sub-national crop yield forecasting. *Earth Syst. Sci. Data* 2026, 18, 3997-4018. DOI: 10.5194/essd-18-3997-2026.",
+  "status": "DOI-LOOKUP-FAILED",
+  "detail": "HTTPError: HTTP Error 429: Too Many Requests"
+ },
+ {
+  "num": 8,
+  "text": "Roberts, D.R.; Bahn, V.; Ciuti, S.; et al. Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure. *Ecography* 2017, 40, 913-929.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 9,
+  "text": "Ploton, P.; Mortier, F.; Rejou-Mechain, M.; et al. Spatial validation reveals poor predictive performance of large-scale ecological mapping models. *Nat. Commun.* 2020, 11, 4540.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 10,
+  "text": "Meyer, H.; Pebesma, E. Machine learning-based global maps of ecological variables and the challenge of assessing them. *Nat. Commun.* 2022, 13, 2208.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 11,
+  "text": "Wadoux, A.M.J.-C.; Heuvelink, G.B.M.; de Bruin, S.; Brus, D.J. Spatial cross-validation is not the right way to evaluate map accuracy. *Ecol. Model.* 2021, 401, 115211.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 12,
+  "text": "Raudaschl, R.S.; et al. On the subsampling strategy for cross-validation of spatially autocorrelated data. *Ecol. Model.* 2022, 467, 109920.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 13,
+  "text": "Zhao, Y.; Xiao, D.; Bai, H.; et al. The prediction of wheat yield in the North China Plain by coupling crop model with machine learning algorithms. *Agriculture* 2023, 13, 99.",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 14,
+  "text": "NASA Langley Research Center. Prediction Of Worldwide Energy Resources (POWER): Daily Point Data API. Available online: https://power.larc.nasa.gov/docs/services/api/temporal/daily/ (accessed on 24 November 2026).",
+  "status": "NO-DOI-IN-ENTRY"
+ },
+ {
+  "num": 15,
+  "text": "Gao, J.; Liao, J.; Liu, Y. Development of crop yield dataset for China from 1981 to 2022. *Chin. J. Agrometeorol.* 2026, 47, 456-472. DOI: 10.3969/j.issn.1000-6362.2026.03.012.",
+  "status": "DOI-LOOKUP-FAILED",
+  "detail": "HTTPError: HTTP Error 404: Not Found"
+ },
+ {
+  "num": 16,
+  "text": "Yan, M.; Wang, W.; Zhang, Y.; et al. Standardizing benchmarks for plant genomic prediction. *Agronomy* 2026, 16, 1131. DOI: 10.3390/agronomy16121131.",
+  "status": "FOUND",
+  "doi": "10.3390/agronomy16121131",
+  "cr_title": "Standardizing Benchmarks for Plant Genomic Prediction",
+  "cr_authors": [
+   "Yan",
+   "Wang",
+   "Zhang"
+  ],
+  "cr_year": 2026,
+  "cr_journal": "Agronomy",
+  "cr_volume": "16",
+  "cr_page": "1131",
+  "first_author_match": true,
+  "title_words_in_ours": false
+ }
+]

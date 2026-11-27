@@ -1,0 +1,111 @@
+{
+ "2": {
+  "doi": "10.1038/ncomms6989",
+  "status": "found",
+  "title": "Climate variation explains a third of global crop yield variability",
+  "authors": [
+   "Ray",
+   "Gerber",
+   "MacDonald"
+  ],
+  "year": 2015,
+  "journal": "Nature Communications",
+  "volume": "6",
+  "issue": "1",
+  "page": "5989"
+ },
+ "3": {
+  "doi": "10.1016/j.compag.2020.105709",
+  "status": "found",
+  "title": "Crop yield prediction using machine learning: A systematic literature review",
+  "authors": [
+   "van Klompenburg",
+   "Kassahun",
+   "Catal"
+  ],
+  "year": 2020,
+  "journal": "Computers and Electronics in Agriculture",
+  "volume": "177",
+  "issue": null,
+  "page": "105709"
+ },
+ "5": {
+  "doi": "10.1038/s41597-025-05572-x",
+  "status": "found",
+  "title": "Crop Statistic to Annual Map: Tracking spatiotemporal dynamics of crop-specific areas through machine learning and statistics disaggregating",
+  "authors": [
+   "Li",
+   "Yu",
+   "Du"
+  ],
+  "year": 2025,
+  "journal": "Scientific Data",
+  "volume": "12",
+  "issue": "1",
+  "page": "1249"
+ },
+ "7": {
+  "doi": "10.5194/essd-18-3997-2026",
+  "status": "found",
+  "title": "CY-Bench: a comprehensive benchmark dataset for sub-national crop yield forecasting",
+  "authors": [
+   "Kallenberg",
+   "Paudel",
+   "Ofori-Ampofo"
+  ],
+  "year": 2026,
+  "journal": "Earth System Science Data",
+  "volume": "18",
+  "issue": "6",
+  "page": "3997-4018"
+ },
+ "8": {
+  "doi": "10.1111/ecog.02881",
+  "status": "found",
+  "title": "Cross‐validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+  "authors": [
+   "Roberts",
+   "Bahn",
+   "Ciuti"
+  ],
+  "year": 2017,
+  "journal": "Ecography",
+  "volume": "40",
+  "issue": "8",
+  "page": "913-929"
+ },
+ "10": {
+  "doi": "10.1038/s41467-022-29838-9",
+  "status": "found",
+  "title": "Machine learning-based global maps of ecological variables and the challenge of assessing them",
+  "authors": [
+   "Meyer",
+   "Pebesma"
+  ],
+  "year": 2022,
+  "journal": "Nature Communications",
+  "volume": "13",
+  "issue": "1",
+  "page": "2208"
+ },
+ "12": {
+  "doi": "10.1016/j.ecolmodel.2021.109920",
+  "status": "failed",
+  "err": "404 not in CrossRef"
+ },
+ "13": {
+  "doi": "10.3390/agriculture13010099",
+  "status": "found",
+  "title": "The Prediction of Wheat Yield in the North China Plain by Coupling Crop Model with Machine Learning Algorithms",
+  "authors": [
+   "Zhao",
+   "Xiao",
+   "Bai"
+  ],
+  "year": 2022,
+  "journal": "Agriculture",
+  "volume": "13",
+  "issue": "1",
+  "page": "99"
+ }
+}

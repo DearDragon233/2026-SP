@@ -1,0 +1,74 @@
+{
+ "2": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "3": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "5": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "7": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "8": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "9": {
+  "status": "found",
+  "doi": "10.1038/s41467-020-18321-y",
+  "title": "Spatial validation reveals poor predictive performance of large-scale ecological mapping models",
+  "authors": [
+   "Ploton",
+   "Mortier",
+   "Réjou-Méchain",
+   "Barbier"
+  ],
+  "year": 2020,
+  "journal": "Nature Communications",
+  "volume": "11",
+  "issue": "1",
+  "page": "4540",
+  "first_author_ok": true,
+  "year_ok": true,
+  "year_ours": "2020",
+  "title_overlap": "10/10"
+ },
+ "10": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "11": {
+  "status": "found",
+  "doi": "10.1016/j.ecolmodel.2021.109692",
+  "title": "Spatial cross-validation is not the right way to evaluate map accuracy",
+  "authors": [
+   "Wadoux",
+   "Heuvelink",
+   "de Bruin",
+   "Brus"
+  ],
+  "year": 2021,
+  "journal": "Ecological Modelling",
+  "volume": "457",
+  "issue": null,
+  "page": "109692",
+  "first_author_ok": true,
+  "year_ok": true,
+  "year_ours": "2021",
+  "title_overlap": "6/6"
+ },
+ "12": {
+  "status": "failed",
+  "err": "unknown"
+ },
+ "13": {
+  "status": "failed",
+  "err": "unknown"
+ }
+}
