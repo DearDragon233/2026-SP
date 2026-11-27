@@ -1,6 +1,6 @@
 # Cover Letter
 
-*(Author names, affiliations and the corresponding author are left blank deliberately and must be inserted before submission.)*
+
 
 Dear Editors of Agronomy,
 
