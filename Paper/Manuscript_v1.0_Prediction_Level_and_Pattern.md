@@ -1,8 +1,10 @@
 # Level and Pattern in Transferred County Wheat Yield Models: Weather Features, Training Labels and a Training-Mean Baseline Across Three North China Regions
 
-**Manuscript v1.0** | 2026-11-26 | Target: Agronomy (MDPI) | Authors: Yucheng Peng, Yangyi Liang, Xiaotong Shang, Xihao Lin
+**Yucheng Peng 1,*, Yangyi Liang 1, Xiaotong Shang 1 and Xihao Lin 1**
 
-> Every number in this manuscript regenerates from a frozen ledger in the repository (section mapping in Table 5).
+1 College of Future Technology, China Agricultural University, Beijing 100193, China; pengyucheng@cau.edu.cn (Y.P.)
+* Correspondence: [corresponding author email]
+
 
 ---
 
